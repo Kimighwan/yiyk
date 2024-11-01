@@ -25,8 +25,6 @@ public class TitleManager : MonoBehaviour
 
     private void Start()
     {
-        // UIManager.Instance.EnableGoodsUI(false);
-
         StartCoroutine(LoadGameCo());
     }
 
