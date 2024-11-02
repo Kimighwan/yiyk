@@ -653,7 +653,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4361144315742991518, guid: f514700348060964f803f669d42f6b11, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4361144315742991518, guid: f514700348060964f803f669d42f6b11, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1196,10 +1196,6 @@ PrefabInstance:
     - target: {fileID: 602767533454513140, guid: e9a87c802799eda4aaf45cf929f60924, type: 3}
       propertyPath: m_Name
       value: Press
-      objectReference: {fileID: 0}
-    - target: {fileID: 602767533454513141, guid: e9a87c802799eda4aaf45cf929f60924, type: 3}
-      propertyPath: m_Animations.Array.size
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9a87c802799eda4aaf45cf929f60924, type: 3}
