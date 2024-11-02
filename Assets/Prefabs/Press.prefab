@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 0}
-  maxLength: 5
+  maxLength: 1
 --- !u!111 &1931538187
 Animation:
   m_ObjectHideFlags: 0
