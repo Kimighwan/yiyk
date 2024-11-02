@@ -128,9 +128,9 @@ TextureImporter:
       name: Stage_Platform_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 200
+        x: 200
+        y: 200
+        width: 100
         height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -141,6 +141,48 @@ TextureImporter:
       bones: []
       spriteID: 029f807f89ad2db468d7f69f0a5a7c95
       internalID: 983200102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stage_Platform_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f063b9e0ee81882418c39345a9a6063b
+      internalID: -1118993998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stage_Platform_3
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 100
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ad5680fed883324bbb95cdf33b9ff6b
+      internalID: -1268899113
       vertices: []
       indices: 
       edges: []
@@ -157,6 +199,8 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Stage_Platform_0: 1246710912
+      Stage_Platform_2: -1118993998
+      Stage_Platform_3: -1268899113
       Stage_Platform_1: 983200102
   spritePackingTag: 
   pSDRemoveMatte: 0
