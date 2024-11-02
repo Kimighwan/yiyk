@@ -9,7 +9,6 @@ public class Press : MonoBehaviour, IPuzzle
 
     private Animation anim;
     private bool alreadyOpen = false; // 문이 열린 적이 있는가?
-    private bool alreadyOn = false; // 발판을 밟은 적이 있는가?
 
     private void Awake()
     {
@@ -18,17 +17,16 @@ public class Press : MonoBehaviour, IPuzzle
 
     public void On()
     {
-        anim.Play("press_on");
-        alreadyOn = true;
+        anim.Play();
     }
 
-    public void Off()
-    {
-        if (!alreadyOpen) return;
-        anim.Play("press_off");
-        Close();
-        alreadyOn = false;
-    }
+    //public void Off()
+    //{
+    //    if (!alreadyOpen) return;
+    //    anim.Play("press_off");
+    //    Close();
+    //    alreadyOn = false;
+    //}
 
     public void Open()
     {
@@ -38,25 +36,28 @@ public class Press : MonoBehaviour, IPuzzle
         alreadyOpen = true;
     }
 
-    public void Close()
-    {
+    //public void Close()
+    //{
 
-    }
+    //}
 
 
     private void Update()
     {
         Debug.DrawRay(transform.position, transform.up * maxLength, Color.red);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, maxLength);
-        if (hit.transform.gameObject.CompareTag("Player") && !alreadyOn)
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, maxLength, LayerMask.GetMask("Player"));
+        if(hit.collider != null)
         {
-            On();
-            Open();
+            if (hit.transform.gameObject.CompareTag("Player") && !alreadyOpen)
+            {
+                On();
+                Open();
+            }
         }
-        else if(alreadyOpen)
-        {
-            Off();
-        }
+        //else if(alreadyOpen)
+        //{
+        //    Off();
+        //}
     }
 }
