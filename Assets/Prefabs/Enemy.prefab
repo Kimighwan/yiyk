@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8095189410662928640}
   - component: {fileID: -1570228481445538139}
   - component: {fileID: -6149298299283570793}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8095189410662928647}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.58, y: 0.41, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -121,9 +121,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -1.27}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.99
 --- !u!50 &8095189410662928640
 Rigidbody2D:
   serializedVersion: 4

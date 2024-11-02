@@ -54,6 +54,7 @@ public class Monster : MonoBehaviour
             if (hit.collider != null && hit.collider.gameObject == gameObject) // 클릭한 객체가 현재 Monster인지 확인
             {
                 TakeDamage(1);
+                Debug.Log("몬스터 클릭");
             }
         }
 
