@@ -238,9 +238,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8796134745399740847}
         m_TargetAssemblyTypeName: SettingsUI, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: OnClickSoundOnToggle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -525,9 +525,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8796134745399740847}
         m_TargetAssemblyTypeName: BaseUI, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: OnClickCloseButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -575,7 +575,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3673830866970013486
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1043,9 +1043,9 @@ Animation:
   m_GameObject: {fileID: 5824982626383887270}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 04eec2fabbece6a48b1d26f4e0b08c97, type: 2}
+  m_Animation: {fileID: 7400000, guid: ade98348236054440b6236317ec2929e, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: 04eec2fabbece6a48b1d26f4e0b08c97, type: 2}
+  - {fileID: 7400000, guid: ade98348236054440b6236317ec2929e, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -1275,7 +1275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7441921397314897860
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1379,9 +1379,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8796134745399740847}
         m_TargetAssemblyTypeName: SettingsUI, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: OnClickSoundOffToggle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
