@@ -11,6 +11,7 @@ public class DrawLine : MonoBehaviour
     public GameObject linePrefab;
     public int maxLineCount = 180;
     public int curLineCount = 0;
+    public int curLineLeght = 0;
     public float destroyLineTime = 5.0f;
     public List<Vector2> points = new List<Vector2>();
 
@@ -31,6 +32,7 @@ public class DrawLine : MonoBehaviour
             lineRenderer.positionCount = 1;
             lineRenderer.SetPosition(0, points[0]);
             line.Enqueue(obj);
+            curLineLeght = 0;
         }
         else if (Input.GetMouseButton(0))
         {
@@ -39,8 +41,8 @@ public class DrawLine : MonoBehaviour
             if (Vector2.Distance(points[points.Count - 1], pos) > 0.1f && curLineCount <= maxLineCount)
             {
                 points.Add(pos);
-                int useline = curLineCount++;
-                useLine.Enqueue(useline);
+                curLineCount++;
+                curLineLeght++;
                 lineRenderer.positionCount++;
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, pos);
                 coll.points = points.ToArray();
@@ -52,14 +54,15 @@ public class DrawLine : MonoBehaviour
             points.Clear();
             GameObject obj = line.Dequeue();
             Destroy(obj, destroyLineTime);
-            int preUserLineCount = useLine.Dequeue();
-            StartCoroutine(LineUpdate(preUserLineCount));
+            useLine.Enqueue(curLineLeght);
+            //int preUseLineCount = useLine.Dequeue();
+            StartCoroutine(LineUpdate(/*preUseLineCount*/));
         }
     }
 
-    private IEnumerator LineUpdate(int count)
+    private IEnumerator LineUpdate(/*int count*/)
     {
         yield return new WaitForSeconds(destroyLineTime);
-        curLineCount -= count;
+        curLineCount -= useLine.Dequeue();
     }
 }
