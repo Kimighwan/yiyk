@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Monster : MonoBehaviour
@@ -9,7 +8,7 @@ public class Monster : MonoBehaviour
     public float moveSpeed = 1f;        // 적의 기본 이동 속도
     public float approachSpeed = 2f;    // 플레이어 접근 시 속도
     public float approachRange = 5f;    // 접근 반응 거리
-    public float approachDuration = 1f;  // 접근 지속 시간
+    public float approachDuration = 1f; // 접근 지속 시간
     private float fixedY;
     private Animator animator;
 
@@ -36,14 +35,15 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        if (isHit) return;
+        if (isHit || isApproaching) return;
 
         // 플레이어와의 거리 체크
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
+        // 접근 범위 내에 플레이어가 있고 접근 중이 아닌 경우에만 접근 시작
         if (distanceToPlayer <= approachRange && !isApproaching)
         {
-            StopAllCoroutines();
+            StopCoroutine(currentAnimationCoroutine);
             StartCoroutine(ApproachPlayer());
         }
 
@@ -51,7 +51,7 @@ public class Monster : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !isHit)
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hit.collider != null && hit.collider.CompareTag("Enemy"))
+            if (hit.collider != null && hit.collider.gameObject == gameObject) // 클릭한 객체가 현재 Monster인지 확인
             {
                 TakeDamage(1);
             }
@@ -76,7 +76,7 @@ public class Monster : MonoBehaviour
         Debug.Log("피격 이미지 생성");
         health -= damage; // 체력 감소
         isHit = true; // 피격 상태 설정
-        animator.enabled = false; // 애니메이션 중지
+        animator.enabled = false;
         StartCoroutine(HandleHit()); // 피격 처리 시작
 
         if (health <= 0)
@@ -87,10 +87,10 @@ public class Monster : MonoBehaviour
 
     IEnumerator HandleHit()
     {
-        yield return new WaitForSeconds(2f); // 2초 동안 피격 이미지 표시
-        spriteRenderer.sprite = null; // 피격 이미지 제거
+        yield return new WaitForSeconds(2f);
+        spriteRenderer.sprite = null;
         isHit = false; // 피격 상태 해제
-        animator.enabled = true; // 애니메이션 재개
+        animator.enabled = true;
         currentAnimationCoroutine = StartCoroutine(MovePattern()); // 이동 패턴 재개
     }
 
@@ -98,24 +98,22 @@ public class Monster : MonoBehaviour
     {
         while (true)
         {
-            animator.SetTrigger("Idle");
-            yield return new WaitForSeconds(1f);
-
-            // 이동할 위치 설정
+            animator.Play("Enemy_Idle");
             float targetX = movingLeft ? startPosition.x - moveDistance : startPosition.x + moveDistance;
             Vector3 targetPosition = new Vector3(targetX, transform.position.y, transform.position.z);
 
-            // 목표 위치까지 이동
             while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
             {
-                animator.SetTrigger("Jump");
                 transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
                 yield return null;
             }
 
-            // 이동 방향 전환
             movingLeft = !movingLeft;
             spriteRenderer.flipX = movingLeft;
+
+            // 방향 전환 시 2초 대기 및 Idle 애니메이션
+            animator.Play("Enemy_Idle");
+            yield return new WaitForSeconds(2f);
         }
     }
 
@@ -124,17 +122,20 @@ public class Monster : MonoBehaviour
         isApproaching = true;
         float elapsedTime = 0f;
 
+        float fixedY = transform.position.y;
+
+        // 플레이어를 따라가는 동안 Jump 애니메이션 실행
+        animator.Play("Enemy_Jump");
+
         while (elapsedTime < approachDuration)
         {
             Vector3 targetPosition = new Vector3(player.position.x, fixedY, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, approachSpeed * Time.deltaTime);
             elapsedTime += Time.deltaTime;
-            //animator.SetTrigger("Enemy_Jump");
             yield return null;
         }
 
-        
         isApproaching = false;
-        StartCoroutine(MovePattern()); // 이동 패턴 재개
+        currentAnimationCoroutine = StartCoroutine(MovePattern());
     }
 }
