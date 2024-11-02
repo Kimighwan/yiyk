@@ -29,17 +29,18 @@ public class LobbyUIController : MonoBehaviour
             }
             else // 아무 UI도 없다면 게임 종료 팝업UI 띄우기
             {
-                var uiData = new ConfirmUIData();
-                uiData.confirmType = ConfirmType.OK_CANCEL;
-                uiData.titleTxt = "Quit";
-                uiData.descTxt = "Do you want to quit game?";
-                uiData.okBtnTxt = "Quit";
-                uiData.cancelBtnTxt = "Cancel";
-                uiData.onClickOKBtn = () =>
-                {
-                    Application.Quit();
-                };
-                UIManager.Instance.OpenUI<ConfirmUI>(uiData);
+                //var uiData = new ConfirmUIData();
+                //uiData.confirmType = ConfirmType.OK_CANCEL;
+                //uiData.titleTxt = "Quit";
+                //uiData.descTxt = "Do you want to quit game?";
+                //uiData.okBtnTxt = "Quit";
+                //uiData.cancelBtnTxt = "Cancel";
+                //uiData.onClickOKBtn = () =>
+                //{
+                //    Application.Quit();
+                //};
+                //UIManager.Instance.OpenUI<ConfirmUI>(uiData);
+                OnClickSettingsBtn();
             }
         }
     }

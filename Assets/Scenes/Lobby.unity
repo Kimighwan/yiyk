@@ -274,6 +274,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2088910905 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5584884902364433877, guid: 89991c74aa717c74a9f465bbf117e4d2, type: 3}
+  m_PrefabInstance: {fileID: 5584884903451953986}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9219901b905cf46bd88f0b5aa88926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5584884903451953986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -329,7 +340,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5584884904286181609, guid: 89991c74aa717c74a9f465bbf117e4d2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2088910905}
+    - target: {fileID: 5584884904286181609, guid: 89991c74aa717c74a9f465bbf117e4d2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickSettingsBtn
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5584884902361838252, guid: 89991c74aa717c74a9f465bbf117e4d2, type: 3}
+    - {fileID: 5584884904262812984, guid: 89991c74aa717c74a9f465bbf117e4d2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 89991c74aa717c74a9f465bbf117e4d2, type: 3}
 --- !u!1001 &8189303778283769808
 PrefabInstance:
