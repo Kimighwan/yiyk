@@ -8,9 +8,11 @@ public class Move : MonoBehaviour
     public float maxSpeed;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
+    Animator anim;
 
     private void Awake()
     {
+        anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -19,11 +21,21 @@ public class Move : MonoBehaviour
     {
         // Stop  Speed?
         if (Input.GetButtonUp("Horizontal"))
-            rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
+        {
+            float x = Input.GetAxis("Horizontal");
+            rigid.AddForce(new Vector2(x, rigid.velocity.y));
+        }
+            //rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
 
         // Direction Sprite // 토마토 앞,뒤가 있을려나?
         if (Input.GetButton("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
+
+        // Animation
+        if (Mathf.Abs(rigid.velocity.x) < 0.2)
+            anim.SetBool("isMove", false);
+        else
+            anim.SetBool("isMove", true);
     }
 
     private void FixedUpdate()
