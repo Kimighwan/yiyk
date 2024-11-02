@@ -807,6 +807,7 @@ MonoBehaviour:
   linePrefab: {fileID: 4076808591492971025, guid: 228efba1d6fb89a4199bc1e9b02c5b81, type: 3}
   maxLineCount: 180
   curLineCount: 0
+  curLineLeght: 0
   destroyLineTime: 5
   points: []
 --- !u!114 &519420034
