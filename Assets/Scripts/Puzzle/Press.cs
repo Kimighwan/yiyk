@@ -5,7 +5,7 @@ using UnityEngine;
 public class Press : MonoBehaviour, IPuzzle
 {
     public GameObject door;
-    public int maxLength = 5;
+    public int maxLength = 1;
 
     private Animator anim;
     private bool alreadyOpen = false; // 문이 열린 적이 있는가?

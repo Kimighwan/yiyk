@@ -7,9 +7,15 @@ using UnityEngine;
 public class Lever : MonoBehaviour, IPuzzle
 {
     public GameObject door;
+    public GameObject door1;
+    public GameObject door2;
+
     public GameObject lever;
 
-    private Animation doorAnim;
+    private Animator doorAnim;
+    private Animator doorAnim1;
+    private Animator doorAnim2;
+
     private Animator leverOn;
 
     private bool alreadyOpen = false;
@@ -17,7 +23,10 @@ public class Lever : MonoBehaviour, IPuzzle
     
     private void Awake()
     {
-        doorAnim = door.GetComponent<Animation>();
+        doorAnim = door.GetComponent<Animator>();
+        doorAnim1 = door1.GetComponent<Animator>();
+        doorAnim2 = door2.GetComponent <Animator>();
+
         leverOn = lever.GetComponent<Animator>();
         //leverOn.StopPlayback();
     }
@@ -27,7 +36,9 @@ public class Lever : MonoBehaviour, IPuzzle
         if (alreadyOpen) // 열려있으면 그냥 종료
             return;
 
-        doorAnim.Play();
+        doorAnim.SetBool("isWall1Up", door.transform.position.y == 0);
+        doorAnim1.SetBool("isWall2Down", door1.transform.position.y == 16);
+        doorAnim2.SetBool("isWall3Up", door2.transform.position.y == 0);
 
         alreadyOpen = true; // 열려있다는 것을 체크
     }
