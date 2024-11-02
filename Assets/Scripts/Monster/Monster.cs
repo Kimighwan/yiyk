@@ -9,16 +9,17 @@ public class Monster : MonoBehaviour
     public float moveSpeed = 1f;        // 적의 기본 이동 속도
     public float approachSpeed = 2f;    // 플레이어 접근 시 속도
     public float approachRange = 5f;    // 접근 반응 거리
-    public float approachDuration = 1f; // 접근 지속 시간
-    public Color hitColor = Color.red; // 피격 시 색상
-    private Color originalColor;         // 원래 색상
+    public float approachDuration = 1f;  // 접근 지속 시간
     private float fixedY;
+    private Animator animator;
 
     private Vector3 startPosition;      // 시작 위치
     private bool movingLeft = true;     // 이동 방향 체크
     private bool isApproaching = false; // 플레이어 접근 중 여부
     private SpriteRenderer spriteRenderer; // 스프라이트 렌더러
     private FadeManager fadeManager;    // 페이드 매니저
+    public Sprite hitSprite;
+    private Coroutine currentAnimationCoroutine;
 
     private int health = 3;             // 적의 체력
     private bool isHit = false;          // 피격 상태 체크
@@ -28,13 +29,15 @@ public class Monster : MonoBehaviour
         startPosition = transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
         fadeManager = FindObjectOfType<FadeManager>(); // 페이드 매니저 찾기
-        originalColor = spriteRenderer.color; // 원래 색상 저장
+        animator = GetComponent<Animator>();
         fixedY = transform.position.y;
-        StartCoroutine(MovePattern()); // 이동 패턴 시작
+        currentAnimationCoroutine = StartCoroutine(MovePattern()); // 이동 패턴 시작
     }
 
     void Update()
     {
+        if (isHit) return;
+
         // 플레이어와의 거리 체크
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
@@ -48,13 +51,13 @@ public class Monster : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !isHit)
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hit.collider != null && hit.collider.CompareTag("Enemy")) // 적 태그 확인
+            if (hit.collider != null && hit.collider.CompareTag("Enemy"))
             {
                 TakeDamage(1);
             }
         }
 
-        transform.position = new Vector3(transform.position.x, fixedY,transform.position.z);
+        transform.position = new Vector3(transform.position.x, fixedY, transform.position.z);
     }
 
     // 플레이어와 충돌 감지
@@ -69,10 +72,11 @@ public class Monster : MonoBehaviour
     // 적의 피해 처리
     private void TakeDamage(int damage)
     {
-        spriteRenderer.color = hitColor;
+        spriteRenderer.sprite = hitSprite;
+        Debug.Log("피격 이미지 생성");
         health -= damage; // 체력 감소
         isHit = true; // 피격 상태 설정
-        StopAllCoroutines(); // 현재 모든 코루틴 정지
+        animator.enabled = false; // 애니메이션 중지
         StartCoroutine(HandleHit()); // 피격 처리 시작
 
         if (health <= 0)
@@ -83,26 +87,33 @@ public class Monster : MonoBehaviour
 
     IEnumerator HandleHit()
     {
-        // 1초 동안 적의 이동을 정지
-        yield return new WaitForSeconds(1f);
-        spriteRenderer.color = originalColor; // 원래 색상으로 복원
+        yield return new WaitForSeconds(2f); // 2초 동안 피격 이미지 표시
+        spriteRenderer.sprite = null; // 피격 이미지 제거
         isHit = false; // 피격 상태 해제
-        StartCoroutine(MovePattern()); // 이동 패턴 재개
+        animator.enabled = true; // 애니메이션 재개
+        currentAnimationCoroutine = StartCoroutine(MovePattern()); // 이동 패턴 재개
     }
 
     IEnumerator MovePattern()
     {
         while (true)
         {
+            animator.SetTrigger("Idle");
+            yield return new WaitForSeconds(1f);
+
+            // 이동할 위치 설정
             float targetX = movingLeft ? startPosition.x - moveDistance : startPosition.x + moveDistance;
             Vector3 targetPosition = new Vector3(targetX, transform.position.y, transform.position.z);
 
+            // 목표 위치까지 이동
             while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
             {
+                animator.SetTrigger("Jump");
                 transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
                 yield return null;
             }
 
+            // 이동 방향 전환
             movingLeft = !movingLeft;
             spriteRenderer.flipX = movingLeft;
         }
@@ -113,17 +124,17 @@ public class Monster : MonoBehaviour
         isApproaching = true;
         float elapsedTime = 0f;
 
-        float fixedY = transform.position.y;
-
         while (elapsedTime < approachDuration)
         {
             Vector3 targetPosition = new Vector3(player.position.x, fixedY, transform.position.z);
-            transform.position = Vector3.MoveTowards(transform.position, player.position, approachSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, approachSpeed * Time.deltaTime);
             elapsedTime += Time.deltaTime;
+            //animator.SetTrigger("Enemy_Jump");
             yield return null;
         }
 
+        
         isApproaching = false;
-        StartCoroutine(MovePattern());
+        StartCoroutine(MovePattern()); // 이동 패턴 재개
     }
 }
