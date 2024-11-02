@@ -6,6 +6,7 @@ public enum SceneType
     Title,
     Lobby,
     InGame,
+    Stage3,
 }
 
 public class SceneLoader : SingletonBehaviour<SceneLoader>
