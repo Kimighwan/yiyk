@@ -8,32 +8,33 @@ public class Lever : MonoBehaviour, IPuzzle
 {
     public GameObject door;
     public GameObject lever;
-    private SpriteRenderer spriteRenderer;
+
     private Animation doorAnim;
-    private Animation leverOn;
+    private Animator leverOn;
+
     private bool alreadyOpen = false;
     //Animator leverOn;
     
     private void Awake()
     {
         doorAnim = door.GetComponent<Animation>();
-        leverOn = lever.GetComponent<Animation>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        leverOn = lever.GetComponent<Animator>();
         //leverOn.StopPlayback();
     }
 
-    public void Open()
+    public void Open() // 문 여는 함수
     {
-        if (alreadyOpen)
+        if (alreadyOpen) // 열려있으면 그냥 종료
             return;
-        leverOn.Play("Lever");
-        doorAnim.Play("door_open");
-        alreadyOpen = true;
+
+        doorAnim.Play();
+
+        alreadyOpen = true; // 열려있다는 것을 체크
     }
 
-    public void On()
+    public void On() // 레버 작동 함수
     {
-        //spriteRenderer.flipX = true;
+        leverOn.SetBool("isOn", true);
     }
 
 
