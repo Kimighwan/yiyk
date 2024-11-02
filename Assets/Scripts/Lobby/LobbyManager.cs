@@ -23,6 +23,6 @@ public class LobbyManager : SingletonBehaviour<LobbyManager>
         }
 
         lobbyUIController.Init();
-        AudioManager.Instance.PlayBGM(BGM.lobby);
+        // AudioManager.Instance.PlayBGM(BGM.lobby);
     }
 }
