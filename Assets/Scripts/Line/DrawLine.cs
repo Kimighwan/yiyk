@@ -26,6 +26,11 @@ public class DrawLine : MonoBehaviour
     private Queue<int> useLine = new Queue<int>();
     //////////////////////////////////////////////////////////////
 
+    private void Start()
+    {
+        AudioManager.Instance.PlayBGM(BGM.lobby);
+    }
+
     private void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z));

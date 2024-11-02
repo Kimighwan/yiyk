@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 public enum BGM
 {
@@ -146,6 +147,19 @@ public class AudioManager : SingletonBehaviour<AudioManager>
         foreach (var audioSourceItem in m_SFXPlayer)
         {
             audioSourceItem.Value.volume = 1f;
+        }
+    }
+
+    public void SetBGMVolume(float volume)
+    {
+        m_CurrBGMSource.volume = volume;
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        foreach (var audioSourceItem in m_SFXPlayer)
+        {
+            audioSourceItem.Value.volume = volume;
         }
     }
 }
