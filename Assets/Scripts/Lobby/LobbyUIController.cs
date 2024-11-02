@@ -20,7 +20,7 @@ public class LobbyUIController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)) // ESC키, 모바일은 뒤로가기 버튼 누르면
         {
-            AudioManager.Instance.PlaySFX(SFX.ui_button_click);
+            //AudioManager.Instance.PlaySFX(SFX.ui_button_click);
 
             var frontUI = UIManager.Instance.GetCurrentFrontUI();
             if (frontUI != null) // UI가 띄워져 있다면
@@ -46,7 +46,6 @@ public class LobbyUIController : MonoBehaviour
 
     public void OnClickSettingsBtn()
     {
-
         var settinsUI = new BaseUIData();
         UIManager.Instance.OpenUI<SettingsUI>(settinsUI);
     }

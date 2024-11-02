@@ -62,7 +62,7 @@ public class BaseUI : MonoBehaviour
 
     public virtual void OnClickCloseButton()
     {
-        AudioManager.Instance.PlaySFX(SFX.ui_button_click);
+        //AudioManager.Instance.PlaySFX(SFX.ui_button_click);
         CloseUI();
     }
 }

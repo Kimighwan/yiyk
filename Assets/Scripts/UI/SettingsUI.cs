@@ -15,13 +15,13 @@ public class SettingsUI : BaseUI
     {
         base.SetInfo(uiData);
 
-        SetGameVersion();
+        // SetGameVersion();
     }
 
-    private void SetGameVersion()
-    {
-        gameVersionTxt.text = $"Version:{Application.version}";
-    }
+    //private void SetGameVersion()
+    //{
+    //    gameVersionTxt.text = $"Version:{Application.version}";
+    //}
 
     private void SetSoundSetting(bool sound)
     {
@@ -31,12 +31,12 @@ public class SettingsUI : BaseUI
 
     public void OnClickSoundOnToggle()
     {
-        AudioManager.Instance.PlaySFX(SFX.ui_button_click);
+        //AudioManager.Instance.PlaySFX(SFX.ui_button_click);
     }
 
     public void OnClickSoundOffToggle()
     {
-        AudioManager.Instance.PlaySFX(SFX.ui_button_click);
+        //AudioManager.Instance.PlaySFX(SFX.ui_button_click);
     }
 
 }
