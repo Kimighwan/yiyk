@@ -1,44 +1,49 @@
 using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Lever : MonoBehaviour, IPuzzle
 {
     public GameObject door;
-
+    public GameObject lever;
     private SpriteRenderer spriteRenderer;
     private Animation doorAnim;
+    private Animation leverOn;
     private bool alreadyOpen = false;
-
+    //Animator leverOn;
+    
     private void Awake()
     {
         doorAnim = door.GetComponent<Animation>();
+        leverOn = lever.GetComponent<Animation>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        //leverOn.StopPlayback();
     }
 
     public void Open()
     {
         if (alreadyOpen)
             return;
-
-        doorAnim.Play();
+        leverOn.Play("Lever");
+        doorAnim.Play("door_open");
         alreadyOpen = true;
     }
 
     public void On()
     {
-        spriteRenderer.flipX = true;
+        //spriteRenderer.flipX = true;
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnMouseDown()
     {
-        Debug.Log("OnTriggerEnter2D 콜라이더 닿음");
-        if (collision.CompareTag("Line"))
+        if (Input.GetMouseButtonDown(0))
         {
-            On();
+            Debug.Log("Lever clicked");
             Open();
+            On();
         }
     }
 
