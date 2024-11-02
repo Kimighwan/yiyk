@@ -12,7 +12,7 @@ public class CameraMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 targetPos = new Vector3(tomato.position.x, tomato.position.y, transform.position.z);
+        Vector3 targetPos = new Vector3(tomato.position.x, tomato.position.y + 4, transform.position.z);
 
         //targetPos.x = Mathf.Clamp(targetPos.x, minCameraBoundary.x, maxCameraBoundary.x);
         //targetPos.y = Mathf.Clamp(targetPos.y, minCameraBoundary.y, maxCameraBoundary.y);
