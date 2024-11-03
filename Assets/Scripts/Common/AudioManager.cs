@@ -4,7 +4,7 @@ using static Unity.VisualScripting.Member;
 
 public enum BGM
 {
-    lobby,
+    Main ,
     COUNT
 }
 
