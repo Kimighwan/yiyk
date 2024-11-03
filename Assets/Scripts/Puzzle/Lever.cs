@@ -53,7 +53,6 @@ public class Lever : MonoBehaviour, IPuzzle
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Lever clicked");
             Open();
             On();
         }

@@ -21,24 +21,36 @@ public class DrawLine : MonoBehaviour
     EdgeCollider2D coll;
     private Queue<GameObject> line = new Queue<GameObject>();
     Vector3 mousePos;
-    RaycastHit2D hit;
+    RaycastHit2D hitLever;
+    RaycastHit2D hitEnemy;
     private Queue<int> useLine = new Queue<int>();
     //////////////////////////////////////////////////////////////
+
+    private void Start()
+    {
+        AudioManager.Instance.PlayBGM(BGM.lobby);
+    }
 
     private void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z));
 
         Debug.DrawRay(mousePos, Vector3.forward * 100f, Color.red, 100f);
-        hit = Physics2D.Raycast(mousePos, Vector3.forward, 100f, LayerMask.GetMask("Lever"));
+        hitLever = Physics2D.Raycast(mousePos, Vector3.forward, 100f, LayerMask.GetMask("Lever"));
+        hitEnemy = Physics2D.Raycast(mousePos, Vector3.forward, 100f, LayerMask.GetMask("Enemy"));
 
 
         if (Input.GetMouseButtonDown(0)) // line 갯수는 1개임
         {
-            if (hit.collider != null)
+            // 캐찹 인스턴스화
+            GameObject ketChapp = Instantiate(Resources.Load<GameObject>("Ketchapp"), new Vector3(mousePos.x, mousePos.y, 15), Quaternion.identity);
+            Destroy(ketChapp, 4.8f);
+
+            // 레버 및 몬스터 위에는 라인이 그려지지 않음
+            if (hitLever.collider != null || hitEnemy.collider != null)
                 return;
 
-            GameObject obj = Instantiate(linePrefab);
+            GameObject obj = Instantiate(linePrefab/*, new Vector3(mousePos.x, mousePos.y, 15), Quaternion.identity*/);
             lineRenderer = obj.GetComponent<LineRenderer>();
             coll = obj.GetComponent<EdgeCollider2D>();
             points.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
@@ -50,7 +62,8 @@ public class DrawLine : MonoBehaviour
         }
         else if (Input.GetMouseButton(0) && isStart)
         {
-            if (hit.collider != null)
+            // 레버 및 몬스터 위에는 라인이 그려지지 않음
+            if (hitLever.collider != null || hitEnemy.collider != null)
             {
                 GameObject obj = null;
                 points.Clear();
@@ -83,6 +96,10 @@ public class DrawLine : MonoBehaviour
         else if (Input.GetMouseButtonUp(0) && isStart)
         {
             GameObject obj = null;
+            if(points.Count == 1)
+            {
+                coll.gameObject.SetActive(false); // 클릭만 했을 때
+            }
             points.Clear();
             if(line.Count != 0)
                 obj = line.Dequeue();
@@ -99,4 +116,5 @@ public class DrawLine : MonoBehaviour
         yield return new WaitForSeconds(destroyLineTime);
         curLineCount -= useLine.Dequeue();
     }
+
 }

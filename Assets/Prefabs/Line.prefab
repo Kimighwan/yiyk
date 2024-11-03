@@ -73,13 +73,11 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  m_SortingOrder: 20
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.78133136
+    widthMultiplier: 0.50106287
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -147,9 +145,7 @@ EdgeCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.05, y: 0}
-  - {x: 0.05, y: 0}
+  m_Points: []
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
