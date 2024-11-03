@@ -8,6 +8,7 @@ TagManager:
   - Puzzle
   - Enemy
   - Lever
+  - Obstacle
   layers:
   - Default
   - TransparentFX

@@ -37,7 +37,7 @@ public class TitleManager : MonoBehaviour
         LogoAnim.gameObject.SetActive(false);
         Title.SetActive(true); 
 
-        _asyncOperation = SceneLoader.Instance.LoadSceneAsync(SceneType.Stage3);
+        _asyncOperation = SceneLoader.Instance.LoadSceneAsync(SceneType.InGame);
         if (_asyncOperation == null)
         {
             yield break;
