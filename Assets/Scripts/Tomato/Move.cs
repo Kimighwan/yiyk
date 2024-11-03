@@ -87,7 +87,7 @@ public class Move : MonoBehaviour
 
     private IEnumerator StartSetPosition(Vector3 newPosition)
     {
-        yield return new WaitForSecondsRealtime(5f);
+        yield return new WaitForSecondsRealtime(1f);
         transform.position = newPosition;
         rigid.velocity = Vector2.zero; // 이동 초기화
         isDead = false;
