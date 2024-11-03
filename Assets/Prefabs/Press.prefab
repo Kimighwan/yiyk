@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 602767533454513099}
   - component: {fileID: 602767533454513098}
   - component: {fileID: 602767533454513096}
-  - component: {fileID: 1840373149599652880}
+  - component: {fileID: 1931538187}
   m_Layer: 0
   m_Name: Press
   m_TagString: Untagged
@@ -100,23 +100,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 0}
   maxLength: 1
---- !u!95 &1840373149599652880
-Animator:
-  serializedVersion: 4
+--- !u!111 &1931538187
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 602767533454513140}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 54ed6fc8b7937a64aae47859b7b4ca31, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 54ed6fc8b7937a64aae47859b7b4ca31, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0

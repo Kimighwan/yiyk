@@ -13468,14 +13468,13 @@ GameObject:
   m_Component:
   - component: {fileID: 2301169700720720253}
   - component: {fileID: 8107547800428539431}
-  - component: {fileID: 371531914083071698}
   m_Layer: 0
   m_Name: StageCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2301169700720720253
 Transform:
   m_ObjectHideFlags: 0
@@ -13517,18 +13516,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
---- !u!114 &371531914083071698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3722650543981456378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea5f1ac15fdcf424d921310e0fac7df0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &371531913509863414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13536,10 +13523,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 371531913876945006}
     m_Modifications:
-    - target: {fileID: 4361144315599037539, guid: f514700348060964f803f669d42f6b11, type: 3}
-      propertyPath: m_TagString
-      value: Obstacle
-      objectReference: {fileID: 0}
     - target: {fileID: 4361144315742991518, guid: f514700348060964f803f669d42f6b11, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -13616,44 +13599,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4361144316263491162, guid: f514700348060964f803f669d42f6b11, type: 3}
   m_PrefabInstance: {fileID: 371531913509863414}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &1575384882
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4152908094648654252}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.008966923, y: -11.33}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.4968647, y: 0.90565455}
-    oldSize: {x: 2.86, y: 2.66}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.86, y: 16}
-  m_EdgeRadius: 0
---- !u!114 &1575384883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4152908094648654252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea5f1ac15fdcf424d921310e0fac7df0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &371531914127756155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13671,7 +13616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8095189410662928642, guid: 024c90478fcc5c344a442e9402eec314, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.05
+      value: 2.15
       objectReference: {fileID: 0}
     - target: {fileID: 8095189410662928642, guid: 024c90478fcc5c344a442e9402eec314, type: 3}
       propertyPath: m_LocalPosition.z
