@@ -6,7 +6,7 @@ public class SoundManager : MonoBehaviour
 {
     public AudioSource source;
 
-    public void SetVolume(float volume)
+    public void SetBGMVolume(float volume)
     {
         source.volume = volume;
     }
