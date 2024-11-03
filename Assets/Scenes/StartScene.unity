@@ -1022,9 +1022,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1350668676}
-        m_TargetAssemblyTypeName: StartScene, Assembly-CSharp
-        m_MethodName: Quit
+      - m_Target: {fileID: 464807902}
+        m_TargetAssemblyTypeName: settingUI, Assembly-CSharp
+        m_MethodName: OnClickSettingsBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
