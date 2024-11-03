@@ -10,7 +10,7 @@ public class Lever : MonoBehaviour, IPuzzle
 
     public GameObject lever;
 
-    protected Animator doorAnim;
+    protected Animation doorAnim;
 
     protected Animator leverOn;
 
@@ -19,18 +19,18 @@ public class Lever : MonoBehaviour, IPuzzle
     
     private void Awake()
     {
-        doorAnim = door.GetComponent<Animator>();
+        doorAnim = door.GetComponent<Animation>();
 
         leverOn = lever.GetComponent<Animator>();
         //leverOn.StopPlayback();
     }
 
-    public virtual void Open() // 문 여는 함수
+    public void Open() // 문 여는 함수
     {
         if (alreadyOpen) // 열려있으면 그냥 종료
             return;
 
-        doorAnim.SetBool("isWall1Up", door.transform.position.y == 0);
+        doorAnim.Play();
 
         alreadyOpen = true; // 열려있다는 것을 체크
     }

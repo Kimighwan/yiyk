@@ -39,4 +39,8 @@ public class SettingsUI : BaseUI
         //AudioManager.Instance.PlaySFX(SFX.ui_button_click);
     }
 
+    public void ReStart()
+    {
+        SceneLoader.Instance.ReloadScene();
+    }
 }
