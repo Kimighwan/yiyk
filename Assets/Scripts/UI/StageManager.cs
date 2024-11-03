@@ -27,7 +27,10 @@ public class StageManager : MonoBehaviour
 
         currentStageIndex = stageIndex;
     }
-
+    public void OnClickReStart()
+    {
+        ActivateStage(currentStageIndex);
+    }
     public void NextStage()
     {
         if (currentStageIndex < stages.Length - 1)
