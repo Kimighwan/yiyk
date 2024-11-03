@@ -1521,7 +1521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4356448306181367816, guid: 8707a007117b5ea4587a0f355e57bc31, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4356448306181367819, guid: 8707a007117b5ea4587a0f355e57bc31, type: 3}
       propertyPath: m_RootOrder
@@ -1836,7 +1836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3405760899260070883, guid: e864cde06faadba499291c740d4d742c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3405760899608355950, guid: e864cde06faadba499291c740d4d742c, type: 3}
       propertyPath: m_Tiles.Array.size
@@ -37588,7 +37588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1986510350274668137, guid: f0070c7351c4038419169073f35b563e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2063843469358675529, guid: f0070c7351c4038419169073f35b563e, type: 3}
       propertyPath: m_IsActive
