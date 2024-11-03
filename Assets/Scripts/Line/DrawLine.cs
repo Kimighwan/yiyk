@@ -28,7 +28,7 @@ public class DrawLine : MonoBehaviour
 
     private void Start()
     {
-        AudioManager.Instance.PlayBGM(BGM.lobby);
+        // AudioManager.Instance.PlayBGM(BGM.lobby);
     }
 
     private void Update()
