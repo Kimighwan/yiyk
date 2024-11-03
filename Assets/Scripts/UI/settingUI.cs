@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SettingUI : MonoBehaviour
+public class settingUI : MonoBehaviour
 {
     public GameObject setting;
     private void Update()
@@ -20,7 +20,7 @@ public class SettingUI : MonoBehaviour
             {
                 setting.SetActive(false);
             }
-            else 
+            else
             {
                 OnClickSettingsBtn();
             }
