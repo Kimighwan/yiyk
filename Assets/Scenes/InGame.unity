@@ -875,6 +875,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.86, y: 16.76}
   m_EdgeRadius: 0
+--- !u!1 &851487134 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1426784854218448316, guid: f0070c7351c4038419169073f35b563e, type: 3}
+  m_PrefabInstance: {fileID: 1986510350058285219}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &851487139
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851487134}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 54ed6fc8b7937a64aae47859b7b4ca31, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &970776230
 GameObject:
   m_ObjectHideFlags: 0
@@ -36104,26 +36124,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3068270940438807446, guid: e864cde06faadba499291c740d4d742c, type: 3}
   m_PrefabInstance: {fileID: 1320885807}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1712096599
-Animator:
-  serializedVersion: 4
+--- !u!111 &1712096599
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1712096594}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 54ed6fc8b7937a64aae47859b7b4ca31, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &1795383621
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36468,7 +36483,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 5.55
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1426784854218448263, guid: f0070c7351c4038419169073f35b563e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f0070c7351c4038419169073f35b563e, type: 3}
 --- !u!1 &1986510350058285220 stripped
 GameObject:
