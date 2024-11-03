@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class Boundary : MonoBehaviour
 {
+    private StageManager stageManager;
+    private FadeManager fadeManager;
+
+    private void Awake()
+    {
+        stageManager = FindObjectOfType<StageManager>();
+        fadeManager = FindObjectOfType<FadeManager>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            // 재시작
-            Debug.Log("재시작");
+            stageManager.ActivateStage(stageManager.currentStageIndex);
+            fadeManager.FadeOutAndRestart();
         }
     }
 }
