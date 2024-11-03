@@ -26,11 +26,7 @@ public class Move : MonoBehaviour
     {
         if (isDead) return; // 사망 상태에서는 이동 불가
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            stageManager.ActivateStage(stageManager.currentStageIndex);
-            fadeManager.FadeOutAndRestart();
-        }
+        
 
         // 이동 처리
         if (Input.GetButtonUp("Horizontal"))
@@ -78,6 +74,7 @@ public class Move : MonoBehaviour
         anim.SetBool("isDie", true);
         rigid.velocity = Vector2.zero;
         fadeManager.FadeOutAndRestart();
+        SetPosition(transform.position);
     }
 
     public void SetPosition(Vector3 newPosition)
