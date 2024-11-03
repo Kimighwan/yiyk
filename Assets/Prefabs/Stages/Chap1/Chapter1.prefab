@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1426784854218448259}
   - component: {fileID: 1426784854218448258}
   - component: {fileID: 1426784854218448256}
-  - component: {fileID: 1426784854218448263}
+  - component: {fileID: 7107093873315250463}
   m_Layer: 0
   m_Name: Press
   m_TagString: Untagged
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 2815986741127279620}
   maxLength: 5
---- !u!95 &1426784854218448263
+--- !u!95 &7107093873315250463
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -110,7 +110,7 @@ Animator:
   m_GameObject: {fileID: 1426784854218448316}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 30c48a0e693622240be4bfdcdf8bcd7a, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

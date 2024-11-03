@@ -7,17 +7,17 @@ public class Press : MonoBehaviour, IPuzzle
     public GameObject door;
     public int maxLength = 1;
 
-    private Animator anim;
+    private Animation anim;
     private bool alreadyOpen = false; // 문이 열린 적이 있는가?
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponent<Animation>();
     }
 
     public void On()
     {
-        anim.SetTrigger("isPress");
+        anim.Play();
     }
 
     //public void Off()
