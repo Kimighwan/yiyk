@@ -1,37 +1,61 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Move : MonoBehaviour
 {
     public float maxSpeed;
-    Rigidbody2D rigid;
-    SpriteRenderer spriteRenderer;
-    Animator anim;
+    private Rigidbody2D rigid;
+    private SpriteRenderer spriteRenderer;
+    private Animator anim;
 
+    private bool isDead = false; // 사망 여부 체크
+    private bool restartRequested = false; // 재시작 요청 체크
+    private float rKeyHoldTime = 0f; // R 키 누른 시간
+
+    private FadeManager fadeManager;
+    private StageManager stageManager;
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        fadeManager = FindObjectOfType<FadeManager>();
+        stageManager = FindObjectOfType<StageManager>();
     }
 
     private void Update()
     {
-        // Stop  Speed?
+        if (isDead)
+        {
+            // R 키를 누르고 있으면 시간 증가
+            if (Input.GetKey(KeyCode.R))
+            {
+                rKeyHoldTime += Time.unscaledDeltaTime;
+
+                if (rKeyHoldTime >= 3f)
+                {
+                    restartRequested = false;
+                    RestartStage();
+                }
+            }
+
+            // 3초 동안 재시작이 되지 않으면 페이드 아웃
+            if (restartRequested && rKeyHoldTime < 3f)
+            {
+                StartCoroutine(FadeToMainMenu());
+            }
+            return; // 사망 상태에서는 이동 불가
+        }
         if (Input.GetButtonUp("Horizontal"))
         {
             float x = Input.GetAxis("Horizontal");
             rigid.AddForce(new Vector2(x, rigid.velocity.y));
         }
-            //rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
 
-        // Direction Sprite // 토마토 앞,뒤가 있을려나?
         if (Input.GetButton("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
 
-        // Animation
         if (Mathf.Abs(rigid.velocity.x) < 0.2)
             anim.SetBool("isMove", false);
         else
@@ -40,14 +64,47 @@ public class Move : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Move By Keyboard
+        if (isDead) return;
+
         float h = Input.GetAxisRaw("Horizontal");
         rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
 
-        // Max Speed
-        if (rigid.velocity.x > maxSpeed) // Right Max Speed
+        if (rigid.velocity.x > maxSpeed)
             rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
-        else if (rigid.velocity.x < maxSpeed * (-1)) // Left Max Speed
+        else if (rigid.velocity.x < maxSpeed * (-1))
             rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
+    }
+    public void Die()
+    {
+        isDead = true;
+        restartRequested= true;
+        anim.SetBool("isDie", true);
+        anim.SetBool("isMove", false);
+      
+        Invoke("DealthAnimation",2f);
+    }
+    
+    private void DealthAnimation()
+    {
+        Time.timeScale = 0;
+    }
+
+    // 페이드 아웃 후 시작 화면으로 이동
+    IEnumerator FadeToMainMenu()
+    {
+        yield return new WaitForSeconds(3f);
+        fadeManager.FadeOutAndRestart();
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("StartScene"); 
+    }
+
+    private void RestartStage()
+    {
+        isDead = false;
+        Time.timeScale = 1;
+        anim.SetBool("isDie", false);
+        anim.SetBool("isMove", true);
+        restartRequested = false;
+        stageManager.ActivateStage(stageManager.currentStageIndex);
     }
 }

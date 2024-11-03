@@ -4,8 +4,7 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour
 {
     public GameObject[] stages;
-    public Transform player;
-    private int currentStageIndex = 0; 
+    public int currentStageIndex = 0; 
 
     private void Start()
     {

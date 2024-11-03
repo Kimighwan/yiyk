@@ -58,7 +58,11 @@ public class Monster : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            fadeManager.FadeOutAndRestart(); // 페이드 아웃 및 씬 재시작
+            Move playerMove = other.GetComponent<Move>();
+            if (playerMove != null)
+            {
+                playerMove.Die();
+            }
         }
     }
 
