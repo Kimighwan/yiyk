@@ -7,11 +7,16 @@ using UnityEngine.UI;
 public class FadeManager : SingletonBehaviour<FadeManager>
 {
     public Image fadeImage;        // 페이드 이미지
-    public float fadeDuration = 5f; // 페이드 지속 시간
-
+    public float fadeDuration = 3f; // 페이드 지속 시간
+    private StageManager stageManager;
     protected override void Init()
     {
         base.Init();
+    }
+
+    private void Awake()
+    {
+        stageManager = FindObjectOfType<StageManager>();
     }
 
     private void Start()
@@ -36,37 +41,35 @@ public class FadeManager : SingletonBehaviour<FadeManager>
         while (elapsedTime < fadeDuration)
         {
             color.a = Mathf.Lerp(0, 1, elapsedTime / fadeDuration);
+            Time.timeScale = 0;
             fadeImage.color = color;
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
 
         color.a = 1;
         fadeImage.color = color;
 
-        // 씬 재시작
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        stageManager.ActivateStage(stageManager.currentStageIndex);
 
-        // 씬이 다시 시작되면서 페이드 인
         StartCoroutine(FadeIn());
     }
 
-    // 페이드 인 효과 코루틴
     private IEnumerator FadeIn()
     {
         float elapsedTime = 0f;
         Color color = fadeImage.color;
 
-        // 페이드 인
         while (elapsedTime < fadeDuration)
         {
             color.a = Mathf.Lerp(1, 0, elapsedTime / fadeDuration);
             fadeImage.color = color;
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
 
         color.a = 0;
         fadeImage.color = color;
+        Time.timeScale = 1;
     }
 }

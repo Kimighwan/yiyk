@@ -4,23 +4,29 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour
 {
     public GameObject[] stages;
-    public int currentStageIndex = 0; 
+    public Transform[] stageStartPositions;
+    public int currentStageIndex = 0;
 
     private void Start()
     {
-        ActivateStage(currentStageIndex); 
+        ActivateStage(currentStageIndex);
     }
 
     public void ActivateStage(int stageIndex)
     {
-        foreach (var stage in stages)
+        for (int i = 0; i < stages.Length; i++)
         {
-            stage.SetActive(false);
+            stages[i].SetActive(i == stageIndex);
         }
 
-        stages[stageIndex].SetActive(true);
-    }
+        Move player = FindObjectOfType<Move>();
+        if (player != null && stageIndex < stageStartPositions.Length)
+        {
+            player.SetPosition(stageStartPositions[stageIndex].position);
+        }
 
+        currentStageIndex = stageIndex;
+    }
 
     public void NextStage()
     {
