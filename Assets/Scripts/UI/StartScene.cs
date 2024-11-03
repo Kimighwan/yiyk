@@ -8,4 +8,9 @@ public class StartScene : MonoBehaviour
     {
         SceneManager.LoadScene("Title");
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

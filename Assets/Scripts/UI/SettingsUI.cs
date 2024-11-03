@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class SettingsUI : BaseUI
 {
-    public TextMeshProUGUI gameVersionTxt;
+    // public TextMeshProUGUI gameVersionTxt;
 
     public GameObject soundOnToggle;
     public GameObject soundOffToggle;
@@ -39,4 +39,9 @@ public class SettingsUI : BaseUI
         //AudioManager.Instance.PlaySFX(SFX.ui_button_click);
     }
 
+
+    public void OnClickSettingQuit()
+    {
+        gameObject.SetActive(!gameObject.activeSelf);
+    }
 }
