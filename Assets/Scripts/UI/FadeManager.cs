@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class FadeManager : SingletonBehaviour<FadeManager>
 {
     public Image fadeImage;        // 페이드 이미지
-    public float fadeDuration = 3f; // 페이드 지속 시간
+    public float fadeDuration = 5f; // 페이드 지속 시간
     private StageManager stageManager;
     protected override void Init()
     {
