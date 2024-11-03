@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour
@@ -36,7 +37,7 @@ public class TitleManager : MonoBehaviour
         LogoAnim.gameObject.SetActive(false);
         Title.SetActive(true); 
 
-        _asyncOperation = SceneLoader.Instance.LoadSceneAsync(SceneType.Lobby);
+        _asyncOperation = SceneLoader.Instance.LoadSceneAsync(SceneType.InGame);
         if (_asyncOperation == null)
         {
             yield break;
@@ -59,7 +60,6 @@ public class TitleManager : MonoBehaviour
                 _asyncOperation.allowSceneActivation = true;
                 yield break;
             }
-
             yield return null;
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Press : MonoBehaviour, IPuzzle
 {
     public GameObject door;
-    public int maxLength = 5;
+    public int maxLength = 1;
 
     private Animator anim;
     private bool alreadyOpen = false; // 문이 열린 적이 있는가?
@@ -47,10 +47,11 @@ public class Press : MonoBehaviour, IPuzzle
     {
         Debug.DrawRay(transform.position, transform.up * maxLength, Color.red);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, maxLength, LayerMask.GetMask("Player"));
-        if(hit.collider != null)
+        RaycastHit2D hitTomato = Physics2D.Raycast(transform.position, transform.up, maxLength, LayerMask.GetMask("Player"));
+        RaycastHit2D hitEnemy = Physics2D.Raycast(transform.position, transform.up, maxLength, LayerMask.GetMask("Enemy"));
+        if (hitTomato.collider != null || hitEnemy.collider != null)
         {
-            if (hit.transform.gameObject.CompareTag("Player") && !alreadyOpen)
+            if (!alreadyOpen)
             {
                 On();
                 Open();

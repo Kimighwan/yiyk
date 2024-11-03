@@ -48,14 +48,7 @@ public class Monster : MonoBehaviour
         }
 
         // 마우스 왼쪽 클릭 감지
-        if (Input.GetMouseButtonDown(0) && !isHit)
-        {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hit.collider != null && hit.collider.gameObject == gameObject) // 클릭한 객체가 현재 Monster인지 확인
-            {
-                TakeDamage(1);
-            }
-        }
+       
 
         transform.position = new Vector3(transform.position.x, fixedY, transform.position.z);
     }
@@ -137,5 +130,18 @@ public class Monster : MonoBehaviour
 
         isApproaching = false;
         currentAnimationCoroutine = StartCoroutine(MovePattern());
+    }
+
+    private void OnMouseDown()
+    {
+        if (Input.GetMouseButtonDown(0) && !isHit)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            if (hit.collider != null && hit.collider.gameObject == gameObject) // 클릭한 객체가 현재 Monster인지 확인
+            {
+                TakeDamage(1);
+                Debug.Log("몬스터 클릭");
+            }
+        }
     }
 }
