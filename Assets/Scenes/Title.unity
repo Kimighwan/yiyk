@@ -154,7 +154,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4534517729731994870}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -215,7 +215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &702653904
 AudioSource:
   m_ObjectHideFlags: 0
@@ -424,7 +424,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4534517729731994871}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1067667758
 SpriteRenderer:
@@ -990,8 +990,8 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4534517729680976859, guid: 14526cb0345b74b4ba3d2de9da77765d, type: 3}
   m_PrefabInstance: {fileID: 4534517729731994869}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &4534517729731994871 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4534517729927049478, guid: 14526cb0345b74b4ba3d2de9da77765d, type: 3}
+--- !u!4 &4534517729731994871 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4534517731025383078, guid: 14526cb0345b74b4ba3d2de9da77765d, type: 3}
   m_PrefabInstance: {fileID: 4534517729731994869}
   m_PrefabAsset: {fileID: 0}
