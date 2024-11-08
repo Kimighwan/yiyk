@@ -29,7 +29,7 @@ public class TitleManager : MonoBehaviour
     {
         Title.SetActive(true); 
 
-        _asyncOperation = SceneLoader.Instance.LoadSceneAsync(SceneType.InGame);
+        _asyncOperation = SceneLoader.Instance.LoadSceneAsync(SceneType.Stage1);
         if (_asyncOperation == null)
         {
             yield break;
