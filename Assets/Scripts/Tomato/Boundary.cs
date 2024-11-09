@@ -17,8 +17,8 @@ public class Boundary : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            stageManager.ActivateStage(stageManager.currentStageIndex);
-            fadeManager.FadeOutAndRestart();
+            
+            SceneLoader.Instance.ReloadScene();
         }
     }
 }
