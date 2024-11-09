@@ -19,7 +19,7 @@ public class Lever : MonoBehaviour, IPuzzle
     
     private void Awake()
     {
-        doorAnim = door.GetComponent<Animation>();
+        doorAnim = door.transform.GetChild(1).GetComponent<Animation>();
 
         leverOn = lever.GetComponent<Animator>();
         //leverOn.StopPlayback();
@@ -31,8 +31,14 @@ public class Lever : MonoBehaviour, IPuzzle
             return;
 
         doorAnim.Play();
+        Invoke("OnCol", 0.8f);
 
         alreadyOpen = true; // 열려있다는 것을 체크
+    }
+
+    private void OnCol()
+    {
+        door.GetComponent<Collider2D>().enabled = true;
     }
 
     public void On() // 레버 작동 함수

@@ -7,11 +7,13 @@ public class Press : MonoBehaviour, IPuzzle
     public GameObject door;
     public int maxLength = 1;
 
+    private Animation dorreAnim;
     private Animation anim;
     private bool alreadyOpen = false; // 문이 열린 적이 있는가?
 
     private void Awake()
     {
+        dorreAnim = door.transform.GetChild(1).GetComponent<Animation>();
         anim = GetComponent<Animation>();
     }
 
@@ -32,15 +34,16 @@ public class Press : MonoBehaviour, IPuzzle
     {
         if (alreadyOpen) return;
 
-        door.GetComponent<Animation>().Play();
+        dorreAnim.Play();
+        Invoke("OnCol", 0.8f);
 
         alreadyOpen = true;
     }
 
-    //public void Close()
-    //{
-
-    //}
+    private void OnCol()
+    {
+        door.GetComponent<Collider2D>().enabled = true;
+    }
 
 
     private void Update()
