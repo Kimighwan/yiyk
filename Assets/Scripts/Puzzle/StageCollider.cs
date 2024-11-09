@@ -13,7 +13,7 @@ public class StageCollider : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            stageManager.NextStage();
+            SceneLoader.Instance.NextStage();
         }
     }
 }

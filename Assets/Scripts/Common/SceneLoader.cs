@@ -20,7 +20,7 @@ public enum SceneType
 
 public class SceneLoader : SingletonBehaviour<SceneLoader>
 {
-    private int curStageNumber = 2; // 2 : Stage1 æ¿ ¿Œµ¶Ω∫
+
     public void LoadScene(SceneType sceneType)
     {
         Time.timeScale = 1f;
