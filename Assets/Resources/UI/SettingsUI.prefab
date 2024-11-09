@@ -396,7 +396,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1930451893679076040}
         m_TargetAssemblyTypeName: SettingsUI, Assembly-CSharp
-        m_MethodName: ReStart
+        m_MethodName: ReStartBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

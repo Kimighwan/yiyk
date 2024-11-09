@@ -44,4 +44,9 @@ public class SettingsUI : BaseUI
     {
         gameObject.SetActive(!gameObject.activeSelf);
     }
+
+    public void ReStartBtn()
+    {
+        SceneLoader.Instance.ReloadScene();
+    }
 }
