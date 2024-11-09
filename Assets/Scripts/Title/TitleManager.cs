@@ -49,7 +49,10 @@ public class TitleManager : MonoBehaviour
             // 로딩이 완료된다면 로비로 씬전환 후 코루틴 종료
             if (_asyncOperation.progress >= 0.9f)
             {
-                _asyncOperation.allowSceneActivation = true;
+                SceneLoader.Instance.Fade(Color.black, 0f, 1f, 0.5f, 0f, false, () =>
+                {
+                    _asyncOperation.allowSceneActivation = true;
+                });
                 yield break;
             }
             yield return null;

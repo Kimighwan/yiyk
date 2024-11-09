@@ -22,6 +22,11 @@ public class Move : MonoBehaviour
         fadeManager = FindObjectOfType<FadeManager>();
     }
 
+    private void Start()
+    {
+        SceneLoader.Instance.Fade(Color.black, 1f, 0f, 0.5f, 0f, true);
+    }
+
     private void Update()
     {
         if (isDead) return; // 사망 상태에서는 이동 불가
@@ -73,7 +78,7 @@ public class Move : MonoBehaviour
         isDead = true;
         anim.SetBool("isDie", true);
         rigid.velocity = Vector2.zero;
-        fadeManager.FadeOutAndRestart();
+        SceneLoader.Instance.ReloadScene();
         SetPosition(transform.position);
     }
 

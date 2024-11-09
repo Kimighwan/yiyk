@@ -23,9 +23,9 @@ public class Lever1 : MonoBehaviour, IPuzzle
 
     private void Awake()
     {
-        doorAnim = door.GetComponent<Animator>();
-        doorAnim1 = door1.GetComponent<Animator>();
-        doorAnim2 = door2.GetComponent<Animator>();
+        doorAnim = door.transform.GetChild(1).GetComponent<Animator>();
+        doorAnim1 = door1.transform.GetChild(1).GetComponent<Animator>();
+        doorAnim2 = door2.transform.GetChild(1).GetComponent<Animator>();
 
         leverOn = lever.GetComponent<Animator>();
         //leverOn.StopPlayback();
