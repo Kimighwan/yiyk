@@ -12,4 +12,6 @@ public class SettingUIManager : StartSceneCanvasManager
 
 
     // 재시작 버튼 구현
+
+    // R버튼 재시작 구현 -> 2초 누르면 재시작
 }
