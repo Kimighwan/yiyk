@@ -11,7 +11,7 @@ public class StartSceneCanvasManager : MonoBehaviour
         HandleInput();
     }
 
-    private void HandleInput()
+    protected virtual void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) // ESC키, 모바일은 뒤로가기 버튼 누르면
         {
