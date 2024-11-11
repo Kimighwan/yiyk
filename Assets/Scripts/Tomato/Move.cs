@@ -62,21 +62,21 @@ public class Move : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
-            rigid.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+            //Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
+            //rigid.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
 
-            Die();
+            StartCoroutine("DieCo");
         }
     }
 
-    private void Die()
+    private IEnumerator DieCo()
     {
         isDead = true;
         anim.SetBool("isDie", true);
         rigid.velocity = Vector2.zero;
+        rigid.simulated = false;
+        yield return new WaitForSeconds(1.0f);
         SceneLoader.Instance.ReloadScene();
-
-
 
         // SetPosition(transform.position);
     }
