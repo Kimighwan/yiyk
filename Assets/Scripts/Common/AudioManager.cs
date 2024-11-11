@@ -53,6 +53,7 @@ public class AudioManager : SingletonBehaviour<AudioManager>
             var newAudioSource = newGO.AddComponent<AudioSource>();
             newAudioSource.clip = audioClip;
             newAudioSource.loop = true;
+            newAudioSource.volume = 0.1f;
             newAudioSource.playOnAwake = false;
             newGO.transform.parent = BGMTrs;
 
