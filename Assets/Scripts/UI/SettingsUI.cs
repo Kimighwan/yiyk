@@ -12,6 +12,13 @@ public class SettingsUI : BaseUI
     private float preValue; // 流傈 杭俘 农扁
     private bool sound = true; // false: 家府 阐 // true: 家府 糯
 
+
+    private void Update()
+    {
+        AudioManager.Instance.SetBGMVolume(slider.value);
+    }
+
+
     public override void SetInfo(BaseUIData uiData)
     {
         base.SetInfo(uiData);
