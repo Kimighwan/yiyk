@@ -7,10 +7,9 @@ public class Move : MonoBehaviour
     public float knockbackForce = 10f;
 
     private Rigidbody2D rigid;
+    private Vector2 moveVec;
     private SpriteRenderer spriteRenderer;
     private Animator anim;
-    private StageManager stageManager;
-    private FadeManager fadeManager;
     private bool isDead = false;
 
     private void Awake()
@@ -18,33 +17,29 @@ public class Move : MonoBehaviour
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        stageManager = FindObjectOfType<StageManager>();
-        fadeManager = FindObjectOfType<FadeManager>();
     }
 
     private void Start()
     {
+        isDead = false;
         SceneLoader.Instance.Fade(Color.black, 1f, 0f, 2.0f, 0f, true);
-        AudioManager.Instance.PlayBGM(BGM.IngameBGM);
+        AudioManager.Instance.PlayBGM(BGM.IngameBGM); // 임시 BGM 재생 위치
     }
 
     private void Update()
     {
         if (isDead) return; // 사망 상태에서는 이동 불가
 
-        
 
         // 이동 처리
-        if (Input.GetButtonUp("Horizontal"))
-        {
-            float x = Input.GetAxis("Horizontal");
-            rigid.AddForce(new Vector2(x, rigid.velocity.y));
-        }
+        float x = Input.GetAxis("Horizontal");
+        moveVec = new Vector2(x, rigid.velocity.y);
+        rigid.AddForce(moveVec);
 
         if (Input.GetButton("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
 
-        if (Mathf.Abs(rigid.velocity.x) < 0.2)
+        if (moveVec == Vector2.zero/*Mathf.Abs(rigid.velocity.x) < 0.2*/)
             anim.SetBool("isMove", false);
         else
             anim.SetBool("isMove", true);
@@ -80,19 +75,22 @@ public class Move : MonoBehaviour
         anim.SetBool("isDie", true);
         rigid.velocity = Vector2.zero;
         SceneLoader.Instance.ReloadScene();
-        SetPosition(transform.position);
+
+
+
+        // SetPosition(transform.position);
     }
 
-    public void SetPosition(Vector3 newPosition)
-    {
-        StartCoroutine(StartSetPosition(newPosition));
-    }
+    //public void SetPosition(Vector3 newPosition)
+    //{
+    //    StartCoroutine(StartSetPosition(newPosition));
+    //}
 
-    private IEnumerator StartSetPosition(Vector3 newPosition)
-    {
-        yield return new WaitForSecondsRealtime(1f);
-        transform.position = newPosition;
-        rigid.velocity = Vector2.zero; // 이동 초기화
-        isDead = false;
-    }
+    //private IEnumerator StartSetPosition(Vector3 newPosition)
+    //{
+    //    yield return new WaitForSecondsRealtime(1f);
+    //    transform.position = newPosition;
+    //    rigid.velocity = Vector2.zero; // 이동 초기화
+    //    isDead = false;
+    //}
 }
