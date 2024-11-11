@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class StartSceneCanvasManager : MonoBehaviour
 {
     public GameObject setting;
+
     private void Update()
     {
         HandleInput();
