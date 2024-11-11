@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SettingUIManager : StartSceneCanvasManager
+public class SettingUIManager :  StartSceneCanvasManager
 {
     [SerializeField] private bool RDown = false; // R 키를 눌렀는가? // true: 누르는 중
     [SerializeField] private float RDownTime = 0.0f; // R 키를 몇초 눌렀는가?
