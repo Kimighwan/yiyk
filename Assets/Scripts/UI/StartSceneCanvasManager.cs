@@ -20,6 +20,7 @@ public class StartSceneCanvasManager : MonoBehaviour
             if (setting.activeSelf) // UI가 띄워져 있다면
             {
                 setting.SetActive(false);
+                Time.timeScale = 1.0f;
             }
             else
             {
@@ -31,6 +32,7 @@ public class StartSceneCanvasManager : MonoBehaviour
     public void OnClickSettingsBtn()
     {
         setting.SetActive(!setting.activeSelf);
+        Time.timeScale = setting.activeSelf == true ? 0f : 1f;
     }
 
     public void OnClickQuit()
