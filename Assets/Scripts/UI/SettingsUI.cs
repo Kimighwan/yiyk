@@ -43,6 +43,7 @@ public class SettingsUI : BaseUI
     public void OnClickSettingQuit()
     {
         gameObject.SetActive(!gameObject.activeSelf);
+        Time.timeScale = gameObject.activeSelf == true ? 0f : 1f;
     }
 
     public void ReStartBtn()
