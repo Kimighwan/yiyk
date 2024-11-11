@@ -4,15 +4,16 @@ using static Unity.VisualScripting.Member;
 
 public enum BGM
 {
-    Main ,
+    MainBGM,
+    IngameBGM,
     COUNT
 }
 
 public enum SFX
 {
-    chapter_clear,
-    stage_clear,
-    ui_button_click,
+    ButtonClick,
+    Mouseclick,
+    Opendoor,
     COUNT
 }
 
