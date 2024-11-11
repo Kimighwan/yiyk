@@ -24,7 +24,7 @@ public class Move : MonoBehaviour
 
     private void Start()
     {
-        SceneLoader.Instance.Fade(Color.black, 1f, 0f, 0.5f, 0f, true);
+        SceneLoader.Instance.Fade(Color.black, 1f, 0f, 2.0f, 0f, true);
     }
 
     private void Update()

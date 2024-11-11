@@ -36,13 +36,13 @@ public class SceneLoader : SingletonBehaviour<SceneLoader>
     public void LoadScene(SceneType sceneType)
     {
         Time.timeScale = 1f;
-        Fade(Color.black, 1f, 0f, 0.5f, 0f, true);
+        Fade(Color.black, 1f, 0f, 2.0f, 0f, true);
         SceneManager.LoadScene(sceneType.ToString());
     }
 
     public void ReloadScene()
     {
-        SceneLoader.Instance.Fade(Color.black, 0f, 1f, 0.5f, 0f, false, () =>
+        SceneLoader.Instance.Fade(Color.black, 0f, 1f, 2.0f, 0f, false, () =>
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         });
