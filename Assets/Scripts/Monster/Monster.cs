@@ -68,6 +68,7 @@ public class Monster : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject); // 체력이 0 이하일 경우 오브젝트 파괴
+            animator.SetTrigger("Die");
         }
     }
 

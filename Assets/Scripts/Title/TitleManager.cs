@@ -7,10 +7,6 @@ using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour
 {
-    // 로고
-    public Animation LogoAnim;
-    public TextMeshProUGUI LogoTxt;
-
     // 타이틀
     public GameObject Title;
     public Slider LoadingSlider;
@@ -20,7 +16,7 @@ public class TitleManager : MonoBehaviour
 
     private void Awake()
     {
-        LogoAnim.gameObject.SetActive(true);
+        // LogoAnim.gameObject.SetActive(true);
         Title.SetActive(false);
     }
 
@@ -31,13 +27,9 @@ public class TitleManager : MonoBehaviour
 
     private IEnumerator LoadGameCo()
     {
-        LogoAnim.Play();
-        yield return new WaitForSeconds(LogoAnim.clip.length);
-
-        LogoAnim.gameObject.SetActive(false);
         Title.SetActive(true); 
 
-        _asyncOperation = SceneLoader.Instance.LoadSceneAsync(SceneType.InGame);
+        _asyncOperation = SceneLoader.Instance.LoadSceneAsync(SceneType.Stage1);
         if (_asyncOperation == null)
         {
             yield break;
@@ -57,7 +49,10 @@ public class TitleManager : MonoBehaviour
             // 로딩이 완료된다면 로비로 씬전환 후 코루틴 종료
             if (_asyncOperation.progress >= 0.9f)
             {
-                _asyncOperation.allowSceneActivation = true;
+                SceneLoader.Instance.Fade(Color.black, 0f, 1f, 2.0f, 0f, false, () =>
+                {
+                    _asyncOperation.allowSceneActivation = true;
+                });
                 yield break;
             }
             yield return null;

@@ -22,12 +22,15 @@ public class StageManager : MonoBehaviour
         Move player = FindObjectOfType<Move>();
         if (player != null && stageIndex < stageStartPositions.Length)
         {
-            player.SetPosition(stageStartPositions[stageIndex].position);
+            //player.SetPosition(stageStartPositions[stageIndex].position);
         }
 
         currentStageIndex = stageIndex;
     }
-
+    public void OnClickReStart()
+    {
+        ActivateStage(currentStageIndex);
+    }
     public void NextStage()
     {
         if (currentStageIndex < stages.Length - 1)
