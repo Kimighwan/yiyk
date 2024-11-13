@@ -43,7 +43,10 @@ public class SettingsUI : BaseUI
 
         preValue = slider.value; // 나중에 sound 키면 slider 값 복구를 위해 임시 저장
         sound = false;
+
+        AudioManager.Instance.PlaySFX(SFX.ButtonClick);
         AudioManager.Instance.Mute();
+
         SetSoundSetting(sound);
         slider.value = 0f; 
     }
@@ -53,7 +56,10 @@ public class SettingsUI : BaseUI
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
 
         sound = true;
+
         AudioManager.Instance.UnMute();
+        AudioManager.Instance.PlaySFX(SFX.ButtonClick);
+
         SetSoundSetting(sound);
         slider.value = preValue; // 끄기전 slider 값 복구
     }
@@ -61,12 +67,14 @@ public class SettingsUI : BaseUI
 
     public void OnClickSettingQuit()
     {
+        AudioManager.Instance.PlaySFX(SFX.ButtonClick);
         gameObject.SetActive(!gameObject.activeSelf);
         Time.timeScale = gameObject.activeSelf == true ? 0f : 1f;
     }
 
     public void ReStartBtn()
     {
+        AudioManager.Instance.PlaySFX(SFX.ButtonClick);
         SceneLoader.Instance.ReloadScene();
     }
 }

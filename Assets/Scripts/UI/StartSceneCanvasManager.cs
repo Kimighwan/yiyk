@@ -7,6 +7,11 @@ public class StartSceneCanvasManager : MonoBehaviour
 {
     public GameObject setting;
 
+    private void Start()
+    {
+        AudioManager.Instance.PlayBGM(BGM.MainBGM);
+    }
+
     private void Update()
     {
         HandleInput();
@@ -32,17 +37,20 @@ public class StartSceneCanvasManager : MonoBehaviour
 
     public void OnClickSettingsBtn()
     {
+        AudioManager.Instance.PlaySFX(SFX.ButtonClick);
         setting.SetActive(!setting.activeSelf);
         Time.timeScale = setting.activeSelf == true ? 0f : 1f;
     }
 
     public void OnClickQuit()
     {
+        AudioManager.Instance.PlaySFX(SFX.ButtonClick);
         Application.Quit();
     }
 
     public void OnClickStartBtn()
     {
+        AudioManager.Instance.PlaySFX(SFX.ButtonClick);
         SceneManager.LoadScene("Title");
     }
 }
