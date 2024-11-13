@@ -24,15 +24,20 @@ public class DrawLine : MonoBehaviour
     RaycastHit2D hitLever;
     RaycastHit2D hitEnemy;
     private Queue<int> useLine = new Queue<int>();
+
+    public GameObject settingUI;
+
     //////////////////////////////////////////////////////////////
 
     private void Start()
     {
-        AudioManager.Instance.PlayBGM(BGM.lobby);
+        // AudioManager.Instance.PlayBGM(BGM.lobby);
     }
 
     private void Update()
     {
+        if (settingUI.activeSelf) return;
+
         mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z));
 
         Debug.DrawRay(mousePos, Vector3.forward * 100f, Color.red, 100f);

@@ -48,23 +48,12 @@ public class Monster : MonoBehaviour
         }
 
         // 마우스 왼쪽 클릭 감지
-       
+
 
         transform.position = new Vector3(transform.position.x, fixedY, transform.position.z);
     }
 
-    // 플레이어와 충돌 감지
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Move playerMove = other.GetComponent<Move>();
-            if (playerMove != null)
-            {
-                playerMove.Die();
-            }
-        }
-    }
+
 
     // 적의 피해 처리
     private void TakeDamage(int damage)
@@ -79,6 +68,7 @@ public class Monster : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject); // 체력이 0 이하일 경우 오브젝트 파괴
+            animator.SetTrigger("Die");
         }
     }
 
@@ -126,6 +116,7 @@ public class Monster : MonoBehaviour
 
         while (elapsedTime < approachDuration)
         {
+            Vector3 direction = (player.position - transform.position).normalized;
             Vector3 targetPosition = new Vector3(player.position.x, fixedY, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, approachSpeed * Time.deltaTime);
             elapsedTime += Time.deltaTime;

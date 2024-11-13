@@ -1,62 +1,45 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Move : MonoBehaviour
 {
     public float maxSpeed;
+    public float knockbackForce = 10f;
+
     private Rigidbody2D rigid;
+    private Vector2 moveVec;
     private SpriteRenderer spriteRenderer;
     private Animator anim;
+    private bool isDead = false;
 
-    private bool isDead = false; // 사망 여부 체크
-    private bool restartRequested = false; // 재시작 요청 체크
-    private float rKeyHoldTime = 0f; // R 키 누른 시간
-
-    private FadeManager fadeManager;
-    private StageManager stageManager;
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        fadeManager = FindObjectOfType<FadeManager>();
-        stageManager = FindObjectOfType<StageManager>();
+    }
+
+    private void Start()
+    {
+        isDead = false;
+        SceneLoader.Instance.Fade(Color.black, 1f, 0f, 2.0f, 0f, true);
+        AudioManager.Instance.PlayBGM(BGM.IngameBGM); // 임시 BGM 재생 위치
     }
 
     private void Update()
     {
-        if (isDead)
-        {
-            // R 키를 누르고 있으면 시간 증가
-            if (Input.GetKey(KeyCode.R))
-            {
-                rKeyHoldTime += Time.unscaledDeltaTime;
+        if (isDead) return; // 사망 상태에서는 이동 불가
 
-                if (rKeyHoldTime >= 3f)
-                {
-                    restartRequested = false;
-                    RestartStage();
-                }
-            }
 
-            // 3초 동안 재시작이 되지 않으면 페이드 아웃
-            if (restartRequested && rKeyHoldTime < 3f)
-            {
-                StartCoroutine(FadeToMainMenu());
-            }
-            return; // 사망 상태에서는 이동 불가
-        }
-        if (Input.GetButtonUp("Horizontal"))
-        {
-            float x = Input.GetAxis("Horizontal");
-            rigid.AddForce(new Vector2(x, rigid.velocity.y));
-        }
+        // 이동 처리
+        float x = Input.GetAxis("Horizontal");
+        moveVec = new Vector2(x, rigid.velocity.y);
+        rigid.AddForce(moveVec);
 
         if (Input.GetButton("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
 
-        if (Mathf.Abs(rigid.velocity.x) < 0.2)
+        if (moveVec == Vector2.zero/*Mathf.Abs(rigid.velocity.x) < 0.2*/)
             anim.SetBool("isMove", false);
         else
             anim.SetBool("isMove", true);
@@ -64,7 +47,7 @@ public class Move : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDead) return;
+        if (isDead) return; // 사망 상태에서는 이동 불가
 
         float h = Input.GetAxisRaw("Horizontal");
         rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
@@ -74,37 +57,40 @@ public class Move : MonoBehaviour
         else if (rigid.velocity.x < maxSpeed * (-1))
             rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
     }
-    public void Die()
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            //Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
+            //rigid.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+
+            StartCoroutine("DieCo");
+        }
+    }
+
+    private IEnumerator DieCo()
     {
         isDead = true;
-        restartRequested= true;
         anim.SetBool("isDie", true);
-        anim.SetBool("isMove", false);
-      
-        Invoke("DealthAnimation",2f);
-    }
-    
-    private void DealthAnimation()
-    {
-        Time.timeScale = 0;
+        rigid.velocity = Vector2.zero;
+        rigid.simulated = false;
+        yield return new WaitForSeconds(1.0f);
+        SceneLoader.Instance.ReloadScene();
+
+        // SetPosition(transform.position);
     }
 
-    // 페이드 아웃 후 시작 화면으로 이동
-    IEnumerator FadeToMainMenu()
-    {
-        yield return new WaitForSeconds(3f);
-        fadeManager.FadeOutAndRestart();
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("StartScene"); 
-    }
+    //public void SetPosition(Vector3 newPosition)
+    //{
+    //    StartCoroutine(StartSetPosition(newPosition));
+    //}
 
-    private void RestartStage()
-    {
-        isDead = false;
-        Time.timeScale = 1;
-        anim.SetBool("isDie", false);
-        anim.SetBool("isMove", true);
-        restartRequested = false;
-        stageManager.ActivateStage(stageManager.currentStageIndex);
-    }
+    //private IEnumerator StartSetPosition(Vector3 newPosition)
+    //{
+    //    yield return new WaitForSecondsRealtime(1f);
+    //    transform.position = newPosition;
+    //    rigid.velocity = Vector2.zero; // 이동 초기화
+    //    isDead = false;
+    //}
 }
