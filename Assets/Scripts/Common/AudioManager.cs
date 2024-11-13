@@ -80,6 +80,9 @@ public class AudioManager : SingletonBehaviour<AudioManager>
             newAudioSource.playOnAwake = false;
             newGO.transform.parent = SFXTrs;
 
+            if (newAudioSource.name == "Mouseclick")
+                newAudioSource.volume = 0.2f;
+
             m_SFXPlayer[(SFX)i] = newAudioSource;
         }
     }
