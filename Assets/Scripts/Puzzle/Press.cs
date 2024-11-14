@@ -35,7 +35,8 @@ public class Press : MonoBehaviour, IPuzzle
         if (alreadyOpen) return;
 
         dorreAnim.Play();
-        Invoke("OnCol", 0.8f);
+        door.transform.GetChild(2).gameObject.SetActive(true);
+        //Invoke("OnCol", 0.8f);
 
         alreadyOpen = true;
     }
