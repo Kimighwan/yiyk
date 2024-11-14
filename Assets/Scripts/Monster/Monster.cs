@@ -8,7 +8,6 @@ public class Monster : MonoBehaviour
     public float moveSpeed = 1f;        // 적의 기본 이동 속도
     public float approachSpeed = 2f;    // 플레이어 접근 시 속도
     public float approachRange = 5f;    // 접근 반응 거리
-    public float approachDuration = 1f; // 접근 지속 시간
     private float fixedY;
     private Animator animator;
 
@@ -18,124 +17,154 @@ public class Monster : MonoBehaviour
     private SpriteRenderer spriteRenderer; // 스프라이트 렌더러
     private FadeManager fadeManager;    // 페이드 매니저
     public Sprite hitSprite;
+    private Sprite originalSprite;      // 원래 스프라이트 저장
     private Coroutine currentAnimationCoroutine;
 
     private int health = 3;             // 적의 체력
-    private bool isHit = false;          // 피격 상태 체크
-
+    private bool isHit = false;         // 피격 상태 체크
+    private string currentAnimState;     // 현재 애니메이션 상태 확인을 위한 변수
     void Start()
     {
+        
         startPosition = transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        originalSprite = spriteRenderer.sprite;  // 원래 스프라이트 저장
         fadeManager = FindObjectOfType<FadeManager>(); // 페이드 매니저 찾기
         animator = GetComponent<Animator>();
         fixedY = transform.position.y;
         currentAnimationCoroutine = StartCoroutine(MovePattern()); // 이동 패턴 시작
+        currentAnimState = ""; // 초기 애니메이션 상태 초기화
     }
 
     void Update()
     {
+        animator.SetBool("IsJump", true);
+
+
         if (isHit || isApproaching) return;
 
         // 플레이어와의 거리 체크
-        float distanceToPlayer = Vector3.Distance(player.position, transform.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         // 접근 범위 내에 플레이어가 있고 접근 중이 아닌 경우에만 접근 시작
         if (distanceToPlayer <= approachRange && !isApproaching)
         {
-            StopCoroutine(currentAnimationCoroutine);
+            if (currentAnimationCoroutine != null)
+            {
+                StopCoroutine(currentAnimationCoroutine);
+                currentAnimationCoroutine = null;
+            }
+
             StartCoroutine(ApproachPlayer());
         }
 
-        // 마우스 왼쪽 클릭 감지
-
-
-        transform.position = new Vector3(transform.position.x, fixedY, transform.position.z);
+        // Y축 고정
+        //transform.position = new Vector3(transform.position.x, fixedY, transform.position.z);
     }
-
-
 
     // 적의 피해 처리
     private void TakeDamage(int damage)
     {
-        spriteRenderer.sprite = hitSprite;
-        Debug.Log("피격 이미지 생성");
-        health -= damage; // 체력 감소
-        isHit = true; // 피격 상태 설정
-        animator.enabled = false;
-        StartCoroutine(HandleHit()); // 피격 처리 시작
+        health -= damage;   // 체력 감소
 
+        if (isHit)
+        {
+            health -= damage;
+            Debug.Log("추가피격");
+            return;
+        }
         if (health <= 0)
         {
-            Destroy(gameObject); // 체력이 0 이하일 경우 오브젝트 파괴
-            animator.SetTrigger("Die");
+            StartCoroutine(Die());
+            return;
         }
+        isHit = true;
+        spriteRenderer.sprite = hitSprite;
+        StopAllCoroutines();
+        animator.enabled = false;
+        StartCoroutine(HandleHit()); // 피격 처리 시작
     }
 
     IEnumerator HandleHit()
     {
         yield return new WaitForSeconds(2f);
-        spriteRenderer.sprite = null;
-        isHit = false; // 피격 상태 해제
+
+        spriteRenderer.sprite = originalSprite;
+        isHit = false;        
         animator.enabled = true;
-        currentAnimationCoroutine = StartCoroutine(MovePattern()); // 이동 패턴 재개
+        currentAnimationCoroutine = StartCoroutine(MovePattern());
     }
 
     IEnumerator MovePattern()
     {
         while (true)
         {
-            animator.Play("Enemy_Idle");
             float targetX = movingLeft ? startPosition.x - moveDistance : startPosition.x + moveDistance;
             Vector3 targetPosition = new Vector3(targetX, transform.position.y, transform.position.z);
 
-            while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
+            float elapsedTime = 0f;
+            while (elapsedTime < 3f)
             {
+                float jumpHeight = Mathf.Sin(elapsedTime * Mathf.PI) * 2f;
                 transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+                elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
             movingLeft = !movingLeft;
             spriteRenderer.flipX = movingLeft;
 
-            // 방향 전환 시 2초 대기 및 Idle 애니메이션
-            animator.Play("Enemy_Idle");
+            // 2초 대기 (Idle 애니메이션)
+            animator.SetBool("IsJump", false);
+            animator.SetBool("IsIdle", true);
             yield return new WaitForSeconds(2f);
+
+            animator.SetBool("IsJump", true);
+            animator.SetBool("IsIdle", false);
         }
+        
     }
 
     IEnumerator ApproachPlayer()
     {
         isApproaching = true;
-        float elapsedTime = 0f;
+        Debug.Log("ApproachPlayer 코루틴 시작");
 
-        float fixedY = transform.position.y;
+        Vector3 dir = (player.position - transform.position).normalized;
 
-        // 플레이어를 따라가는 동안 Jump 애니메이션 실행
-        animator.Play("Enemy_Jump");
+        float distance = Vector3.Distance(player.position, transform.position);
 
-        while (elapsedTime < approachDuration)
+        if (distance <= 5.0f)
         {
-            Vector3 direction = (player.position - transform.position).normalized;
-            Vector3 targetPosition = new Vector3(player.position.x, fixedY, transform.position.z);
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, approachSpeed * Time.deltaTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            transform.position = new Vector3(transform.position.x + (dir.x * approachSpeed), transform.position.y, transform.position.z + (dir.z * approachSpeed));
         }
-
-        isApproaching = false;
-        currentAnimationCoroutine = StartCoroutine(MovePattern());
+        else
+        {
+            isApproaching = false;
+            currentAnimationCoroutine = StartCoroutine(MovePattern()); // 원래 이동 패턴 재개
+        }
+        yield return null;
+       
+  
+        Debug.Log("ApproachPlayer 코루틴 종료, 이동 패턴 재개");
     }
+    private IEnumerator Die()
+    {
+        animator.SetBool("IsDie", true);
 
+        Debug.Log("사망 애니메이션 실행");
+
+        yield return new WaitForSeconds(2f); 
+        Destroy(gameObject); 
+    }
     private void OnMouseDown()
     {
-        if (Input.GetMouseButtonDown(0) && !isHit)
+        if (Input.GetMouseButtonDown(0))
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hit.collider != null && hit.collider.gameObject == gameObject) // 클릭한 객체가 현재 Monster인지 확인
+            if (hit.collider != null && hit.collider.gameObject == gameObject) 
             {
                 TakeDamage(1);
-                Debug.Log("몬스터 클릭");
             }
         }
     }
