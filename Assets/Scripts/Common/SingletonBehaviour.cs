@@ -26,7 +26,7 @@ public class SingletonBehaviour<T> : MonoBehaviour where T : SingletonBehaviour<
 
             if (!isDestroyOnLoad) DontDestroyOnLoad(this);
         }
-        else
+        else if(instance != this)
         {
             Destroy(gameObject);
         }
@@ -39,6 +39,7 @@ public class SingletonBehaviour<T> : MonoBehaviour where T : SingletonBehaviour<
 
     protected virtual void Dispose()
     {
-        instance = null;
+        if(instance == this)
+            instance = null;
     }
 }
