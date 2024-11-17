@@ -46,7 +46,7 @@ public class SettingsUI : BaseUI
         sound = false;
 
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
-        AudioManager.Instance.Mute();
+        AudioManager.Instance.PauseBGM();
 
         SetSoundSetting(sound);
         slider.value = 0f; 
@@ -58,7 +58,7 @@ public class SettingsUI : BaseUI
 
         sound = true;
 
-        AudioManager.Instance.UnMute();
+        AudioManager.Instance.ResumeBGM();
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
 
         SetSoundSetting(sound);
