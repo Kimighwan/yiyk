@@ -68,7 +68,7 @@ public class DrawLine : MonoBehaviour
             points.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             lineRenderer.positionCount = 1;
             lineRenderer.SetPosition(0, points[0]);
-            line.Enqueue(obj);
+            line.Enqueue(obj);      // Enqueue
             curLineLeght = 0;
             isStart = true;
         }
@@ -80,11 +80,9 @@ public class DrawLine : MonoBehaviour
                 GameObject obj = null;
                 points.Clear();
                 if (line.Count != 0)
-                    obj = line.Dequeue();
+                    obj = line.Dequeue();   // Dequeue
                 Destroy(obj, destroyLineTime);
-                useLine.Enqueue(curLineLeght);
-                //int preUseLineCount = useLine.Dequeue();
-                StartCoroutine(LineUpdate(/*preUseLineCount*/));
+                useLine.Enqueue(curLineLeght);     // Enqueue
                 isStart = false;
                 return;
             }
@@ -114,11 +112,9 @@ public class DrawLine : MonoBehaviour
             }
             points.Clear();
             if (line.Count != 0)
-                obj = line.Dequeue();
+                obj = line.Dequeue();  // Dequeue
             Destroy(obj, destroyLineTime);
-            useLine.Enqueue(curLineLeght);
-            //int preUseLineCount = useLine.Dequeue();
-            StartCoroutine(LineUpdate(/*preUseLineCount*/));
+            useLine.Enqueue(curLineLeght); // Enqueue
             isStart = false;
         }
 
@@ -126,12 +122,6 @@ public class DrawLine : MonoBehaviour
         {
             
         }
-    }
-
-    private IEnumerator LineUpdate(/*int count*/)
-    {
-        yield return new WaitForSeconds(destroyLineTime);
-        curLineCount -= useLine.Dequeue();
     }
 
 }

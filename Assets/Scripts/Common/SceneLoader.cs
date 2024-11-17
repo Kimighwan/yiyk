@@ -25,17 +25,6 @@ public class SceneLoader : SingletonBehaviour<SceneLoader>
 {
     public Image fadeImg; // 페이드 이미지
 
-    private void Start()
-    {
-        StartCoroutine("StartBGMAudio");
-    }
-
-    private IEnumerator StartBGMAudio()
-    {
-        yield return new WaitForSeconds(4.0f);
-        AudioManager.Instance.PlayBGM(BGM.IngameBGM);
-    }
-
     protected override void Init()
     {
         base.Init();
@@ -47,15 +36,16 @@ public class SceneLoader : SingletonBehaviour<SceneLoader>
     public void LoadScene(SceneType sceneType)
     {
         Time.timeScale = 1f;
-        Fade(Color.black, 1f, 0f, 2.0f, 0f, true);
         SceneManager.LoadScene(sceneType.ToString());
     }
 
-    public void ReloadScene()
+    public void ReloadScene(int idx = 0)
     {
-        SceneLoader.Instance.Fade(Color.black, 0f, 1f, 2.0f, 0f, false, () =>
+        Fade(Color.black, 0f, 1f, 2.0f, 0f, false, () => // 어두워짐
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + idx);
+
+            Fade(Color.black, 1f, 0f, 2.0f, 0f, false); // 밝아짐
         });
 
         Time.timeScale = 1f;
@@ -69,7 +59,8 @@ public class SceneLoader : SingletonBehaviour<SceneLoader>
 
     public void NextStage()
     {
-        LoadScene((SceneType)(SceneManager.GetActiveScene().buildIndex + 1)); // 현재 씬의 인덱스 + 1로 다음 씬으로 이동
+        // LoadScene((SceneType)(SceneManager.GetActiveScene().buildIndex + 1)); // 현재 씬의 인덱스 + 1로 다음 씬으로 이동
+        ReloadScene(1);
     }
 
 

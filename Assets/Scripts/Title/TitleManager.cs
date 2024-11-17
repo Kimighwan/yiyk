@@ -52,6 +52,8 @@ public class TitleManager : MonoBehaviour
                 SceneLoader.Instance.Fade(Color.black, 0f, 1f, 2.0f, 0f, false, () =>
                 {
                     _asyncOperation.allowSceneActivation = true;
+                    AudioManager.Instance.PlayBGM(BGM.IngameBGM);
+                    SceneLoader.Instance.Fade(Color.black, 1f, 0f, 2.0f, 0f, false);
                 });
                 yield break;
             }
