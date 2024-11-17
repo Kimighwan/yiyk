@@ -25,6 +25,17 @@ public class SceneLoader : SingletonBehaviour<SceneLoader>
 {
     public Image fadeImg; // 페이드 이미지
 
+    private void Start()
+    {
+        StartCoroutine("StartBGMAudio");
+    }
+
+    private IEnumerator StartBGMAudio()
+    {
+        yield return new WaitForSeconds(4.0f);
+        AudioManager.Instance.PlayBGM(BGM.IngameBGM);
+    }
+
     protected override void Init()
     {
         base.Init();
