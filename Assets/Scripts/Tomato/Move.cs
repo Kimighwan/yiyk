@@ -22,7 +22,7 @@ public class Move : MonoBehaviour
     private void Start()
     {
         isDead = false;
-       // SceneLoader.Instance.Fade(Color.black, 1f, 0f, 2.0f, 0f, true);
+        // SceneLoader.Instance.Fade(Color.black, 1f, 0f, 2.0f, 0f, true);
        // AudioManager.Instance.PlayBGM(BGM.IngameBGM); // 임시 BGM 재생 위치
     }
 
