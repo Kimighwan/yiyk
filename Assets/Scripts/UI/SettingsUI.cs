@@ -16,6 +16,7 @@ public class SettingsUI : BaseUI
     private void Update()
     {
         AudioManager.Instance.SetBGMVolume(slider.value);
+        SliderUpdate();
     }
 
 
@@ -76,5 +77,13 @@ public class SettingsUI : BaseUI
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
         SceneLoader.Instance.ReloadScene();
+    }
+
+    private void SliderUpdate() 
+    {
+        // 슬라이더 0으로 조절하면 사운드 토글이 OFF로 바뀜
+        // 슬라이더 0 초과로 조절하면 사운드 토글이 OnF로 바뀜
+        soundOnToggle.SetActive(slider.value > 0.0f);
+        soundOffToggle.SetActive(slider.value == 0.0f);
     }
 }

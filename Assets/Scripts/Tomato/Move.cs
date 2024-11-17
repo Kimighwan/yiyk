@@ -71,6 +71,7 @@ public class Move : MonoBehaviour
 
     private IEnumerator DieCo()
     {
+        transform.localRotation = new Quaternion(0, 0, 0, 0);
         isDead = true;
         anim.SetBool("isDie", true);
         rigid.velocity = Vector2.zero;
