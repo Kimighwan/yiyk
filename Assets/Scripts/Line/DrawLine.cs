@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DrawLine : MonoBehaviour
 {
-    //private Coroutine checkInputTime;
+    [SerializeField]
+    private bool isStart = false;
+    private bool mouseRightBtnDown = false;
 
     [SerializeField]
     [Header("------ Line Info ------")]
@@ -14,9 +17,6 @@ public class DrawLine : MonoBehaviour
     public int curLineLenght = 0; // 지금 그리고 있는 캐찹 길이
     public float destroyLineTime = 5.0f; // 선 사라지는 딜레이
     public List<Vector2> points = new List<Vector2>();
-
-    private bool isStart = false;
-    private bool mouseRightBtnDown = false;
 
     LineRenderer lineRenderer;
     EdgeCollider2D coll;
@@ -85,7 +85,7 @@ public class DrawLine : MonoBehaviour
                 //    obj = line.Dequeue();   // Dequeue
                 usedLinesLength.Enqueue(curLineLenght);     // Enqueue
 
-                StartCoroutine(LineDestroyCo(/*obj*/));
+                StartCoroutine("LineDestroy");
                 isStart = false;
 
                 //Destroy(obj, destroyLineTime);
@@ -99,14 +99,17 @@ public class DrawLine : MonoBehaviour
 
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            if (Vector2.Distance(points[points.Count - 1], pos) > 0.1f && usedLineLength <= maxLineCount)
+            if (Vector2.Distance(points[points.Count - 1], pos) > 0.1f && usedLineLength <= maxLineCount && !mouseRightBtnDown)
             {
                 points.Add(pos);
                 usedLineLength++;
                 curLineLenght++;
-                lineRenderer.positionCount++;
-                lineRenderer.SetPosition(lineRenderer.positionCount - 1, pos);
-                coll.points = points.ToArray();
+                if(line.Count != 0)
+                {
+                    lineRenderer.positionCount++;
+                    lineRenderer.SetPosition(lineRenderer.positionCount - 1, pos);
+                    coll.points = points.ToArray();
+                }
             }
 
         }
@@ -122,7 +125,7 @@ public class DrawLine : MonoBehaviour
             //    obj = line.Dequeue();  // Dequeue
             usedLinesLength.Enqueue(curLineLenght); // Enqueue
 
-            StartCoroutine(LineDestroyCo(/*obj*/));
+            StartCoroutine("LineDestroy");
             isStart = false;
 
             //Destroy(obj, destroyLineTime);
@@ -132,44 +135,42 @@ public class DrawLine : MonoBehaviour
 
     private void LineDelete()
     {
-        if (Input.GetMouseButtonDown(1)) // 모든 캐찹 삭제
+        if (Input.GetMouseButtonDown(1) && !mouseRightBtnDown && !isStart) // 모든 캐찹 삭제
         {
-            Debug.Log("우클릭!!");
-            while (line.Count != 0)
-            {
-                mouseRightBtnDown = true;
-            }
+            if (line.Count == 0) return;
+
+            mouseRightBtnDown = true;
+            LineDirectDestroy();
         }
     }
 
-    private IEnumerator LineDestroyCo()
+    private IEnumerator LineDestroy() // 젤 오래된 라인 삭제
     {
-        float chkTime = 0.0f;
-        while(chkTime < destroyLineTime) // 기본 삭제 시간동안 우클릭 했는지 확인
+        float chkTime = 0f;
+        while(chkTime < destroyLineTime)// 딜레이 적용 후...
         {
+            yield return null; 
             chkTime += Time.deltaTime;
-            yield return null;
-            if (mouseRightBtnDown) // 마우스 우클릭을 했다면
-            {
-                LineDestroy();
-                mouseRightBtnDown = false;
-                yield break;
-            }
+            if (mouseRightBtnDown) yield break; // 만약 우클릭, 즉 모든 라인 삭제한다면 그냥 종료
         }
 
-        // 기본 삭제 시간이 지나서 라인 삭제 처리
-        LineDestroy();
-
-        yield return null;
+        GameObject obj = null;
+        if (line.Count != 0)
+            obj = line.Dequeue();  // Dequeue
+        Destroy(obj); // 라인 삭제
+        if(usedLinesLength.Count != 0)
+        usedLineLength -= usedLinesLength.Dequeue(); // 사용했던 라인 길이 회복
     }
 
-    private void LineDestroy()
+    private void LineDirectDestroy() // 가장 오래된 선 한 개 바로 지우기
     {
         GameObject obj = null;
         if (line.Count != 0)
             obj = line.Dequeue();  // Dequeue
         Destroy(obj); // 라인 삭제
-        usedLineLength -= usedLinesLength.Dequeue(); // 사용했던 라인 길이 회복
+        if (usedLinesLength.Count != 0)
+            usedLineLength -= usedLinesLength.Dequeue(); // 사용했던 라인 길이 회복
+        mouseRightBtnDown = false;
     }
 
 
