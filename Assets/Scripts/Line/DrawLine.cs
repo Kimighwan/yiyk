@@ -8,6 +8,7 @@ public class DrawLine : MonoBehaviour
     [SerializeField]
     private bool isStart = false;
     private bool mouseRightBtnDown = false;
+    private bool mouseRightCoolTime = false;
 
     [SerializeField]
     [Header("------ Line Info ------")]
@@ -16,6 +17,7 @@ public class DrawLine : MonoBehaviour
     public int usedLineLength = 0; // 현재까지 사용한 길이
     public int curLineLenght = 0; // 지금 그리고 있는 캐찹 길이
     public float destroyLineTime = 5.0f; // 선 사라지는 딜레이
+    public WaitForSeconds mouseRightClickDelay = new WaitForSeconds(1.0f);
     public List<Vector2> points = new List<Vector2>();
 
     LineRenderer lineRenderer;
@@ -141,14 +143,15 @@ public class DrawLine : MonoBehaviour
 
     private void LineDelete()
     {
-        if (Input.GetMouseButtonDown(1) && !mouseRightBtnDown && !isStart) // 모든 캐찹 삭제
+        if (Input.GetMouseButtonDown(1) && !mouseRightBtnDown && !isStart && !mouseRightCoolTime) // 모든 캐찹 삭제
         {
             if (line.Count == 0) return;
 
             Coroutine deleteCo = coroutines.Dequeue();
             StopCoroutine(deleteCo);
 
-            mouseRightBtnDown = true;
+            mouseRightBtnDown = true; // 우클릭 클릭
+            mouseRightCoolTime = true; // 쿨타임 체크
             LineDirectDestroy();
         }
     }
@@ -173,15 +176,25 @@ public class DrawLine : MonoBehaviour
 
     private void LineDirectDestroy() // 가장 오래된 선 한 개 바로 지우기
     {
+        if(line.Count == 0) return;
+
         GameObject obj = null;
         if (line.Count != 0)
             obj = line.Dequeue();  // Dequeue
         Destroy(obj); // 라인 삭제
         if (usedLinesLength.Count != 0)
             usedLineLength -= usedLinesLength.Dequeue(); // 사용했던 라인 길이 회복
+
         mouseRightBtnDown = false;
+
+        StartCoroutine("mouseRightClickDelayCo");
     }
 
+    private IEnumerator mouseRightClickDelayCo() // 우클릭 쿨타임
+    {
+        yield return mouseRightClickDelay;
+        mouseRightCoolTime = false;
+    }
 
     //private IEnumerator LineUpdateCo(float delay = 0)
     //{
