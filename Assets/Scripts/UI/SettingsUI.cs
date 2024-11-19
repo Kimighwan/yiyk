@@ -20,6 +20,7 @@ public class SettingsUI : BaseUI
             PlayerPrefs.SetInt("Sound", 1);
 
         slider.value = PlayerPrefs.GetFloat("Value");
+        PlayerPrefs.SetFloat("preValue", 0.1f);
     }
 
     private void Update()
@@ -57,7 +58,8 @@ public class SettingsUI : BaseUI
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
 
-        preVolume = slider.value; // 나중에 sound 키면 slider 값 복구를 위해 임시 저장
+        // preVolume = slider.value; // 나중에 sound 키면 slider 값 복구를 위해 임시 저장
+        PlayerPrefs.SetFloat("preValue", slider.value);
 
         PlayerPrefs.SetInt("Sound", 0);
         PlayerPrefs.SetFloat("Value", 0.0f);
@@ -80,7 +82,7 @@ public class SettingsUI : BaseUI
         AudioManager.Instance.ResumeBGM();
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
 
-        slider.value = preVolume; // 끄기전 slider 값 복구
+        slider.value = PlayerPrefs.GetFloat("preValue"); // 끄기전 slider 값 복구
     }
 
 
