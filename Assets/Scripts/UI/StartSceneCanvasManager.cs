@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -52,6 +53,11 @@ public class StartSceneCanvasManager : MonoBehaviour
     public void OnClickStartBtn()
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
-        SceneManager.LoadScene("Title");
+
+        SceneLoader.Instance.Fade(Color.black, 0f, 1f, 2.0f, 0f, true, () =>
+        {
+            SceneManager.LoadScene("CutScene");
+            SceneLoader.Instance.Fade(Color.black, 1f, 0f, 0.5f, 0f, false);
+        });
     }
 }

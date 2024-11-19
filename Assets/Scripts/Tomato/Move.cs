@@ -39,7 +39,7 @@ public class Move : MonoBehaviour
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
 
         // Anim
-        anim.SetBool("isMove", rigid.velocity.normalized.x == 0);
+        anim.SetBool("isMove", rigid.velocity.normalized.x != 0);
     }
 
     private void FixedUpdate()
