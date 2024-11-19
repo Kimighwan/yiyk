@@ -10,6 +10,8 @@ TagManager:
   - Lever
   - Obstacle
   - Trap
+  - Ground
+  - JumpPad
   layers:
   - Default
   - TransparentFX
