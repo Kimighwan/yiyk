@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    public float maxSpeed = 5.0f;
+    public float maxSpeed = 10.0f;
     public float knockbackForce = 10f;
 
     private Rigidbody2D rigid;

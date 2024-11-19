@@ -60,7 +60,7 @@ public class DrawLine : MonoBehaviour
         {
             // 캐찹 인스턴스화
             GameObject ketChapp = Instantiate(Resources.Load<GameObject>("Ketchapp"), new Vector3(mousePos.x, mousePos.y, 15), Quaternion.identity);
-            Destroy(ketChapp, 4.8f);
+            Destroy(ketChapp, 1.0f);
 
             AudioManager.Instance.PlaySFX(SFX.Mouseclick);
 
@@ -122,7 +122,7 @@ public class DrawLine : MonoBehaviour
         else if (Input.GetMouseButtonUp(0) && isStart)
         {
             //GameObject obj = null;
-            if (points.Count == 1)
+            if (points.Count < 5)
             {
                 coll.gameObject.SetActive(false); // 클릭만 했을 때
             }

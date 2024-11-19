@@ -8,15 +8,30 @@ public class SettingsUI : BaseUI
     public GameObject soundOnToggle;
     public GameObject soundOffToggle;
     public Slider slider;
-   
-    private float preValue; // 직전 볼륨 크기
-    private bool sound = true; // false: 소리 끔 // true: 소리 킴
 
+    private float preVolume; // 직전 사운드 크기
+    private bool sound = false; // false: 소리 끔 // true: 소리 킴
+
+    private void Awake()
+    {
+        if(PlayerPrefs.HasKey("Sound"))
+            sound = PlayerPrefs.GetInt("Sound") == 1 ? true : false;
+        else
+            PlayerPrefs.SetInt("Sound", 1);
+
+        slider.value = PlayerPrefs.GetFloat("Value");
+    }
 
     private void Update()
     {
         AudioManager.Instance.SetBGMVolume(slider.value);
+
+        if(slider.value > 0)
+            AudioManager.Instance.ResumeBGM();
+
         SliderUpdate();
+
+        sound = PlayerPrefs.GetInt("Sound") == 1 ? true : false;
     }
 
 
@@ -24,7 +39,7 @@ public class SettingsUI : BaseUI
     {
         base.SetInfo(uiData);
 
-        // SetGameVersion();
+        SetSoundSetting(sound);
     }
 
     //private void SetGameVersion()
@@ -42,13 +57,15 @@ public class SettingsUI : BaseUI
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
 
-        preValue = slider.value; // 나중에 sound 키면 slider 값 복구를 위해 임시 저장
-        sound = false;
+        preVolume = slider.value; // 나중에 sound 키면 slider 값 복구를 위해 임시 저장
+
+        PlayerPrefs.SetInt("Sound", 0);
+        PlayerPrefs.SetFloat("Value", 0.0f);
+        SetSoundSetting(sound);
 
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
         AudioManager.Instance.PauseBGM();
 
-        SetSoundSetting(sound);
         slider.value = 0f; 
     }
 
@@ -56,13 +73,14 @@ public class SettingsUI : BaseUI
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
 
-        sound = true;
+        PlayerPrefs.SetInt("Sound", 1);
+        PlayerPrefs.SetFloat("Value", preVolume);
+        SetSoundSetting(sound);
 
         AudioManager.Instance.ResumeBGM();
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
 
-        SetSoundSetting(sound);
-        slider.value = preValue; // 끄기전 slider 값 복구
+        slider.value = preVolume; // 끄기전 slider 값 복구
     }
 
 
@@ -85,5 +103,6 @@ public class SettingsUI : BaseUI
         // 슬라이더 0 초과로 조절하면 사운드 토글이 OnF로 바뀜
         soundOnToggle.SetActive(slider.value > 0.0f);
         soundOffToggle.SetActive(slider.value == 0.0f);
+        PlayerPrefs.SetFloat("Value", slider.value);
     }
 }
