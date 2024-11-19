@@ -101,6 +101,7 @@ public class AudioManager : SingletonBehaviour<AudioManager>
         }
 
         m_CurrBGMSource = m_BGMPlayer[bgm];
+        m_CurrBGMSource.volume = PlayerPrefs.GetFloat("Value");
         m_CurrBGMSource.Play();
     }
 

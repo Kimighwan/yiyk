@@ -9,6 +9,7 @@ public class StartSceneCanvasManager : MonoBehaviour
 
     private void Start()
     {
+        PlayerPrefs.SetFloat("Value", 0.1f);
         AudioManager.Instance.PlayBGM(BGM.MainBGM);
     }
 
