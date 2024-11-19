@@ -1,16 +1,20 @@
 using System.Collections;
+using TreeEditor;
 using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    public float maxSpeed;
+    public float maxSpeed = 5.0f;
     public float knockbackForce = 10f;
 
     private Rigidbody2D rigid;
-    private Vector2 moveVec;
+    private Vector3 moveVec;
     private SpriteRenderer spriteRenderer;
     private Animator anim;
     private bool isDead = false;
+
+    [Header("Move")]
+    private float h; // 수평 방향
 
     private void Awake()
     {
@@ -22,36 +26,29 @@ public class Move : MonoBehaviour
     private void Start()
     {
         isDead = false;
-        // SceneLoader.Instance.Fade(Color.black, 1f, 0f, 2.0f, 0f, true);
-       // AudioManager.Instance.PlayBGM(BGM.IngameBGM); // 임시 BGM 재생 위치
     }
 
     private void Update()
     {
-        if (isDead) return; // 사망 상태에서는 이동 불가
+        // Stop Speed
+        if (Input.GetButtonUp("Horizontal"))
+            rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.3f, rigid.velocity.y);
 
-
-        // 이동 처리
-        float x = Input.GetAxis("Horizontal");
-        moveVec = new Vector2(x, rigid.velocity.y);
-        rigid.AddForce(moveVec);
-
-        if (Input.GetButton("Horizontal"))
+        // Sprite
+        if (Input.GetButtonDown("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
 
-        if (moveVec == Vector2.zero/*Mathf.Abs(rigid.velocity.x) < 0.2*/)
-            anim.SetBool("isMove", false);
-        else
-            anim.SetBool("isMove", true);
+        // Anim
+        anim.SetBool("isMove", rigid.velocity.normalized.x == 0);
     }
 
     private void FixedUpdate()
     {
-        if (isDead) return; // 사망 상태에서는 이동 불가
-
-        float h = Input.GetAxisRaw("Horizontal");
+        // Move
+        h = Input.GetAxisRaw("Horizontal");
         rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
 
+        // Max Speed
         if (rigid.velocity.x > maxSpeed)
             rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
         else if (rigid.velocity.x < maxSpeed * (-1))
@@ -62,9 +59,6 @@ public class Move : MonoBehaviour
     {
         if (collision.CompareTag("Enemy") || collision.CompareTag("Trap"))
         {
-            //Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
-            //rigid.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
-
             StartCoroutine("DieCo");
         }
     }
@@ -81,17 +75,4 @@ public class Move : MonoBehaviour
 
         // SetPosition(transform.position);
     }
-
-    //public void SetPosition(Vector3 newPosition)
-    //{
-    //    StartCoroutine(StartSetPosition(newPosition));
-    //}
-
-    //private IEnumerator StartSetPosition(Vector3 newPosition)
-    //{
-    //    yield return new WaitForSecondsRealtime(1f);
-    //    transform.position = newPosition;
-    //    rigid.velocity = Vector2.zero; // 이동 초기화
-    //    isDead = false;
-    //}
 }
