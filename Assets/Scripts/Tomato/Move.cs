@@ -22,7 +22,7 @@ public class Move : MonoBehaviour
     private void Start()
     {
         isDead = false;
-       // SceneLoader.Instance.Fade(Color.black, 1f, 0f, 2.0f, 0f, true);
+        // SceneLoader.Instance.Fade(Color.black, 1f, 0f, 2.0f, 0f, true);
        // AudioManager.Instance.PlayBGM(BGM.IngameBGM); // 임시 BGM 재생 위치
     }
 
@@ -60,7 +60,7 @@ public class Move : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") || collision.CompareTag("Trap"))
         {
             //Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
             //rigid.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
@@ -71,6 +71,7 @@ public class Move : MonoBehaviour
 
     private IEnumerator DieCo()
     {
+        transform.localRotation = new Quaternion(0, 0, 0, 0);
         isDead = true;
         anim.SetBool("isDie", true);
         rigid.velocity = Vector2.zero;

@@ -36,15 +36,16 @@ public class SceneLoader : SingletonBehaviour<SceneLoader>
     public void LoadScene(SceneType sceneType)
     {
         Time.timeScale = 1f;
-        Fade(Color.black, 1f, 0f, 2.0f, 0f, true);
         SceneManager.LoadScene(sceneType.ToString());
     }
 
-    public void ReloadScene()
+    public void ReloadScene(int idx = 0)
     {
-        SceneLoader.Instance.Fade(Color.black, 0f, 1f, 2.0f, 0f, false, () =>
+        Fade(Color.black, 0f, 1f, 2.0f, 0f, false, () => // ¾îµÎ¿öÁü
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + idx);
+
+            Fade(Color.black, 1f, 0f, 2.0f, 0f, false); // ¹à¾ÆÁü
         });
 
         Time.timeScale = 1f;
@@ -58,7 +59,8 @@ public class SceneLoader : SingletonBehaviour<SceneLoader>
 
     public void NextStage()
     {
-        LoadScene((SceneType)(SceneManager.GetActiveScene().buildIndex + 1)); // ÇöÀç ¾ÀÀÇ ÀÎµ¦½º + 1·Î ´ÙÀ½ ¾ÀÀ¸·Î ÀÌµ¿
+        // LoadScene((SceneType)(SceneManager.GetActiveScene().buildIndex + 1)); // ÇöÀç ¾ÀÀÇ ÀÎµ¦½º + 1·Î ´ÙÀ½ ¾ÀÀ¸·Î ÀÌµ¿
+        ReloadScene(1);
     }
 
 

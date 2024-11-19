@@ -1,21 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DrawLine : MonoBehaviour
 {
-    //private Coroutine checkInputTime;
+    [SerializeField]
+    private bool isStart = false;
+    private bool mouseRightBtnDown = false;
 
     [SerializeField]
     [Header("------ Line Info ------")]
     public GameObject linePrefab; // line 프리펩
     public int maxLineCount = 180; // 라인 쵀대 길이
-    public int curLineCount = 0; // 현재까지 사용한 길이
-    public int curLineLeght = 0; // 지금 그리고 있는 캐찹 길이
+    public int usedLineLength = 0; // 현재까지 사용한 길이
+    public int curLineLenght = 0; // 지금 그리고 있는 캐찹 길이
     public float destroyLineTime = 5.0f; // 선 사라지는 딜레이
     public List<Vector2> points = new List<Vector2>();
-
-    private bool isStart = false;
 
     LineRenderer lineRenderer;
     EdgeCollider2D coll;
@@ -23,7 +24,9 @@ public class DrawLine : MonoBehaviour
     Vector3 mousePos;
     RaycastHit2D hitLever; // 레버인지 체크용
     RaycastHit2D hitEnemy; // 몬스터인지 체크용
-    private Queue<int> useLine = new Queue<int>(); // 사용했던 라인들의 길이
+    private Queue<int> usedLinesLength = new Queue<int>(); // 사용했던 라인들의 길이
+
+    private Queue<Coroutine> coroutines = new Queue<Coroutine>(); // 삭제 코루틴 Queue
 
     public GameObject settingUI;
 
@@ -37,6 +40,7 @@ public class DrawLine : MonoBehaviour
     private void Update()
     {
         Draw();
+        LineDelete();
     }
 
     private void Draw()
@@ -68,8 +72,8 @@ public class DrawLine : MonoBehaviour
             points.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             lineRenderer.positionCount = 1;
             lineRenderer.SetPosition(0, points[0]);
-            line.Enqueue(obj);
-            curLineLeght = 0;
+            line.Enqueue(obj);      // Enqueue
+            curLineLenght = 0;
             isStart = true;
         }
         else if (Input.GetMouseButton(0) && isStart)
@@ -77,15 +81,20 @@ public class DrawLine : MonoBehaviour
             // 레버 및 몬스터 위에 마우스가 올라가면...
             if (hitLever.collider != null || hitEnemy.collider != null)
             {
-                GameObject obj = null;
+                //GameObject obj = null;
                 points.Clear();
-                if (line.Count != 0)
-                    obj = line.Dequeue();
-                Destroy(obj, destroyLineTime);
-                useLine.Enqueue(curLineLeght);
-                //int preUseLineCount = useLine.Dequeue();
-                StartCoroutine(LineUpdate(/*preUseLineCount*/));
+                //if (line.Count != 0)
+                //    obj = line.Dequeue();   // Dequeue
+                usedLinesLength.Enqueue(curLineLenght);     // Enqueue
+
+                Coroutine co = StartCoroutine("LineDestroy");
+                coroutines.Enqueue(co);
+
                 isStart = false;
+
+                //Destroy(obj, destroyLineTime);
+                //StartCoroutine(LineUpdateCo(destroyLineTime));
+
                 return;
             }
 
@@ -94,44 +103,89 @@ public class DrawLine : MonoBehaviour
 
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            if (Vector2.Distance(points[points.Count - 1], pos) > 0.1f && curLineCount <= maxLineCount)
+            if (Vector2.Distance(points[points.Count - 1], pos) > 0.1f && usedLineLength <= maxLineCount && !mouseRightBtnDown)
             {
                 points.Add(pos);
-                curLineCount++;
-                curLineLeght++;
-                lineRenderer.positionCount++;
-                lineRenderer.SetPosition(lineRenderer.positionCount - 1, pos);
-                coll.points = points.ToArray();
+                usedLineLength++;
+                curLineLenght++;
+                if(line.Count != 0)
+                {
+                    lineRenderer.positionCount++;
+                    lineRenderer.SetPosition(lineRenderer.positionCount - 1, pos);
+                    coll.points = points.ToArray();
+                }
             }
 
         }
         else if (Input.GetMouseButtonUp(0) && isStart)
         {
-            GameObject obj = null;
+            //GameObject obj = null;
             if (points.Count == 1)
             {
                 coll.gameObject.SetActive(false); // 클릭만 했을 때
             }
             points.Clear();
-            if (line.Count != 0)
-                obj = line.Dequeue();
-            Destroy(obj, destroyLineTime);
-            useLine.Enqueue(curLineLeght);
-            //int preUseLineCount = useLine.Dequeue();
-            StartCoroutine(LineUpdate(/*preUseLineCount*/));
+            //if (line.Count != 0)
+            //    obj = line.Dequeue();  // Dequeue
+            usedLinesLength.Enqueue(curLineLenght); // Enqueue
+
+            Coroutine co = StartCoroutine("LineDestroy");
+            coroutines.Enqueue(co);
+
             isStart = false;
-        }
 
-        if(Input.GetMouseButtonDown(2)) // 모든 캐찹 삭제
-        {
-            
+            //Destroy(obj, destroyLineTime);
+            //StartCoroutine(LineUpdateCo(destroyLineTime));
         }
     }
 
-    private IEnumerator LineUpdate(/*int count*/)
+    private void LineDelete()
     {
-        yield return new WaitForSeconds(destroyLineTime);
-        curLineCount -= useLine.Dequeue();
+        if (Input.GetMouseButtonDown(1) && !mouseRightBtnDown && !isStart) // 모든 캐찹 삭제
+        {
+            if (line.Count == 0) return;
+
+            Coroutine deleteCo = coroutines.Dequeue();
+            StopCoroutine(deleteCo);
+
+            mouseRightBtnDown = true;
+            LineDirectDestroy();
+        }
     }
 
+    private IEnumerator LineDestroy() // 젤 오래된 라인 삭제
+    {
+        float chkTime = 0f;
+        while(chkTime < destroyLineTime)// 딜레이 적용 후...
+        {
+            yield return null; 
+            chkTime += Time.deltaTime;
+            if (mouseRightBtnDown) yield break; // 만약 우클릭, 즉 모든 라인 삭제한다면 그냥 종료
+        }
+
+        GameObject obj = null;
+        if (line.Count != 0)
+            obj = line.Dequeue();  // Dequeue
+        Destroy(obj); // 라인 삭제
+        if(usedLinesLength.Count != 0)
+        usedLineLength -= usedLinesLength.Dequeue(); // 사용했던 라인 길이 회복
+    }
+
+    private void LineDirectDestroy() // 가장 오래된 선 한 개 바로 지우기
+    {
+        GameObject obj = null;
+        if (line.Count != 0)
+            obj = line.Dequeue();  // Dequeue
+        Destroy(obj); // 라인 삭제
+        if (usedLinesLength.Count != 0)
+            usedLineLength -= usedLinesLength.Dequeue(); // 사용했던 라인 길이 회복
+        mouseRightBtnDown = false;
+    }
+
+
+    //private IEnumerator LineUpdateCo(float delay = 0)
+    //{
+    //    yield return new WaitForSeconds(delay);
+    //    usedLineLength -= usedLinesLength.Dequeue();
+    //}
 }
