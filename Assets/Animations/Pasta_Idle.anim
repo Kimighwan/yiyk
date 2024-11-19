@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy_Jump
+  m_Name: Pasta_Idle
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 094ba7b56214d0647a5068ada5c2a558, type: 3}
-    - time: 0.25
-      value: {fileID: 21300000, guid: 1735b7158c89326438c0265fe17e3d75, type: 3}
-    - time: 0.5
-      value: {fileID: 21300000, guid: b0179232e1556cf4e94c1c958cf263df, type: 3}
+      value: {fileID: 21300000, guid: 968c5df72fa96b84b98c346fad6629d7, type: 3}
+    - time: 0.083333336
+      value: {fileID: 21300000, guid: b3e863da6ac4d4241a95db5662c6cd44, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,15 +42,14 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 094ba7b56214d0647a5068ada5c2a558, type: 3}
-    - {fileID: 21300000, guid: 1735b7158c89326438c0265fe17e3d75, type: 3}
-    - {fileID: 21300000, guid: b0179232e1556cf4e94c1c958cf263df, type: 3}
+    - {fileID: 21300000, guid: 968c5df72fa96b84b98c346fad6629d7, type: 3}
+    - {fileID: 21300000, guid: b3e863da6ac4d4241a95db5662c6cd44, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.5833333
+    m_StopTime: 0.16666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

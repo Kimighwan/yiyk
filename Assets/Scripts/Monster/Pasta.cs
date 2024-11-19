@@ -1,7 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public class Pasta : MonoBehaviour
 {
     public Transform player;            // 플레이어 위치
     public float moveDistance = 3f;     // 적의 이동 거리
@@ -28,22 +29,19 @@ public class Monster : MonoBehaviour
     {
         startPosition = transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        originalSprite = spriteRenderer.sprite;  // 원래 스프라이트 저장
-        fadeManager = FindObjectOfType<FadeManager>(); // 페이드 매니저 찾기
+        originalSprite = spriteRenderer.sprite;
+        fadeManager = FindObjectOfType<FadeManager>();
         animator = GetComponent<Animator>();
-        //fixedY = transform.position.y;
-        currentAnimationCoroutine = StartCoroutine(MovePattern()); // 이동 패턴 시작
-        currentAnimState = ""; // 초기 애니메이션 상태 초기화
+        currentAnimationCoroutine = StartCoroutine(MovePattern());
+        currentAnimState = "";
     }
 
     void Update()
     {
         if (isHit || isApproaching) return;
 
-        // 플레이어와의 거리 체크
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        // 접근 범위 내에 플레이어가 있고 접근 중이 아닌 경우에만 접근 시작
         if (distanceToPlayer <= approachRange && !isApproaching)
         {
             if (currentAnimationCoroutine != null)
@@ -63,7 +61,6 @@ public class Monster : MonoBehaviour
         }
     }
 
-    // 적의 피해 처리
     private void TakeDamage(int damage)
     {
         health -= damage;
@@ -100,19 +97,16 @@ public class Monster : MonoBehaviour
         currentAnimationCoroutine = StartCoroutine(MovePattern());
     }
 
-    // 이동 패턴
     IEnumerator MovePattern()
     {
-       
+
         while (!isApproaching)
         {
-            // 현재 방향을 기준으로 이동
             float targetX = movingLeft ? startPosition.x - 5f : startPosition.x + 5f;
-           
+
             Vector3 targetPosition = new Vector3(targetX, transform.position.y, transform.position.z);
 
 
-            // 이동을 시작하며 목적지로 이동
             float elapsedTime = 0f;
             while (elapsedTime < 3f)
             {
@@ -122,78 +116,63 @@ public class Monster : MonoBehaviour
                 yield return null;
             }
 
-            // 방향을 전환
             movingLeft = !movingLeft;
             spriteRenderer.flipX = movingLeft;
 
-            // 2초 대기 (Idle 애니메이션)
-            animator.SetBool("IsJump", false);
+            animator.SetBool("IsFly", false);
             animator.SetBool("IsIdle", true);
             yield return new WaitForSeconds(2f);
 
-            animator.SetBool("IsJump", true);
+            animator.SetBool("IsFly", true);
             animator.SetBool("IsIdle", false);
         }
     }
 
-    // 플레이어를 향해 접근하는 코루틴
     IEnumerator ApproachPlayer()
     {
         isApproaching = true;
-        animator.SetBool("IsJump", true);
+        animator.SetBool("IsFly", true);
         animator.SetBool("IsIdle", false);
-        Debug.Log("ApproachPlayer 코루틴 시작");
 
-        // 플레이어를 향해 회전
         Vector3 direction = (player.position - transform.position).normalized;
 
-        // X축 방향에 따라서 flipX를 변경
         if (direction.x < 0)
         {
-            spriteRenderer.flipX = true;  // 왼쪽을 바라보면 flipX를 true로 설정
-            movingLeft = true;  // 왼쪽으로 이동
+            spriteRenderer.flipX = true;
+            movingLeft = true;
         }
         else
         {
-            spriteRenderer.flipX = false; // 오른쪽을 바라보면 flipX를 false로 설정
-            movingLeft = false; // 오른쪽으로 이동
+            spriteRenderer.flipX = false;
+            movingLeft = false;
         }
 
-        // 플레이어 방향으로 이동
         while (Vector3.Distance(transform.position, player.position) > 0.1f)
         {
-            // 플레이어와의 거리가 approachRange를 초과하면 따라가는 동작을 멈추고 원래대로 돌아감
+           
             if (Vector3.Distance(transform.position, player.position) > approachRange)
             {
-                Debug.Log("플레이어가 범위 밖으로 나갔습니다. 원래 패턴으로 돌아갑니다.");
                 if (movingLeft)
                     spriteRenderer.flipX = false;
                 else
                     spriteRenderer.flipX = true;
                 isApproaching = false;
-             
-                currentAnimationCoroutine = StartCoroutine(MovePattern());  // 원래 이동 패턴으로 돌아감
-                yield break;  // 코루틴 종료
+
+                currentAnimationCoroutine = StartCoroutine(MovePattern());
+                yield break;
             }
-            Vector3 targetPosition = new Vector3(player.position.x, transform.position.y, transform.position.z);
 
-            // X축으로만 이동
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, approachSpeed * Time.deltaTime);
-
+            transform.position = Vector3.MoveTowards(transform.position, player.position, approachSpeed * Time.deltaTime);
             yield return null;
         }
 
-        Debug.Log("ApproachPlayer 코루틴 종료, 이동 패턴 재개");
-       
         isApproaching = false;
-        currentAnimationCoroutine = StartCoroutine(MovePattern());  // 원래 이동 패턴으로 돌아감
+        currentAnimationCoroutine = StartCoroutine(MovePattern());
     }
 
     private void Die()
     {
         animator.SetBool("IsDie", true);
-
-        Debug.Log("사망 애니메이션 실행");
 
         Destroy(gameObject, 2f);
     }
