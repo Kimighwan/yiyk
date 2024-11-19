@@ -1,36 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class JumpPad : MonoBehaviour
 {
-    [SerializeField]
-    private int jumpForce = 5;
-
-    Rigidbody2D rigid;
+    Animator anim;
 
     private void Awake()
     {
-        rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("JumpPad"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Jump();
+            anim.SetTrigger("Jump");
         }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("JumpPad"))
-        {
-            Jump();
-        }
-    }
-
-    private void Jump()
-    {
-        rigid.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
     }
 }
