@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2912518516958892777}
   - component: {fileID: 2912518516958892776}
   - component: {fileID: 2912518516958892786}
+  - component: {fileID: 6992425832565035064}
   m_Layer: 7
   m_Name: Tomato
   m_TagString: Player
@@ -157,5 +158,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 623e25442c8a6994fb529f39abbceb2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  maxSpeed: 10
   knockbackForce: 10
+--- !u!114 &6992425832565035064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2912518516958892787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf6a2eea29c9234d81163e5080f58af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 2
