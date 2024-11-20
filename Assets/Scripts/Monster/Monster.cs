@@ -193,7 +193,7 @@ public class Monster : MonoBehaviour
     {
         animator.SetBool("IsDie", true);
 
-        Debug.Log("사망 애니메이션 실행");
+        AudioManager.Instance.PlaySFX(SFX.EnemyDie2);
 
         Destroy(gameObject, 2f);
     }

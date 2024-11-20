@@ -174,6 +174,8 @@ public class Pasta : MonoBehaviour
     {
         animator.SetBool("IsDie", true);
 
+        AudioManager.Instance.PlaySFX(SFX.EnemyDie2);
+
         Destroy(gameObject, 2f);
     }
 

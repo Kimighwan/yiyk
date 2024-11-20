@@ -20,6 +20,7 @@ public class Press : MonoBehaviour, IPuzzle
     public void On()
     {
         anim.Play();
+        AudioManager.Instance.PlaySFX(SFX.JellyButton);
     }
 
     //public void Off()

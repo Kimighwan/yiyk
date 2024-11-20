@@ -8,6 +8,11 @@ public class CutScene : MonoBehaviour
     public int idx = 0;
     public List<GameObject> cutSceneImg;
 
+    private void Start()
+    {
+        AudioManager.Instance.PlayBGM(BGM.CutsceneBGM2);
+    }
+
     public void OnClickNextCutScene()
     {
         if(idx < 6)
