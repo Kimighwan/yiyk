@@ -1,4 +1,5 @@
 using System.Collections;
+using System.ComponentModel;
 using UnityEngine;
 
 public class Monster : MonoBehaviour
@@ -22,6 +23,7 @@ public class Monster : MonoBehaviour
 
     private int health = 10;             // 적의 체력
     private bool isHit = false;         // 피격 상태 체크
+    private bool isDie = false;         // 죽었는지 체크
     private string currentAnimState;     // 현재 애니메이션 상태 확인을 위한 변수
 
     void Start()
@@ -78,7 +80,8 @@ public class Monster : MonoBehaviour
                 animator.enabled = true;
             }
 
-            Die();
+            if(!isDie)
+                Die();
             return;
         }
         if (isHit) return;
@@ -191,6 +194,7 @@ public class Monster : MonoBehaviour
 
     private void Die()
     {
+        isDie = true;
         animator.SetBool("IsDie", true);
 
         AudioManager.Instance.PlaySFX(SFX.EnemyDie2);
