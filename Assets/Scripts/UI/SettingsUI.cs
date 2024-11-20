@@ -8,6 +8,7 @@ public class SettingsUI : BaseUI
     public GameObject soundOnToggle;
     public GameObject soundOffToggle;
     public Slider slider;
+    public Button reStartButton;
 
     private float preVolume; // 流傈 荤款靛 农扁
     private bool sound = false; // false: 家府 阐 // true: 家府 糯
@@ -95,6 +96,7 @@ public class SettingsUI : BaseUI
 
     public void ReStartBtn()
     {
+        reStartButton.interactable = false;
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
         SceneLoader.Instance.ReloadScene();
     }
