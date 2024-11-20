@@ -5,6 +5,7 @@ using static Unity.VisualScripting.Member;
 public enum BGM
 {
     MainBGM,
+    CutsceneBGM2,
     IngameBGM,
     COUNT
 }
@@ -14,6 +15,8 @@ public enum SFX
     ButtonClick,
     Mouseclick,
     Opendoor,
+    EnemyDie2,
+    JellyButton,
     COUNT
 }
 
