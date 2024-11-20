@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StartSceneCanvasManager : MonoBehaviour
 {
     public GameObject setting;
+    public Button gameStartButton;
 
     private void Start()
     {
@@ -53,6 +55,8 @@ public class StartSceneCanvasManager : MonoBehaviour
     public void OnClickStartBtn()
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
+
+        gameStartButton.interactable = false;
 
         SceneLoader.Instance.Fade(Color.black, 0f, 1f, 2.0f, 0f, true, () =>
         {
