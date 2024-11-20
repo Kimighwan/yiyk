@@ -8,18 +8,19 @@ public class Press : MonoBehaviour, IPuzzle
     public int maxLength = 1;
 
     private Animation dorreAnim;
-    private Animation anim;
+    private Animator animator;
     private bool alreadyOpen = false; // 문이 열린 적이 있는가?
 
     private void Awake()
     {
         dorreAnim = door.transform.GetChild(1).GetComponent<Animation>();
-        anim = GetComponent<Animation>();
+        animator = GetComponent<Animator>();
     }
 
     public void On()
     {
-        anim.Play();
+        animator.SetTrigger("isPressed");
+        AudioManager.Instance.PlaySFX(SFX.JellyButton);
     }
 
     //public void Off()
