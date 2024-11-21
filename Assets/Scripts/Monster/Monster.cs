@@ -198,7 +198,8 @@ public class Monster : MonoBehaviour
         animator.SetBool("IsDie", true);
 
         AudioManager.Instance.PlaySFX(SFX.EnemyDie2);
-
+        Collider2D collider = GetComponent<Collider2D>();
+        if (collider != null) { Destroy(collider); }
         Destroy(gameObject, 2f);
     }
 
