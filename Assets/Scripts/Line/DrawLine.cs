@@ -144,6 +144,7 @@ public class DrawLine : MonoBehaviour
             if (line.Count == 0) return;
 
             StopAllCoroutines();
+
             mouseRightBtnDown = true; // 우클릭 클릭
             mouseRightCoolTime = true; // 쿨타임 체크
             LineDirectDestroy();
@@ -168,16 +169,19 @@ public class DrawLine : MonoBehaviour
         usedLineLength -= usedLinesLength.Dequeue(); // 사용했던 라인 길이 회복
     }
 
-    private void LineDirectDestroy() // 가장 오래된 선 한 개 바로 지우기
+    private void LineDirectDestroy() // 모든 선 지우기
     {
         if(line.Count == 0) return;
 
-        GameObject obj = null;
-        if (line.Count != 0)
-            obj = line.Dequeue();  // Dequeue
-        Destroy(obj); // 라인 삭제
-        if (usedLinesLength.Count != 0)
-            usedLineLength -= usedLinesLength.Dequeue(); // 사용했던 라인 길이 회복
+        while (line.Count != 0)
+        {
+            GameObject obj = null;
+            if (line.Count != 0)
+                obj = line.Dequeue();  // Dequeue
+            Destroy(obj); // 라인 삭제
+            if (usedLinesLength.Count != 0)
+                usedLineLength -= usedLinesLength.Dequeue(); // 사용했던 라인 길이 회복
+        }
 
         mouseRightBtnDown = false;
 
@@ -186,7 +190,7 @@ public class DrawLine : MonoBehaviour
 
     private IEnumerator mouseRightClickDelayCo() // 우클릭 쿨타임
     {
-        yield return mouseRightClickDelay;
+        yield return null; //mouseRightClickDelay;
         mouseRightCoolTime = false;
     }
 
