@@ -12,6 +12,7 @@ TagManager:
   - Trap
   - Ground
   - JumpPad
+  - Door
   layers:
   - Default
   - TransparentFX

@@ -28,8 +28,6 @@ public class DrawLine : MonoBehaviour
     RaycastHit2D hitEnemy; // 몬스터인지 체크용
     private Queue<int> usedLinesLength = new Queue<int>(); // 사용했던 라인들의 길이
 
-    private Queue<Coroutine> coroutines = new Queue<Coroutine>(); // 삭제 코루틴 Queue
-
     public GameObject settingUI;
 
     //////////////////////////////////////////////////////////////
@@ -90,7 +88,6 @@ public class DrawLine : MonoBehaviour
                 usedLinesLength.Enqueue(curLineLenght);     // Enqueue
 
                 Coroutine co = StartCoroutine("LineDestroy");
-                coroutines.Enqueue(co);
 
                 isStart = false;
 
@@ -132,7 +129,6 @@ public class DrawLine : MonoBehaviour
             usedLinesLength.Enqueue(curLineLenght); // Enqueue
 
             Coroutine co = StartCoroutine("LineDestroy");
-            coroutines.Enqueue(co);
 
             isStart = false;
 
@@ -147,8 +143,7 @@ public class DrawLine : MonoBehaviour
         {
             if (line.Count == 0) return;
 
-            Coroutine deleteCo = coroutines.Dequeue();
-            StopCoroutine(deleteCo);
+            StopAllCoroutines();
 
             mouseRightBtnDown = true; // 우클릭 클릭
             mouseRightCoolTime = true; // 쿨타임 체크
@@ -174,16 +169,19 @@ public class DrawLine : MonoBehaviour
         usedLineLength -= usedLinesLength.Dequeue(); // 사용했던 라인 길이 회복
     }
 
-    private void LineDirectDestroy() // 가장 오래된 선 한 개 바로 지우기
+    private void LineDirectDestroy() // 모든 선 지우기
     {
         if(line.Count == 0) return;
 
-        GameObject obj = null;
-        if (line.Count != 0)
-            obj = line.Dequeue();  // Dequeue
-        Destroy(obj); // 라인 삭제
-        if (usedLinesLength.Count != 0)
-            usedLineLength -= usedLinesLength.Dequeue(); // 사용했던 라인 길이 회복
+        while (line.Count != 0)
+        {
+            GameObject obj = null;
+            if (line.Count != 0)
+                obj = line.Dequeue();  // Dequeue
+            Destroy(obj); // 라인 삭제
+            if (usedLinesLength.Count != 0)
+                usedLineLength -= usedLinesLength.Dequeue(); // 사용했던 라인 길이 회복
+        }
 
         mouseRightBtnDown = false;
 
@@ -192,7 +190,7 @@ public class DrawLine : MonoBehaviour
 
     private IEnumerator mouseRightClickDelayCo() // 우클릭 쿨타임
     {
-        yield return mouseRightClickDelay;
+        yield return null; //mouseRightClickDelay;
         mouseRightCoolTime = false;
     }
 

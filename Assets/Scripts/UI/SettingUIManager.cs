@@ -11,7 +11,7 @@ public class SettingUIManager :  StartSceneCanvasManager
 
     private void Awake()
     {
-        setting = transform.GetChild(0).gameObject;
+        setting = transform.GetChild(1).gameObject;
     }
 
     private void Start()
