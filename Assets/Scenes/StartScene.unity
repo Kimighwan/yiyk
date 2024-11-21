@@ -984,6 +984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setting: {fileID: 2135399218}
   gameStartButton: {fileID: 640088343}
+  fadeCanvas: {fileID: 1676370015}
 --- !u!1 &1607143757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,6 +1194,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1628261911}
   m_CullTransparentMesh: 1
+--- !u!223 &1676370015 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 1680062163, guid: 910e1ddd8e618904d87dc1a18c53cc45, type: 3}
+  m_PrefabInstance: {fileID: 691092812}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1720179929
 GameObject:
   m_ObjectHideFlags: 0
