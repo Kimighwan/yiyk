@@ -65,4 +65,9 @@ public class StartSceneCanvasManager : MonoBehaviour
             SceneLoader.Instance.Fade(Color.black, 1f, 0f, 0.5f, 0f, false);
         });
     }
+
+    public void ClosedSetting()
+    {
+        setting.SetActive(false);
+    }
 }

@@ -15,6 +15,8 @@ public class CutScene : MonoBehaviour
 
     public void OnClickNextCutScene()
     {
+        AudioManager.Instance.PlaySFX(SFX.ButtonClick);
+
         if(idx < 6)
             cutSceneImg[idx].gameObject.SetActive(true);
 
