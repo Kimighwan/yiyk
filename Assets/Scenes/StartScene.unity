@@ -601,6 +601,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1350668678}
+        m_TargetAssemblyTypeName: StartSceneCanvasManager, Assembly-CSharp
+        m_MethodName: ClosedSetting
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &640088344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -648,7 +660,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1680062163, guid: 910e1ddd8e618904d87dc1a18c53cc45, type: 3}
       propertyPath: m_SortingOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1785287998, guid: 910e1ddd8e618904d87dc1a18c53cc45, type: 3}
       propertyPath: m_Color.a
@@ -972,6 +984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setting: {fileID: 2135399218}
   gameStartButton: {fileID: 640088343}
+  fadeCanvas: {fileID: 1676370015}
 --- !u!1 &1607143757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,6 +1194,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1628261911}
   m_CullTransparentMesh: 1
+--- !u!223 &1676370015 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 1680062163, guid: 910e1ddd8e618904d87dc1a18c53cc45, type: 3}
+  m_PrefabInstance: {fileID: 691092812}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1720179929
 GameObject:
   m_ObjectHideFlags: 0
