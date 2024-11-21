@@ -9,7 +9,7 @@ public class Potal : MonoBehaviour
 
     public PotalController potalController;
 
-    private WaitForSeconds teleportCoolTime = new WaitForSeconds(2.0f);
+    private WaitForSeconds teleportCoolTime = new WaitForSeconds(0.5f);
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Player") && !potalController.coolTime)
