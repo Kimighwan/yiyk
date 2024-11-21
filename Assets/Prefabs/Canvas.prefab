@@ -565,6 +565,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1930451893679076040, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+      propertyPath: BackGroundFadeImg
+      value: 
+      objectReference: {fileID: 3986365011426510318}
     - target: {fileID: 1930451893679076087, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_Name
       value: SettingsUI
