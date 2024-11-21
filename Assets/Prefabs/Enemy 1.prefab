@@ -106,7 +106,7 @@ MonoBehaviour:
   moveDistance: 3
   moveSpeed: 2
   approachSpeed: 2
-  approachRange: 10
+  approachRange: 15
   hitSprite: {fileID: 21300000, guid: 66e8e37f520ff134ba88691e02604f25, type: 3}
 --- !u!58 &294164635012064602
 CircleCollider2D:
