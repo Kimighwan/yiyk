@@ -10,6 +10,8 @@ public class StartSceneCanvasManager : MonoBehaviour
     public GameObject setting;
     public Button gameStartButton;
 
+    public Canvas fadeCanvas;
+
     private void Start()
     {
         PlayerPrefs.SetFloat("BGMValue", 0.1f);
@@ -56,6 +58,7 @@ public class StartSceneCanvasManager : MonoBehaviour
     public void OnClickStartBtn()
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
+        fadeCanvas.sortingOrder = 1;
 
         gameStartButton.interactable = false;
 
@@ -63,6 +66,7 @@ public class StartSceneCanvasManager : MonoBehaviour
         {
             SceneManager.LoadScene("CutScene");
             SceneLoader.Instance.Fade(Color.black, 1f, 0f, 0.5f, 0f, false);
+            fadeCanvas.sortingOrder = 0;
         });
     }
 
