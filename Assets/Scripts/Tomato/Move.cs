@@ -31,8 +31,8 @@ public class Move : MonoBehaviour
     private void Update()
     {
         // Stop Speed
-        // if (Input.GetButtonUp("Horizontal"))
-
+        if (Input.GetButtonUp("Horizontal"))
+            rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
         // Sprite
         if (Input.GetButtonDown("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;

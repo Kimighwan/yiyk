@@ -272,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStart: 0
   linePrefab: {fileID: 4076808591492971025, guid: 228efba1d6fb89a4199bc1e9b02c5b81, type: 3}
-  maxLineCount: 180
+  maxLineCount: 130
   usedLineLength: 0
   curLineLenght: 0
   destroyLineTime: 5
