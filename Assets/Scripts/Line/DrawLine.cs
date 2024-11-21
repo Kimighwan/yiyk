@@ -28,8 +28,6 @@ public class DrawLine : MonoBehaviour
     RaycastHit2D hitEnemy; // 몬스터인지 체크용
     private Queue<int> usedLinesLength = new Queue<int>(); // 사용했던 라인들의 길이
 
-    private Queue<Coroutine> coroutines = new Queue<Coroutine>(); // 삭제 코루틴 Queue
-
     public GameObject settingUI;
 
     //////////////////////////////////////////////////////////////
@@ -90,7 +88,6 @@ public class DrawLine : MonoBehaviour
                 usedLinesLength.Enqueue(curLineLenght);     // Enqueue
 
                 Coroutine co = StartCoroutine("LineDestroy");
-                coroutines.Enqueue(co);
 
                 isStart = false;
 
@@ -132,7 +129,6 @@ public class DrawLine : MonoBehaviour
             usedLinesLength.Enqueue(curLineLenght); // Enqueue
 
             Coroutine co = StartCoroutine("LineDestroy");
-            coroutines.Enqueue(co);
 
             isStart = false;
 
@@ -147,9 +143,7 @@ public class DrawLine : MonoBehaviour
         {
             if (line.Count == 0) return;
 
-            Coroutine deleteCo = coroutines.Dequeue();
-            StopCoroutine(deleteCo);
-
+            StopAllCoroutines();
             mouseRightBtnDown = true; // 우클릭 클릭
             mouseRightCoolTime = true; // 쿨타임 체크
             LineDirectDestroy();
