@@ -690,7 +690,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextBtn: {fileID: 601478669}
-  idx: 1
   cutSceneImg:
   - {fileID: 1273229504}
   - {fileID: 652678041}
