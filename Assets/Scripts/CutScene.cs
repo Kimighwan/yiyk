@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class CutScene : MonoBehaviour
 {
     public Button nextBtn;
-    public int idx = 0;
     public List<GameObject> cutSceneImg;
+
+    private int idx = 1;
 
     private void Start()
     {
