@@ -3393,7 +3393,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3417,7 +3417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734398066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 13.365986, y: 5.298978, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4466,10 +4466,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -11.301596, y: 24.077866}
+    - - {x: -11.302001, y: 47.077057}
       - {x: -11.303291, y: -8.923875}
-      - {x: 109.70145, y: -8.925276}
-      - {x: 109.699265, y: 24.07772}
+      - {x: 111.70151, y: -8.924811}
+      - {x: 111.70653, y: 47.08933}
 --- !u!1001 &1011431945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4862,7 +4862,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1743412082}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 5
+    OrthographicSize: 15
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0

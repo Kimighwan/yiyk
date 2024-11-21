@@ -16,6 +16,8 @@ public class SettingsUI : BaseUI
 
     public Button reStartButton;
 
+    public GameObject BackGroundFadeImg;
+
     private float preBGMVolume; // 流傈 荤款靛 农扁
     private bool bgmSound = false; // false: 家府 阐 // true: 家府 糯
 
@@ -152,6 +154,7 @@ public class SettingsUI : BaseUI
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
         gameObject.SetActive(!gameObject.activeSelf);
+        BackGroundFadeImg.SetActive(!BackGroundFadeImg.activeSelf);
         Time.timeScale = gameObject.activeSelf == true ? 0f : 1f;
     }
 
