@@ -11,6 +11,7 @@ public class Move : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator anim;
     private bool isDead = false;
+    private float speedCheck;
 
     [Header("Move")]
     private float h; // 수평 방향
@@ -30,21 +31,20 @@ public class Move : MonoBehaviour
     private void Update()
     {
         // Stop Speed
-        if (Input.GetButtonUp("Horizontal"))
-            rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.3f, rigid.velocity.y);
+        // if (Input.GetButtonUp("Horizontal"))
 
         // Sprite
         if (Input.GetButtonDown("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
 
         // Anim
-        anim.SetBool("isMove", rigid.velocity.normalized.x != 0);
+        anim.SetBool("isMove", Mathf.Abs(h) > 0.2f);
     }
 
     private void FixedUpdate()
     {
         // Move
-        h = Input.GetAxisRaw("Horizontal");
+        h = Input.GetAxis("Horizontal");
         rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
 
         // Max Speed
