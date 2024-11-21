@@ -12,6 +12,8 @@ public class StartSceneCanvasManager : MonoBehaviour
 
     public Canvas fadeCanvas;
 
+    public GameObject BackGroundFadeImg;
+
     private void Start()
     {
         PlayerPrefs.SetFloat("BGMValue", 0.1f);
@@ -33,6 +35,7 @@ public class StartSceneCanvasManager : MonoBehaviour
             if (setting.activeSelf) // UI가 띄워져 있다면
             {
                 setting.SetActive(false);
+                BackGroundFadeImg.SetActive(!BackGroundFadeImg.activeSelf);
                 Time.timeScale = 1.0f;
             }
             else
@@ -46,6 +49,7 @@ public class StartSceneCanvasManager : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
         setting.SetActive(!setting.activeSelf);
+        BackGroundFadeImg.SetActive(!BackGroundFadeImg.activeSelf);
         Time.timeScale = setting.activeSelf == true ? 0f : 1f;
     }
 
