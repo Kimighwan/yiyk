@@ -689,6 +689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed004d628fc31da4caa2e3c25def5a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextBtn: {fileID: 601478669}
   idx: 0
   cutSceneImg:
   - {fileID: 1273229504}

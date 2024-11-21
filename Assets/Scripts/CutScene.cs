@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CutScene : MonoBehaviour
 {
+    public Button nextBtn;
     public int idx = 0;
     public List<GameObject> cutSceneImg;
 
@@ -29,6 +31,7 @@ public class CutScene : MonoBehaviour
         }
         if(idx == 7)
         {
+            nextBtn.interactable = false;
             SceneLoader.Instance.Fade(Color.black, 0f, 1f, 2.0f, 0f, false, () =>
             {
                 AudioManager.Instance.PlayBGM(BGM.IngameBGM);
