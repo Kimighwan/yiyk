@@ -5,6 +5,7 @@ using static Unity.VisualScripting.Member;
 public enum BGM
 {
     MainBGM,
+    CutsceneBGM2,
     IngameBGM,
     COUNT
 }
@@ -14,6 +15,8 @@ public enum SFX
     ButtonClick,
     Mouseclick,
     Opendoor,
+    EnemyDie2,
+    JellyButton,
     COUNT
 }
 
@@ -77,11 +80,9 @@ public class AudioManager : SingletonBehaviour<AudioManager>
             var newAudioSource = newGO.AddComponent<AudioSource>();
             newAudioSource.clip = audioClip;
             newAudioSource.loop = false;
+            newAudioSource.volume = 0.5f;
             newAudioSource.playOnAwake = false;
             newGO.transform.parent = SFXTrs;
-
-            if (newAudioSource.name == "Mouseclick")
-                newAudioSource.volume = 0.2f;
 
             m_SFXPlayer[(SFX)i] = newAudioSource;
         }
@@ -101,7 +102,7 @@ public class AudioManager : SingletonBehaviour<AudioManager>
         }
 
         m_CurrBGMSource = m_BGMPlayer[bgm];
-        m_CurrBGMSource.volume = PlayerPrefs.GetFloat("Value");
+        m_CurrBGMSource.volume = PlayerPrefs.GetFloat("BGMValue");
         m_CurrBGMSource.Play();
     }
 
@@ -127,6 +128,7 @@ public class AudioManager : SingletonBehaviour<AudioManager>
             return;
         }
 
+        m_SFXPlayer[sfx].volume = PlayerPrefs.GetFloat("SFXValue");
         m_SFXPlayer[sfx].Play();
     }
 

@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StartSceneCanvasManager : MonoBehaviour
 {
     public GameObject setting;
+    public Button gameStartButton;
 
     private void Start()
     {
-        PlayerPrefs.SetFloat("Value", 0.1f);
+        PlayerPrefs.SetFloat("BGMValue", 0.1f);
+        PlayerPrefs.SetFloat("SFXValue", 0.5f);
         AudioManager.Instance.PlayBGM(BGM.MainBGM);
     }
 
@@ -53,6 +56,8 @@ public class StartSceneCanvasManager : MonoBehaviour
     public void OnClickStartBtn()
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
+
+        gameStartButton.interactable = false;
 
         SceneLoader.Instance.Fade(Color.black, 0f, 1f, 2.0f, 0f, true, () =>
         {

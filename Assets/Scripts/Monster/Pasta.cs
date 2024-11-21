@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class Pasta : MonoBehaviour
@@ -23,6 +24,7 @@ public class Pasta : MonoBehaviour
 
     private int health = 10;             // 적의 체력
     private bool isHit = false;         // 피격 상태 체크
+    private bool isDie = false;         // 죽었는지 체크
     private string currentAnimState;     // 현재 애니메이션 상태 확인을 위한 변수
 
     void Start()
@@ -75,7 +77,8 @@ public class Pasta : MonoBehaviour
                 animator.enabled = true;
             }
 
-            Die();
+            if(!isDie)
+                Die();
             return;
         }
         if (isHit) return;
@@ -172,7 +175,10 @@ public class Pasta : MonoBehaviour
 
     private void Die()
     {
+        isDie = true;
         animator.SetBool("IsDie", true);
+
+        AudioManager.Instance.PlaySFX(SFX.EnemyDie2);
 
         Destroy(gameObject, 2f);
     }

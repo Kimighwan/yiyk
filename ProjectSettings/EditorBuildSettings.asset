@@ -12,8 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/CutScene.unity
     guid: a9306aff946922d4482bba6e4fa60478
   - enabled: 1
-    path: Assets/Scenes/Stage1.unity
+    path: Assets/Scenes/Test.unity
     guid: 7067ffee59e48b64b8acbd820243ea6e
+  - enabled: 1
+    path: Assets/Scenes/Stage1.unity
+    guid: cc0650e381eb95045a4f2cca7f3de71c
   - enabled: 1
     path: Assets/Scenes/Stage2.unity
     guid: 94763f186707cf04d99c40917bdd9cd7
@@ -38,9 +41,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage9.unity
     guid: 2f23594c562e2d04ea0abad1e9042bcc
-  - enabled: 1
-    path: Assets/Scenes/Stage10.unity
-    guid: dd754f4da8179c1449817e2cf327dc58
   - enabled: 1
     path: Assets/Scenes/Clear.unity
     guid: 6021111489d191a47bc4f170ae1b3b50

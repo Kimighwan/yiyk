@@ -8,6 +8,7 @@ public enum SceneType
 {
     StartScene,
     CutScene,
+    Test,
     Stage1,
     Stage2,
     Stage3,

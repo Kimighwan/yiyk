@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 601478670}
   - component: {fileID: 601478669}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: Next
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -319,16 +319,16 @@ RectTransform:
   m_GameObject: {fileID: 601478667}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.54, y: 0.54, z: 0.54}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 961140335}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -23.39, y: 0}
-  m_SizeDelta: {x: 199, y: 183}
+  m_AnchoredPosition: {x: -11.22998, y: 25.960022}
+  m_SizeDelta: {x: 500, y: 200}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &601478669
 MonoBehaviour:
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 03e9470c04ffb8a458a6b674f1af5b9e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e7f596eff4dcd094e8c1055be20dbda1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -689,6 +689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed004d628fc31da4caa2e3c25def5a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idx: 0
   cutSceneImg:
   - {fileID: 1273229504}
   - {fileID: 652678041}

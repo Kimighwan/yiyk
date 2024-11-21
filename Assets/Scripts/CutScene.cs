@@ -8,6 +8,11 @@ public class CutScene : MonoBehaviour
     public int idx = 0;
     public List<GameObject> cutSceneImg;
 
+    private void Start()
+    {
+        AudioManager.Instance.PlayBGM(BGM.CutsceneBGM2);
+    }
+
     public void OnClickNextCutScene()
     {
         if(idx < 6)
@@ -25,7 +30,7 @@ public class CutScene : MonoBehaviour
             SceneLoader.Instance.Fade(Color.black, 0f, 1f, 2.0f, 0f, false, () =>
             {
                 AudioManager.Instance.PlayBGM(BGM.IngameBGM);
-                SceneLoader.Instance.LoadScene(SceneType.Stage1);
+                SceneLoader.Instance.LoadScene(SceneType.Test);
                 SceneLoader.Instance.Fade(Color.black, 1f, 0f, 2.0f, 0f, false);
             });
         }
