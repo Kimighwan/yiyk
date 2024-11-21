@@ -13,7 +13,7 @@ public class DrawLine : MonoBehaviour
     [SerializeField]
     [Header("------ Line Info ------")]
     public GameObject linePrefab; // line 프리펩
-    public int maxLineCount = 180; // 라인 쵀대 길이
+    public int maxLineCount = 130; // 라인 쵀대 길이
     public int usedLineLength = 0; // 현재까지 사용한 길이
     public int curLineLenght = 0; // 지금 그리고 있는 캐찹 길이
     public float destroyLineTime = 5.0f; // 선 사라지는 딜레이
