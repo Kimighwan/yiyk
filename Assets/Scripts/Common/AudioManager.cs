@@ -7,6 +7,7 @@ public enum BGM
     MainBGM,
     CutsceneBGM2,
     IngameBGM,
+    ClearScene,
     COUNT
 }
 
@@ -17,6 +18,12 @@ public enum SFX
     Opendoor,
     EnemyDie2,
     JellyButton,
+    JumpPad,
+    StageClear,
+    Portal,
+    PlayerDie,
+    CutsceneNext,
+    LeverSwitch,
     COUNT
 }
 

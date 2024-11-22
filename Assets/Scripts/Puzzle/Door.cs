@@ -16,6 +16,7 @@ public class Door : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            AudioManager.Instance.PlaySFX(SFX.StageClear);
             SceneLoader.Instance.NextStage();
             Collider.enabled = false;
         }

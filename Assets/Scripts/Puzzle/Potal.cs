@@ -24,6 +24,7 @@ public class Potal : MonoBehaviour
             {
                 collision.transform.position = enter.transform.position;
             }
+            AudioManager.Instance.PlaySFX(SFX.Portal);
 
             StartCoroutine("coolTimeCo");
         }

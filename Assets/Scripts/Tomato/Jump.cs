@@ -32,5 +32,6 @@ public class Jump : MonoBehaviour
     private void Jumped()
     {
         rigid.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+        AudioManager.Instance.PlaySFX(SFX.JumpPad);
     }
 }
