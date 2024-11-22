@@ -18,7 +18,7 @@ public class CutScene : MonoBehaviour
 
     public void OnClickNextCutScene()
     {
-        AudioManager.Instance.PlaySFX(SFX.ButtonClick);
+        AudioManager.Instance.PlaySFX(SFX.CutsceneNext);
 
         if(idx < 6)
         {

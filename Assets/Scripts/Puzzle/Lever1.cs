@@ -46,6 +46,7 @@ public class Lever1 : MonoBehaviour, IPuzzle
     public void On() // 레버 작동 함수
     {
         leverOn.SetBool("isOn", true);
+        AudioManager.Instance.PlaySFX(SFX.LeverSwitch);
     }
 
 
