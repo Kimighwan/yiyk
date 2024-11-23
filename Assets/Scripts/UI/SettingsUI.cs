@@ -45,7 +45,7 @@ public class SettingsUI : BaseUI
 
         BGMslider.value = PlayerPrefs.GetFloat("BGMValue");
         SFXslider.value = PlayerPrefs.GetFloat("SFXValue");
-        PlayerPrefs.SetFloat("preBGMVolume", 0.1f);
+        PlayerPrefs.SetFloat("preBGMVolume", 0.2f);
         PlayerPrefs.SetFloat("preSFXVolume", 0.5f);
     }
 
@@ -176,5 +176,12 @@ public class SettingsUI : BaseUI
         soundSFXOnToggle.SetActive(SFXslider.value > 0.0f);
         soundSFXOffToggle.SetActive(SFXslider.value == 0.0f);
         PlayerPrefs.SetFloat("SFXValue", SFXslider.value);
+    }
+
+    // URL 링크 열기
+    public void OnClickOpenURL(string url)
+    {
+        AudioManager.Instance.PlaySFX(SFX.ButtonClick);
+        Application.OpenURL(url);
     }
 }

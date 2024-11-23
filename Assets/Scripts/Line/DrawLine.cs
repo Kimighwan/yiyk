@@ -109,7 +109,7 @@ public class DrawLine : MonoBehaviour
 
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            if ((Vector2.Distance(points[points.Count - 1], pos) > 0.1f) 
+            if ((Vector2.Distance(points[points.Count - 1], pos) > 0.7f) 
                 && usedLineLength <= maxLineCount && !mouseRightBtnDown)
             {
                 points.Add(pos);
