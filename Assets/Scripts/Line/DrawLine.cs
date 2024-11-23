@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class DrawLine : MonoBehaviour
@@ -10,6 +10,8 @@ public class DrawLine : MonoBehaviour
     private bool mouseRightBtnDown = false;
     private bool mouseRightCoolTime = false;
 
+    public WaitForSeconds mouseRightClickDelay = new WaitForSeconds(1.0f);
+
     [SerializeField]
     [Header("------ Line Info ------")]
     public GameObject linePrefab; // line 프리펩
@@ -17,19 +19,21 @@ public class DrawLine : MonoBehaviour
     public int usedLineLength = 0; // 현재까지 사용한 길이
     public int curLineLenght = 0; // 지금 그리고 있는 캐찹 길이
     public float destroyLineTime = 5.0f; // 선 사라지는 딜레이
-    public WaitForSeconds mouseRightClickDelay = new WaitForSeconds(1.0f);
+
     public List<Vector2> points = new List<Vector2>();
+    private Queue<GameObject> line = new Queue<GameObject>(); // 라인
+    private Queue<int> usedLinesLength = new Queue<int>(); // 사용했던 라인들의 길이
+
+    RaycastHit2D hitLever; // 레버인지 체크용
+    RaycastHit2D hitEnemy; // 몬스터인지 체크용
+
+    public GameObject settingUI;
+    public Image gauge;
 
     LineRenderer lineRenderer;
     EdgeCollider2D coll;
-    private Queue<GameObject> line = new Queue<GameObject>(); // 라인
     Vector3 mousePos;
-    RaycastHit2D hitLever; // 레버인지 체크용
-    RaycastHit2D hitEnemy; // 몬스터인지 체크용
-    private Queue<int> usedLinesLength = new Queue<int>(); // 사용했던 라인들의 길이
-
-    public GameObject settingUI;
-
+    
     //////////////////////////////////////////////////////////////
 
     private void Start()
@@ -41,6 +45,9 @@ public class DrawLine : MonoBehaviour
     {
         Draw();
         LineDelete();
+
+        // KetChap Gauge
+        gauge.fillAmount = (float)(maxLineCount - usedLineLength) / (float)maxLineCount;
     }
 
     private void Draw()
@@ -102,7 +109,8 @@ public class DrawLine : MonoBehaviour
 
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            if (Vector2.Distance(points[points.Count - 1], pos) > 0.1f && usedLineLength <= maxLineCount && !mouseRightBtnDown)
+            if ((Vector2.Distance(points[points.Count - 1], pos) > 0.1f) 
+                && usedLineLength <= maxLineCount && !mouseRightBtnDown)
             {
                 points.Add(pos);
                 usedLineLength++;
