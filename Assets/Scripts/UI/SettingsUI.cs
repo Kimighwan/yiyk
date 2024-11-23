@@ -177,4 +177,10 @@ public class SettingsUI : BaseUI
         soundSFXOffToggle.SetActive(SFXslider.value == 0.0f);
         PlayerPrefs.SetFloat("SFXValue", SFXslider.value);
     }
+
+    // URL 링크 열기
+    public void OnClickOpenURL(string url)
+    {
+        Application.OpenURL(url);
+    }
 }
