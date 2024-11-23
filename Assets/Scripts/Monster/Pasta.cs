@@ -16,7 +16,7 @@ public class Pasta : MonoBehaviour
     public Sprite hitSprite;
     private Sprite originalSprite;
     private Coroutine currentAnimationCoroutine;
-    private int health = 10;
+    private int health = 6;
     private bool isHit = false;
     private bool isDie = false;
 
@@ -54,21 +54,24 @@ public class Pasta : MonoBehaviour
 
         if (health <= 0)
         {
+            if (isHit)
+            {
+                StopCoroutine(HandleHit());
+                spriteRenderer.sprite = originalSprite;
+                isHit = false;
+                animator.enabled = true;
+            }
+
             if (!isDie)
                 Die();
             return;
         }
-
-        if (isHit) return; // 이미 피격 상태라면 추가 처리하지 않음
+        if (isHit) return;
 
         isHit = true;
         spriteRenderer.sprite = hitSprite;
-
-        StopCurrentAction(); // 현재 모든 행동 중지
-
+        StopAllCoroutines();
         animator.enabled = false;
-
-        // 피격 후 1초 멈춤
         StartCoroutine(HandleHit());
     }
 
@@ -174,15 +177,41 @@ public class Pasta : MonoBehaviour
 
     private void Die()
     {
+        if (isDie) return;
+
         isDie = true;
         animator.SetBool("IsDie", true);
 
-        AudioManager.Instance.PlaySFX(SFX.EnemyDie2);
-        Collider2D collider = GetComponent<Collider2D>();
-        if (collider != null) { Destroy(collider); }
-        Destroy(gameObject, 2f);
-    }
+        StopAllCoroutines();
+        isApproaching = false;
+        isHit = false;
 
+        CircleCollider2D collider = GetComponent<CircleCollider2D>();
+        if (collider != null)
+        {
+            collider.enabled = false;
+        }
+        //StartCoroutine(ScaleUpSprite()); //사망 애니메이션 스케일 증가
+        AudioManager.Instance.PlaySFX(SFX.EnemyDie2);
+
+        Destroy(gameObject, 1f);
+    }
+   /* IEnumerator ScaleUpSprite()
+    {
+        float elapsedTime = 0f;
+        float duration = 1f;
+        Vector3 originalScale = transform.localScale;
+        Vector3 targetScale = originalScale * 2f;
+
+        while (elapsedTime < duration)
+        {
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = targetScale; // 최종 크기 설정
+    }*/
     private void StopCurrentAction()
     {
         // 현재 실행 중인 모든 코루틴 중지

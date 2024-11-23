@@ -16,6 +16,7 @@ public enum SFX
     ButtonClick,
     Mouseclick,
     Opendoor,
+    EnemyDie1,
     EnemyDie2,
     JellyButton,
     JumpPad,
