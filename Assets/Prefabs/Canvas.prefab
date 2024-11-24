@@ -271,7 +271,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -580,22 +580,22 @@ PrefabInstance:
     - target: {fileID: 1930451892298097517, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1207449826447576075}
+      objectReference: {fileID: 723934934710820661}
     - target: {fileID: 1930451892298097517, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1930451892298097517, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: OnClickSettingsBtn
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1930451892298097517, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: StartSceneCanvasManager, Assembly-CSharp
+      value: SettingsUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1930451892298097517, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1930451892376614896, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_AnchorMax.y
@@ -612,6 +612,10 @@ PrefabInstance:
     - target: {fileID: 1930451892376614896, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -427.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930451892376614897, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 1930451892897117913, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_AnchorMax.x
@@ -736,6 +740,10 @@ PrefabInstance:
     - target: {fileID: 1930451893901361539, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -37
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230145672515816535, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8358673440661612959, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_AnchorMax.x
