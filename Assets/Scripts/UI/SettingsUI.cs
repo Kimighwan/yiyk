@@ -190,11 +190,13 @@ public class SettingsUI : BaseUI
     public void OnClickMaker()
     {
         makerImg.SetActive(true);
+        ketChapGaugeBackGround.SetActive(false);
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
     }
     public void OnClickMakerQuit()
     {
         makerImg.SetActive(false);
+        ketChapGaugeBackGround.SetActive(true);
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
     }
 }
