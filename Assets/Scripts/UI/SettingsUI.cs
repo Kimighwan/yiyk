@@ -161,7 +161,7 @@ public class SettingsUI : BaseUI
     public void ReStartBtn()
     {
         reStartButton.interactable = false;
-        AudioManager.Instance.PlaySFX(SFX.ButtonClick);
+        OnClickSettingQuit();
         SceneLoader.Instance.ReloadScene();
     }
 
