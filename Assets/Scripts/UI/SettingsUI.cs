@@ -19,6 +19,7 @@ public class SettingsUI : BaseUI
     public GameObject BackGroundFadeImg;
     public GameObject makerImg;
     public GameObject ketChapGaugeBackGround;
+    public GameObject settingUI;
 
     private float preBGMVolume; // 流傈 荤款靛 农扁
     private bool bgmSound = false; // false: 家府 阐 // true: 家府 糯
@@ -190,12 +191,14 @@ public class SettingsUI : BaseUI
     public void OnClickMaker()
     {
         makerImg.SetActive(true);
+        settingUI.SetActive(false);
         ketChapGaugeBackGround.SetActive(false);
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
     }
     public void OnClickMakerQuit()
     {
         makerImg.SetActive(false);
+        settingUI.SetActive(true);
         ketChapGaugeBackGround.SetActive(true);
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
     }

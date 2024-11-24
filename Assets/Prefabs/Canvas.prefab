@@ -328,14 +328,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setting: {fileID: 723934934710820661}
+  settingUI: {fileID: 1207449825610970360}
   gameStartButton: {fileID: 0}
   fadeCanvas: {fileID: 0}
   BackGroundFadeImg: {fileID: 3986365011426510318}
+  maker: {fileID: 6364867201980014997}
+  ketChapGaugeBackGround: {fileID: 9217329764134573548}
   RDown: 0
   RDownTime: 0
   reLoadingScene: 0
   collTime: 0
-  settingUI: {fileID: 723934934710820661}
 --- !u!114 &5934468682836273810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,6 +724,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1930451893679076040, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+      propertyPath: settingUI
+      value: 
+      objectReference: {fileID: 1207449825610970360}
+    - target: {fileID: 1930451893679076040, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: BackGroundFadeImg
       value: 
       objectReference: {fileID: 3986365011426510318}
@@ -815,5 +821,10 @@ SpriteRenderer:
 --- !u!224 &723934934750641377 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1930451893618282787, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+  m_PrefabInstance: {fileID: 1207449826310467010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6364867201980014997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5230145672515816535, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
   m_PrefabInstance: {fileID: 1207449826310467010}
   m_PrefabAsset: {fileID: 0}

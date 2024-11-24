@@ -8,7 +8,6 @@ public class SettingUIManager :  StartSceneCanvasManager
     [SerializeField] private float RDownTime = 0.0f; // R 키를 몇초 눌렀는가?
     [SerializeField] private bool reLoadingScene = false; // ReloadScene이 계속 요청되지 않도록 예외 처리용 변수
     [SerializeField] private bool collTime = false; // R 키 재시작 기능의 쿨타임 체크용 // 아래 coolTimeCo 코루틴 확인
-    public GameObject settingUI;
 
     private void Awake()
     {
@@ -27,7 +26,7 @@ public class SettingUIManager :  StartSceneCanvasManager
         RDown = Input.GetKey(KeyCode.R); 
         if (RDown && collTime && !reLoadingScene)
         {
-            if(!settingUI.activeSelf)
+            if(!setting.activeSelf)
             Debug.Log("R 키 누르는 중");
             RDownTime += Time.deltaTime;
             if (RDownTime > 2.0f)  // R버튼 2초 누르면 재시작
