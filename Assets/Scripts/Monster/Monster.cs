@@ -228,7 +228,7 @@ public class Monster : MonoBehaviour
         //StartCoroutine(ScaleUpSprite()); //사망 애니메이션 스케일 증가
         AudioManager.Instance.PlaySFX(SFX.EnemyDie1);
 
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 0.5f);
     }
    /* IEnumerator ScaleUpSprite()
     {
