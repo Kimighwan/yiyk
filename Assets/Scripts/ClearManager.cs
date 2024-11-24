@@ -10,7 +10,7 @@ public class ClearManager : MonoBehaviour
     private void Start()
     {
         AudioManager.Instance.PlayBGM(BGM.ClearScene);
-        resultTIme.text = PlayerPrefs.GetFloat("Time").ToString("F3");
+        resultTIme.text = "TIme : " + PlayerPrefs.GetFloat("Time").ToString("F3");
     }
 
     public void OnClickBtn()
