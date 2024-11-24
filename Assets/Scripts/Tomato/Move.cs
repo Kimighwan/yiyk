@@ -10,7 +10,7 @@ public class Move : MonoBehaviour
     private Vector3 moveVec;
     private SpriteRenderer spriteRenderer;
     private Animator anim;
-    private bool isDead = false;
+    private bool isDead;
     private float speedCheck;
 
     private GameManager gameManager;
@@ -33,7 +33,7 @@ public class Move : MonoBehaviour
 
     private void Update()
     {
-        if (gameManager.playerInvincibility) return;
+        if (gameManager.playerInvincibility || isDead) return;
         
         // Stop Speed
         if (Input.GetButtonUp("Horizontal"))
@@ -48,7 +48,7 @@ public class Move : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (gameManager.playerInvincibility)
+        if (gameManager.playerInvincibility || isDead)
         {
             rigid.velocity = Vector2.zero;
             return;
