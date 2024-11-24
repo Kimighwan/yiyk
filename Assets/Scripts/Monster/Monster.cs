@@ -44,7 +44,7 @@ public class Monster : MonoBehaviour
 
         // 플레이어와의 거리 체크
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
+        UpdateFacingDirection();
         // 접근 범위 내에 플레이어가 있고 접근 중이 아닌 경우에만 접근 시작
         if (distanceToPlayer <= approachRange && !isApproaching)
         {
@@ -156,7 +156,6 @@ public class Monster : MonoBehaviour
         }
     }
 
-    // 플레이어를 향해 접근하는 코루틴
     IEnumerator ApproachPlayer()
     {
         isApproaching = true;
@@ -164,50 +163,42 @@ public class Monster : MonoBehaviour
         animator.SetBool("IsIdle", false);
         Debug.Log("ApproachPlayer 코루틴 시작");
 
-        // 플레이어를 향해 회전
-        Vector3 direction = (player.position - transform.position).normalized;
-
-        // X축 방향에 따라서 flipX를 변경
-        if (direction.x < 0)
-        {
-            spriteRenderer.flipX = true;  // 왼쪽을 바라보면 flipX를 true로 설정
-            movingLeft = true;  // 왼쪽으로 이동
-        }
-        else
-        {
-            spriteRenderer.flipX = false; // 오른쪽을 바라보면 flipX를 false로 설정
-            movingLeft = false; // 오른쪽으로 이동
-        }
-
-        // 플레이어 방향으로 이동
         while (Vector3.Distance(transform.position, player.position) > 0.1f)
         {
-            // 플레이어와의 거리가 approachRange를 초과하면 따라가는 동작을 멈추고 원래대로 돌아감
             if (Vector3.Distance(transform.position, player.position) > approachRange)
             {
                 Debug.Log("플레이어가 범위 밖으로 나갔습니다. 원래 패턴으로 돌아갑니다.");
-                if (movingLeft)
-                    spriteRenderer.flipX = false;
-                else
-                    spriteRenderer.flipX = true;
                 isApproaching = false;
-             
-                currentAnimationCoroutine = StartCoroutine(MovePattern());  // 원래 이동 패턴으로 돌아감
-                yield break;  // 코루틴 종료
+                currentAnimationCoroutine = StartCoroutine(MovePattern());
+                yield break;
             }
-            Vector3 targetPosition = new Vector3(player.position.x, transform.position.y, transform.position.z);
 
-            // X축으로만 이동
+            // 방향 업데이트
+            UpdateFacingDirection();
+
+            Vector3 targetPosition = new Vector3(player.position.x, transform.position.y, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, approachSpeed * Time.deltaTime);
 
             yield return null;
         }
 
         Debug.Log("ApproachPlayer 코루틴 종료, 이동 패턴 재개");
-       
         isApproaching = false;
-        currentAnimationCoroutine = StartCoroutine(MovePattern());  // 원래 이동 패턴으로 돌아감
+        currentAnimationCoroutine = StartCoroutine(MovePattern());
     }
+    private void UpdateFacingDirection()
+    {
+        // 플레이어의 X축 위치와 비교하여 방향 업데이트
+        if (player.position.x < transform.position.x)
+        {
+            spriteRenderer.flipX = true; // 플레이어가 왼쪽에 있으면 왼쪽을 바라보게 설정
+        }
+        else
+        {
+            spriteRenderer.flipX = false; // 플레이어가 오른쪽에 있으면 오른쪽을 바라보게 설정
+        }
+    }
+
 
     private void Die()
     {
@@ -230,22 +221,6 @@ public class Monster : MonoBehaviour
 
         Destroy(gameObject, 0.5f);
     }
-   /* IEnumerator ScaleUpSprite()
-    {
-        float elapsedTime = 0f;
-        float duration = 1f;
-        Vector3 originalScale = transform.localScale;
-        Vector3 targetScale = originalScale * 2f;
-
-        while (elapsedTime < duration)
-        {
-            transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.localScale = targetScale; // 최종 크기 설정
-    }*/
 
     private void OnMouseDown()
     {

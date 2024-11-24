@@ -133,38 +133,25 @@ public class Pasta : MonoBehaviour
         animator.SetBool("IsFly", true);
         animator.SetBool("IsIdle", false);
 
-        Vector3 direction = (player.position - transform.position).normalized;
-
-        if (direction.x < 0)
-        {
-            spriteRenderer.flipX = true;
-            movingLeft = true;
-        }
-        else
-        {
-            spriteRenderer.flipX = false;
-            movingLeft = false;
-        }
-
         while (Vector3.Distance(transform.position, player.position) > 0.1f)
         {
             if (isHit) yield break; // 피격 상태라면 중단
 
+            // 플레이어를 벗어나면 추적 중지
             if (Vector3.Distance(transform.position, player.position) > approachRange)
             {
                 isApproaching = false;
-                if (direction.x < 0)
-                {
-                    spriteRenderer.flipX = false;
-                    movingLeft = true;
-                }
-                else
-                {
-                    spriteRenderer.flipX = true;
-                    movingLeft = false;
-                }
                 currentAnimationCoroutine = StartCoroutine(MovePattern());
                 yield break;
+            }
+            Vector3 direction = (player.position - transform.position).normalized;
+            if (direction.x < 0)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                spriteRenderer.flipX = false; 
             }
 
             transform.position = Vector3.MoveTowards(transform.position, player.position, approachSpeed * Time.deltaTime);
@@ -174,6 +161,7 @@ public class Pasta : MonoBehaviour
         isApproaching = false;
         currentAnimationCoroutine = StartCoroutine(MovePattern());
     }
+
 
     private void Die()
     {
