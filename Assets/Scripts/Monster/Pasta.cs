@@ -140,7 +140,7 @@ public class Pasta : MonoBehaviour
 
         while (Vector3.Distance(transform.position, player.position) > 0.1f)
         {
-            if (isHit) yield break; // 피격 상태라면 중단
+            if (isHit) yield break;
 
             // 플레이어를 벗어나면 추적 중지
             if (Vector3.Distance(transform.position, player.position) > approachRange)
@@ -166,8 +166,6 @@ public class Pasta : MonoBehaviour
         isApproaching = false;
         currentAnimationCoroutine = StartCoroutine(MovePattern());
     }
-
-
     private void Die()
     {
         if (isDie) return;
@@ -184,37 +182,19 @@ public class Pasta : MonoBehaviour
         {
             collider.enabled = false;
         }
-        //StartCoroutine(ScaleUpSprite()); //사망 애니메이션 스케일 증가
-        AudioManager.Instance.PlaySFX(SFX.EnemyDie2);
+        AudioManager.Instance.PlaySFX(SFX.EnemyDie1);
 
         Destroy(gameObject, 0.8f);
     }
-   /* IEnumerator ScaleUpSprite()
-    {
-        float elapsedTime = 0f;
-        float duration = 1f;
-        Vector3 originalScale = transform.localScale;
-        Vector3 targetScale = originalScale * 2f;
-
-        while (elapsedTime < duration)
-        {
-            transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.localScale = targetScale; // 최종 크기 설정
-    }*/
     private void StopCurrentAction()
     {
-        // 현재 실행 중인 모든 코루틴 중지
         if (currentAnimationCoroutine != null)
         {
             StopCoroutine(currentAnimationCoroutine);
             currentAnimationCoroutine = null;
         }
 
-        isApproaching = false; // 추격 상태 초기화
+        isApproaching = false;
     }
 
     private void OnMouseDown()
