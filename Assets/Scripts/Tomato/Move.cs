@@ -48,7 +48,11 @@ public class Move : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (gameManager.playerInvincibility) return;
+        if (gameManager.playerInvincibility)
+        {
+            rigid.velocity = Vector2.zero;
+            return;
+        }
 
         // Move
         h = Input.GetAxis("Horizontal");
