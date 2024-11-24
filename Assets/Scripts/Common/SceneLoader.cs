@@ -8,7 +8,6 @@ public enum SceneType
 {
     StartScene,
     CutScene,
-    Test,
     Stage1,
     Stage2,
     Stage3,
@@ -44,7 +43,7 @@ public class SceneLoader : SingletonBehaviour<SceneLoader>
     {
         Fade(Color.black, 0f, 1f, 2.0f, 0f, false, () => // ¾îµÎ¿öÁü
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + idx);
+            LoadScene((SceneType)(SceneManager.GetActiveScene().buildIndex + idx));
 
             Fade(Color.black, 1f, 0f, 2.0f, 0f, false); // ¹à¾ÆÁü
         });

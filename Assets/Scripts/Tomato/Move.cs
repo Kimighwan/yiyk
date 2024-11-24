@@ -13,6 +13,8 @@ public class Move : MonoBehaviour
     private bool isDead = false;
     private float speedCheck;
 
+    private GameManager gameManager;
+
     [Header("Move")]
     private float h; // 수평 방향
 
@@ -21,6 +23,7 @@ public class Move : MonoBehaviour
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
     }
 
     private void Start()
@@ -30,6 +33,8 @@ public class Move : MonoBehaviour
 
     private void Update()
     {
+        if (gameManager.playerInvincibility) return;
+        
         // Stop Speed
         if (Input.GetButtonUp("Horizontal"))
             rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
@@ -43,6 +48,8 @@ public class Move : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (gameManager.playerInvincibility) return;
+
         // Move
         h = Input.GetAxis("Horizontal");
         rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
@@ -58,6 +65,8 @@ public class Move : MonoBehaviour
     {
         if (collision.CompareTag("Enemy") || collision.CompareTag("Trap"))
         {
+            if (gameManager.playerInvincibility) return;
+
             StartCoroutine("DieCo");
         }
     }
