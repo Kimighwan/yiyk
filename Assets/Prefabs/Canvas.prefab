@@ -335,6 +335,7 @@ MonoBehaviour:
   RDownTime: 0
   reLoadingScene: 0
   collTime: 0
+  settingUI: {fileID: 723934934710820661}
 --- !u!114 &5934468682836273810
 MonoBehaviour:
   m_ObjectHideFlags: 0
