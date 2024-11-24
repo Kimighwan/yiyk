@@ -7,12 +7,15 @@ using UnityEngine.UI;
 
 public class StartSceneCanvasManager : MonoBehaviour
 {
-    public GameObject setting;
+    public GameObject setting;   // UI ¼³Á¤Âû ÇÁ¸®ÆÕ
+    public GameObject settingUI; // setting UI : Åé´Ï¹ÙÄû
     public Button gameStartButton;
 
     public Canvas fadeCanvas;
 
     public GameObject BackGroundFadeImg;
+    public GameObject maker;
+    public GameObject ketChapGaugeBackGround;
 
     private void Start()
     {
@@ -34,8 +37,18 @@ public class StartSceneCanvasManager : MonoBehaviour
 
             if (setting.activeSelf) // UI°¡ ¶ç¿öÁ® ÀÖ´Ù¸é
             {
-                setting.SetActive(false);
-                BackGroundFadeImg.SetActive(!BackGroundFadeImg.activeSelf);
+                if (maker.activeSelf) // ¸¸µçÀÌµé ¶ç¿öÁ® ÀÖÀ½
+                {
+                    settingUI.SetActive(true);
+                    maker.SetActive(false);
+                    ketChapGaugeBackGround.SetActive(true);
+                }
+                else
+                {
+                    setting.SetActive(false);
+                    BackGroundFadeImg.SetActive(!BackGroundFadeImg.activeSelf);
+                }
+
                 Time.timeScale = 1.0f;
             }
             else

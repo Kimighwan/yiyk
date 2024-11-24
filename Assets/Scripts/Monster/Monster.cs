@@ -44,7 +44,10 @@ public class Monster : MonoBehaviour
 
         // 플레이어와의 거리 체크
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        UpdateFacingDirection();
+        if (isApproaching)
+        {
+            UpdateFacingDirection(true);
+        }
         // 접근 범위 내에 플레이어가 있고 접근 중이 아닌 경우에만 접근 시작
         if (distanceToPlayer <= approachRange && !isApproaching)
         {
@@ -131,6 +134,7 @@ public class Monster : MonoBehaviour
        
         while (!isApproaching)
         {
+            UpdateFacingDirection(false);
             // 현재 방향을 기준으로 이동
             float targetX = movingLeft ? startPosition.x - 5f : startPosition.x + 5f;
            
@@ -175,7 +179,7 @@ public class Monster : MonoBehaviour
                 yield break;
             }
 
-            UpdateFacingDirection();
+            UpdateFacingDirection(true);
 
             Vector3 targetPosition = new Vector3(player.position.x, transform.position.y, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, approachSpeed * Time.deltaTime);
@@ -197,17 +201,27 @@ public class Monster : MonoBehaviour
             Die();
         }
     }
-    private void UpdateFacingDirection()
+    private void UpdateFacingDirection(bool usePlayerDirection = true)
     {
-        if (player.position.x < transform.position.x)
+        if (usePlayerDirection)
         {
-            spriteRenderer.flipX = true;
+            // 플레이어 방향을 기준으로 방향 설정
+            if (player.position.x < transform.position.x)
+            {
+                spriteRenderer.flipX = true; // 플레이어가 왼쪽에 있으면 왼쪽을 바라봄
+            }
+            else
+            {
+                spriteRenderer.flipX = false; // 플레이어가 오른쪽에 있으면 오른쪽을 바라봄
+            }
         }
         else
         {
-            spriteRenderer.flipX = false;
+            // 이동 방향(movingLeft)을 기준으로 방향 설정
+            spriteRenderer.flipX = movingLeft;
         }
     }
+
 
 
     private void Die()
