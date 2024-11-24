@@ -3538,7 +3538,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 03e9470c04ffb8a458a6b674f1af5b9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -12141,7 +12141,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 7b048d8e5c55cdf4494f1814c80ac007, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -16283,11 +16283,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6506082696787102684, guid: 48ce007f41fd5814b90b4dd3e560862b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -27.1
+      value: -28.2
       objectReference: {fileID: 0}
     - target: {fileID: 6506082696787102684, guid: 48ce007f41fd5814b90b4dd3e560862b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 62.7
+      value: 64.1
       objectReference: {fileID: 0}
     - target: {fileID: 6506082696787102684, guid: 48ce007f41fd5814b90b4dd3e560862b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16325,6 +16325,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 134829730}
+    - target: {fileID: 6506082696787102685, guid: 48ce007f41fd5814b90b4dd3e560862b, type: 3}
+      propertyPath: approachRange
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48ce007f41fd5814b90b4dd3e560862b, type: 3}
 --- !u!4 &1762717122 stripped
@@ -17621,7 +17625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6506082696787102684, guid: 48ce007f41fd5814b90b4dd3e560862b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 62.7
+      value: 64.1
       objectReference: {fileID: 0}
     - target: {fileID: 6506082696787102684, guid: 48ce007f41fd5814b90b4dd3e560862b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17659,6 +17663,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 134829730}
+    - target: {fileID: 6506082696787102685, guid: 48ce007f41fd5814b90b4dd3e560862b, type: 3}
+      propertyPath: approachRange
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48ce007f41fd5814b90b4dd3e560862b, type: 3}
 --- !u!4 &1931136580 stripped
