@@ -136,7 +136,6 @@ public class Monster : MonoBehaviour
            
             Vector3 targetPosition = new Vector3(targetX, transform.position.y, transform.position.z);
 
-
             // 이동을 시작하며 목적지로 이동
             float elapsedTime = 0f;
             while (elapsedTime < 3f)
@@ -176,17 +175,14 @@ public class Monster : MonoBehaviour
                 yield break;
             }
 
-            // 방향 업데이트
             UpdateFacingDirection();
 
-            // X축으로만 이동
             Vector3 targetPosition = new Vector3(player.position.x, transform.position.y, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, approachSpeed * Time.deltaTime);
 
             yield return null;
         }
 
-        // 추격 종료 후 이동 패턴으로 복귀
         if (!isDie)
         {
             isApproaching = false;
@@ -196,14 +192,13 @@ public class Monster : MonoBehaviour
 
     private void UpdateFacingDirection()
     {
-        // 플레이어의 X축 위치와 비교하여 방향 업데이트
         if (player.position.x < transform.position.x)
         {
-            spriteRenderer.flipX = true; // 플레이어가 왼쪽에 있으면 왼쪽을 바라보게 설정
+            spriteRenderer.flipX = true;
         }
         else
         {
-            spriteRenderer.flipX = false; // 플레이어가 오른쪽에 있으면 오른쪽을 바라보게 설정
+            spriteRenderer.flipX = false;
         }
     }
 
@@ -224,7 +219,6 @@ public class Monster : MonoBehaviour
         {
             collider.enabled = false;
         }
-        //StartCoroutine(ScaleUpSprite()); //사망 애니메이션 스케일 증가
         AudioManager.Instance.PlaySFX(SFX.EnemyDie1);
 
         Destroy(gameObject, 0.8f);
