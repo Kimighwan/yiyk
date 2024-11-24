@@ -8,7 +8,7 @@ public class Monster : MonoBehaviour
     public float moveDistance = 3f;     // 적의 이동 거리
     public float moveSpeed = 1f;        // 적의 기본 이동 속도
     public float approachSpeed = 2f;    // 플레이어 접근 시 속도
-    public float approachRange = 5f;    // 접근 반응 거리
+    public float approachRange = 15f;    // 접근 반응 거리
     private float fixedY;
     private Animator animator;
 
@@ -80,7 +80,7 @@ public class Monster : MonoBehaviour
                 animator.enabled = true;
             }
 
-            if(!isDie)
+            if (!isDie)
                 Die();
             return;
         }
@@ -93,15 +93,32 @@ public class Monster : MonoBehaviour
         StartCoroutine(HandleHit());
     }
 
+
+
     IEnumerator HandleHit()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2f); // 피격 후 대기 시간
 
+        // 피격 상태 복구
         spriteRenderer.sprite = originalSprite;
         isHit = false;
         animator.enabled = true;
-        currentAnimationCoroutine = StartCoroutine(MovePattern());
+
+        // 상태에 따라 행동 재개
+        if (!isDie)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            if (distanceToPlayer <= approachRange)
+            {
+                StartCoroutine(ApproachPlayer()); // 플레이어 추격 재개
+            }
+            else
+            {
+                currentAnimationCoroutine = StartCoroutine(MovePattern()); // 이동 패턴 재개
+            }
+        }
     }
+
 
     // 이동 패턴
     IEnumerator MovePattern()
@@ -194,14 +211,41 @@ public class Monster : MonoBehaviour
 
     private void Die()
     {
+        if (isDie) return;
+
         isDie = true;
         animator.SetBool("IsDie", true);
 
-        AudioManager.Instance.PlaySFX(SFX.EnemyDie2);
-        Collider2D collider = GetComponent<Collider2D>();
-        if (collider != null) { Destroy(collider); }
-        Destroy(gameObject, 2f);
+        StopAllCoroutines();
+        isApproaching = false;
+        isHit = false;
+
+        CircleCollider2D collider = GetComponent<CircleCollider2D>();
+        if (collider != null)
+        {
+            collider.enabled = false;
+        }
+        //StartCoroutine(ScaleUpSprite()); //사망 애니메이션 스케일 증가
+        AudioManager.Instance.PlaySFX(SFX.EnemyDie1);
+
+        Destroy(gameObject, 1f);
     }
+   /* IEnumerator ScaleUpSprite()
+    {
+        float elapsedTime = 0f;
+        float duration = 1f;
+        Vector3 originalScale = transform.localScale;
+        Vector3 targetScale = originalScale * 2f;
+
+        while (elapsedTime < duration)
+        {
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = targetScale; // 최종 크기 설정
+    }*/
 
     private void OnMouseDown()
     {
