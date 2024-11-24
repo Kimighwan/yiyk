@@ -725,6 +725,10 @@ PrefabInstance:
       propertyPath: BackGroundFadeImg
       value: 
       objectReference: {fileID: 3986365011426510318}
+    - target: {fileID: 1930451893679076040, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+      propertyPath: ketChapGaugeBackGround
+      value: 
+      objectReference: {fileID: 9217329764134573548}
     - target: {fileID: 1930451893679076087, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_Name
       value: SettingsUI

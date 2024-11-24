@@ -9,7 +9,7 @@ public class Potal : MonoBehaviour
 
     public PotalController potalController;
 
-    private WaitForSeconds teleportCoolTime = new WaitForSeconds(0.5f);
+    private WaitForSeconds teleportCoolTime = new WaitForSeconds(1.0f);
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
