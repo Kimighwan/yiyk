@@ -11,7 +11,6 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI resultTime;
 
     public GameObject door;
-    public Canvas result;
 
     private void Update()
     {
@@ -34,7 +33,6 @@ public class Timer : MonoBehaviour
 
     private void OpenResult()
     {
-        result.gameObject.SetActive(true);
         resultTime.text = PlayerPrefs.GetFloat("Time").ToString("F3");
     }
 }
