@@ -40,7 +40,7 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        if (isHit || isApproaching) return;
+        if (isHit || isApproaching || isDie) return;
 
         // 플레이어와의 거리 체크
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -166,13 +166,11 @@ public class Monster : MonoBehaviour
         isApproaching = true;
         animator.SetBool("IsJump", true);
         animator.SetBool("IsIdle", false);
-        Debug.Log("ApproachPlayer 코루틴 시작");
 
-        while (Vector3.Distance(transform.position, player.position) > 0.1f)
+        while (!isDie && Vector3.Distance(transform.position, player.position) > 0.1f)
         {
             if (Vector3.Distance(transform.position, player.position) > approachRange)
             {
-                Debug.Log("플레이어가 범위 밖으로 나갔습니다. 원래 패턴으로 돌아갑니다.");
                 isApproaching = false;
                 currentAnimationCoroutine = StartCoroutine(MovePattern());
                 yield break;
@@ -181,16 +179,21 @@ public class Monster : MonoBehaviour
             // 방향 업데이트
             UpdateFacingDirection();
 
+            // X축으로만 이동
             Vector3 targetPosition = new Vector3(player.position.x, transform.position.y, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, approachSpeed * Time.deltaTime);
 
             yield return null;
         }
 
-        Debug.Log("ApproachPlayer 코루틴 종료, 이동 패턴 재개");
-        isApproaching = false;
-        currentAnimationCoroutine = StartCoroutine(MovePattern());
+        // 추격 종료 후 이동 패턴으로 복귀
+        if (!isDie)
+        {
+            isApproaching = false;
+            currentAnimationCoroutine = StartCoroutine(MovePattern());
+        }
     }
+
     private void UpdateFacingDirection()
     {
         // 플레이어의 X축 위치와 비교하여 방향 업데이트
@@ -211,7 +214,7 @@ public class Monster : MonoBehaviour
 
         isDie = true;
         animator.SetBool("IsDie", true);
-
+        StopCoroutine(ApproachPlayer());
         StopAllCoroutines();
         isApproaching = false;
         isHit = false;
