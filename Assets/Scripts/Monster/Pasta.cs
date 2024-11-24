@@ -66,12 +66,17 @@ public class Pasta : MonoBehaviour
                 Die();
             return;
         }
-        if (isHit) return;
 
-        isHit = true;
-        spriteRenderer.sprite = hitSprite;
+        // 경직 상태가 이미 활성화된 경우에도 갱신
+        if (!isHit)
+        {
+            isHit = true;
+            animator.enabled = false;
+            spriteRenderer.sprite = hitSprite;
+        }
+
+        // 코루틴 갱신
         StopAllCoroutines();
-        animator.enabled = false;
         StartCoroutine(HandleHit());
     }
 
