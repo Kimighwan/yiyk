@@ -8,7 +8,6 @@ public class Timer : MonoBehaviour
 {
     public float curTime = 0;
     public TextMeshProUGUI gameTimeText;
-    public TextMeshProUGUI resultTime;
 
     public GameObject door;
 
@@ -27,12 +26,6 @@ public class Timer : MonoBehaviour
         else
         {
             PlayerPrefs.SetFloat("Time", curTime);
-            OpenResult();
         }
-    }
-
-    private void OpenResult()
-    {
-        resultTime.text = PlayerPrefs.GetFloat("Time").ToString("F3");
     }
 }
