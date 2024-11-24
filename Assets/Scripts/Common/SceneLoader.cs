@@ -102,8 +102,13 @@ public class SceneLoader : SingletonBehaviour<SceneLoader>
 
     #endregion
 
-    public void OnClickEasteEgg()
+    //public void OnClickEasteEgg()
+    //{
+    //    pass = true;
+    //}
+
+    private void Update()
     {
-        pass = true;
+        if(Input.GetKeyDown(KeyCode.F10)) pass = true;
     }
 }
