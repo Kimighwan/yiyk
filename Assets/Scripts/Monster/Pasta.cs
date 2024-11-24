@@ -182,7 +182,7 @@ public class Pasta : MonoBehaviour
         //StartCoroutine(ScaleUpSprite()); //사망 애니메이션 스케일 증가
         AudioManager.Instance.PlaySFX(SFX.EnemyDie2);
 
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 0.8f);
     }
    /* IEnumerator ScaleUpSprite()
     {
