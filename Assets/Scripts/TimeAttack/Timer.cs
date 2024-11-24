@@ -1,16 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
     public float curTime = 0;
-    public Text gameTimeText;
+    public TextMeshProUGUI gameTimeText;
+    public TextMeshProUGUI resultTime;
+
+    public GameObject door;
+    public Canvas result;
 
     private void Update()
     {
-        curTime += Time.deltaTime;
-        gameTimeText.text = "TIme : " + (int)curTime;
+        CheckTime();
+    }
+
+    private void CheckTime()
+    {
+        if (!door.activeSelf)
+        {
+            curTime += Time.deltaTime;
+            gameTimeText.text = "TIme : " + curTime.ToString("F2");
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("Time", curTime);
+            OpenResult();
+        }
+    }
+
+    private void OpenResult()
+    {
+        result.gameObject.SetActive(true);
+        resultTime.text = PlayerPrefs.GetFloat("Time").ToString("F3");
     }
 }
