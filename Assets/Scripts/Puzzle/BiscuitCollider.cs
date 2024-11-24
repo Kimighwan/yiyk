@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class BiscuitCollider : MonoBehaviour
 {
-    private Collider2D collider;
+    private Collider2D col;
 
     private void Awake()
     {
-        collider = GetComponentInParent<Collider2D>();
+        col = GetComponentInParent<Collider2D>();
     }
 
     private void OffCollider()
     {
-        collider.enabled = false;
+        col.enabled = false;
     }
 }
