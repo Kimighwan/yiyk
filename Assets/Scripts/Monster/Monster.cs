@@ -188,8 +188,15 @@ public class Monster : MonoBehaviour
             isApproaching = false;
             currentAnimationCoroutine = StartCoroutine(MovePattern());
         }
+       
     }
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Trap"))
+        {
+            Die();
+        }
+    }
     private void UpdateFacingDirection()
     {
         if (player.position.x < transform.position.x)
