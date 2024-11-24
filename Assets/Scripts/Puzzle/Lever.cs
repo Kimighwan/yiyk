@@ -51,7 +51,7 @@ public class Lever : MonoBehaviour, IPuzzle
 
     private void OnMouseDown()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !alreadyOpen)
         {
             Open();
             On();
