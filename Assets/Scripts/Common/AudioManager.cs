@@ -25,6 +25,7 @@ public enum SFX
     PlayerDie,
     CutsceneNext,
     LeverSwitch,
+    Eraser,
     COUNT
 }
 

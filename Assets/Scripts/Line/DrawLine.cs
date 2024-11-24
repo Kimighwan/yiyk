@@ -153,6 +153,7 @@ public class DrawLine : MonoBehaviour
 
             StopAllCoroutines();
 
+            AudioManager.Instance.PlaySFX(SFX.Eraser);
             mouseRightBtnDown = true; // 우클릭 클릭
             mouseRightCoolTime = true; // 쿨타임 체크
             LineDirectDestroy();
