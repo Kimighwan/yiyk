@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class CutScene : MonoBehaviour
 {
     public Button nextBtn;
+    public Button skipBtn;
     public List<GameObject> cutSceneImg;
 
     private int idx = 1;
@@ -62,7 +63,7 @@ public class CutScene : MonoBehaviour
 
     public void OnClickSkip()
     {
-        nextBtn.interactable = false;
+        skipBtn.interactable = false;
         SceneLoader.Instance.Fade(Color.black, 0f, 1f, 2.0f, 0f, false, () =>
         {
             AudioManager.Instance.PlayBGM(BGM.IngameBGM);

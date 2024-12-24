@@ -15,6 +15,7 @@ public class SettingsUI : BaseUI
     public Slider SFXslider;
 
     public Button reStartButton;
+    public Button mainBtn;
 
     public GameObject BackGroundFadeImg;
     public GameObject makerImg;
@@ -201,5 +202,12 @@ public class SettingsUI : BaseUI
         settingUI.SetActive(true);
         ketChapGaugeBackGround.SetActive(true);
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
+    }
+
+    public void OnClickMain()
+    {
+        mainBtn.interactable = false;
+        OnClickSettingQuit();
+        SceneLoader.Instance.LoadScene(SceneType.StartScene);
     }
 }
