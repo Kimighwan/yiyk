@@ -59,4 +59,15 @@ public class CutScene : MonoBehaviour
             yield return null;
         }
     }
+
+    public void OnClickSkip()
+    {
+        nextBtn.interactable = false;
+        SceneLoader.Instance.Fade(Color.black, 0f, 1f, 2.0f, 0f, false, () =>
+        {
+            AudioManager.Instance.PlayBGM(BGM.IngameBGM);
+            SceneLoader.Instance.LoadScene(SceneType.Stage1);
+            SceneLoader.Instance.Fade(Color.black, 1f, 0f, 2.0f, 0f, false);
+        });
+    }
 }

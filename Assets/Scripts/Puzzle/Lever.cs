@@ -48,6 +48,14 @@ public class Lever : MonoBehaviour, IPuzzle
         AudioManager.Instance.PlaySFX(SFX.LeverSwitch);
     }
 
+    //public void OnClickStick()
+    //{
+    //    if (!alreadyOpen)
+    //    {
+    //        Open();
+    //        On();
+    //    }
+    //}
 
     private void OnMouseDown()
     {
