@@ -24,8 +24,6 @@ public enum SceneType
 public class SceneLoader : SingletonBehaviour<SceneLoader>
 {
     public Image fadeImg; // 페이드 이미지
-    [SerializeField]
-    private bool pass = false; // 이스터에그 Stage Load // true -> 작동
 
     protected override void Init()
     {
@@ -61,14 +59,7 @@ public class SceneLoader : SingletonBehaviour<SceneLoader>
 
     public void NextStage()
     {
-        if (pass && SceneManager.GetActiveScene().buildIndex == 3)
-        {
-            ReloadScene(8);
-        }
-        else
-        {
-            ReloadScene(1);
-        }
+        ReloadScene(1);
     }
 
     #region Fade
@@ -101,14 +92,4 @@ public class SceneLoader : SingletonBehaviour<SceneLoader>
     }
 
     #endregion
-
-    //public void OnClickEasteEgg()
-    //{
-    //    pass = true;
-    //}
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.F10)) pass = true;
-    }
 }
