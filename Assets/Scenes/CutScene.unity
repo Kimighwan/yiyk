@@ -771,6 +771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextBtn: {fileID: 601478669}
+  skipBtn: {fileID: 1058997993}
   cutSceneImg:
   - {fileID: 1273229504}
   - {fileID: 652678041}
