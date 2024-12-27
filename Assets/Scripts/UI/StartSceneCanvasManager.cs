@@ -17,6 +17,11 @@ public class StartSceneCanvasManager : MonoBehaviour
     public GameObject maker;
     public GameObject ketChapGaugeBackGround;
 
+    private void Awake()
+    {
+        fadeCanvas = GameObject.FindGameObjectWithTag("Fade").GetComponent<Canvas>();
+    }
+
     private void Start()
     {
         PlayerPrefs.SetFloat("BGMValue", 0.2f);
