@@ -16,7 +16,7 @@ public class Move : MonoBehaviour
     private GameManager gameManager;
 
     [Header("Move")]
-    private float h; // 수평 방향
+    private float h; // Horizontal Direction
 
     private void Awake()
     {

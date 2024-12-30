@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ public class Jump : MonoBehaviour
 
     private void Jumped()
     {
-        rigid.velocity = Vector3.zero;  // Á¡ÇÁ·Â Àû¿ë Àü Åä¸¶Åä ¼Óµµ 0 ¼³Á¤ // Á¡ÇÁ¿¡ °£¼··Â ¾ø¾Ö±â À§ÇÔ.
+        rigid.velocity = Vector3.zero;  // ì í”„ë ¥ ì ìš© ì „ í† ë§ˆí†  ì†ë„ 0 ì„¤ì • // ì í”„ì— ê°„ì„­ë ¥ ì—†ì• ê¸° ìœ„í•¨.
         rigid.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         AudioManager.Instance.PlaySFX(SFX.JumpPad);
     }
