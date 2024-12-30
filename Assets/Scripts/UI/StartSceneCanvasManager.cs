@@ -11,11 +11,11 @@ public class StartSceneCanvasManager : MonoBehaviour
     public GameObject settingUI; // setting UI : Åé´Ï¹ÙÄû
     public Button gameStartButton;
 
-    public Canvas fadeCanvas;
-
     public GameObject BackGroundFadeImg;
     public GameObject maker;
     public GameObject ketChapGaugeBackGround;
+
+    private Canvas fadeCanvas;
 
     private void Awake()
     {
