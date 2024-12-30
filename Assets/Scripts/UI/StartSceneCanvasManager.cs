@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class StartSceneCanvasManager : MonoBehaviour
 {
-    public GameObject setting;   // UI ¼³Á¤Âû ÇÁ¸®ÆÕ
-    public GameObject settingUI; // setting UI : Åé´Ï¹ÙÄû
+    public GameObject setting;   // UI ì„¤ì •ì°° í”„ë¦¬íŒ¹
+    public GameObject settingUI; // setting UI : í†±ë‹ˆë°”í€´
     public Button gameStartButton;
 
     public GameObject BackGroundFadeImg;
@@ -36,13 +36,13 @@ public class StartSceneCanvasManager : MonoBehaviour
 
     protected virtual void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) // ESCÅ°, ¸ğ¹ÙÀÏÀº µÚ·Î°¡±â ¹öÆ° ´©¸£¸é
+        if (Input.GetKeyDown(KeyCode.Escape)) // ESCí‚¤, ëª¨ë°”ì¼ì€ ë’¤ë¡œê°€ê¸° ë²„íŠ¼ ëˆ„ë¥´ë©´
         {
             //AudioManager.Instance.PlaySFX(SFX.ui_button_click);
 
-            if (setting.activeSelf) // UI°¡ ¶ç¿öÁ® ÀÖ´Ù¸é
+            if (setting.activeSelf) // UIê°€ ë„ì›Œì ¸ ìˆë‹¤ë©´
             {
-                if (maker.activeSelf) // ¸¸µçÀÌµé ¶ç¿öÁ® ÀÖÀ½
+                if (maker.activeSelf) // ë§Œë“ ì´ë“¤ ë„ì›Œì ¸ ìˆìŒ
                 {
                     settingUI.SetActive(true);
                     maker.SetActive(false);

@@ -1,13 +1,13 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SettingUIManager :  StartSceneCanvasManager
 {
-    [SerializeField] private bool RDown = false; // R Å°¸¦ ´­·¶´Â°¡? // true: ´©¸£´Â Áß
-    [SerializeField] private float RDownTime = 0.0f; // R Å°¸¦ ¸îÃÊ ´­·¶´Â°¡?
-    [SerializeField] private bool reLoadingScene = false; // ReloadSceneÀÌ °è¼Ó ¿äÃ»µÇÁö ¾Êµµ·Ï ¿¹¿Ü Ã³¸®¿ë º¯¼ö
-    [SerializeField] private bool collTime = false; // R Å° Àç½ÃÀÛ ±â´ÉÀÇ ÄğÅ¸ÀÓ Ã¼Å©¿ë // ¾Æ·¡ coolTimeCo ÄÚ·çÆ¾ È®ÀÎ
+    [SerializeField] private bool RDown = false; // R í‚¤ë¥¼ ëˆŒë €ëŠ”ê°€? // true: ëˆ„ë¥´ëŠ” ì¤‘
+    [SerializeField] private float RDownTime = 0.0f; // R í‚¤ë¥¼ ëª‡ì´ˆ ëˆŒë €ëŠ”ê°€?
+    [SerializeField] private bool reLoadingScene = false; // ReloadSceneì´ ê³„ì† ìš”ì²­ë˜ì§€ ì•Šë„ë¡ ì˜ˆì™¸ ì²˜ë¦¬ìš© ë³€ìˆ˜
+    [SerializeField] private bool collTime = false; // R í‚¤ ì¬ì‹œì‘ ê¸°ëŠ¥ì˜ ì¿¨íƒ€ì„ ì²´í¬ìš© // ì•„ë˜ coolTimeCo ì½”ë£¨í‹´ í™•ì¸
 
     private void Awake()
     {
@@ -27,32 +27,32 @@ public class SettingUIManager :  StartSceneCanvasManager
         if (RDown && collTime && !reLoadingScene)
         {
             if(!setting.activeSelf)
-            Debug.Log("R Å° ´©¸£´Â Áß");
+            Debug.Log("R í‚¤ ëˆ„ë¥´ëŠ” ì¤‘");
             RDownTime += Time.deltaTime;
-            if (RDownTime > 2.0f)  // R¹öÆ° 2ÃÊ ´©¸£¸é Àç½ÃÀÛ
+            if (RDownTime > 2.0f)  // Rë²„íŠ¼ 2ì´ˆ ëˆ„ë¥´ë©´ ì¬ì‹œì‘
             {
-                reLoadingScene = true; // ReloadSceneÀÌ °è¼Ó ¿äÃ»µÇÁö ¾Êµµ·Ï ¿¹¿Ü Ã³¸®
+                reLoadingScene = true; // ReloadSceneì´ ê³„ì† ìš”ì²­ë˜ì§€ ì•Šë„ë¡ ì˜ˆì™¸ ì²˜ë¦¬
                 SceneLoader.Instance.ReloadScene();
             }
         }
-        else // ´©¸¥ ½Ã°£ ÃÊ±âÈ­
+        else // ëˆ„ë¥¸ ì‹œê°„ ì´ˆê¸°í™”
         {
             RDownTime = 0.0f;
         }
 
-        //if (!RDown)  // ´©¸¥ ½Ã°£ ÃÊ±âÈ­
+        //if (!RDown)  // ëˆ„ë¥¸ ì‹œê°„ ì´ˆê¸°í™”
         //{
         //    RDownTime = 0.0f;
         //}
     }
 
-    private IEnumerator coolTimeCo() // ¾ÀÀÌ ½ÃÀÛµÇ°í 5ÃÊ°¡ Áö³ª¾ß Àç½ÃÀÛ °¡´É
+    private IEnumerator coolTimeCo() // ì”¬ì´ ì‹œì‘ë˜ê³  5ì´ˆê°€ ì§€ë‚˜ì•¼ ì¬ì‹œì‘ ê°€ëŠ¥
     {
         yield return new WaitForSeconds(5.0f);
         collTime = true;
     }
 
-    public void OnClickReStartBtn() // Àç½ÃÀÛ ¹öÆ° ±¸Çö
+    public void OnClickReStartBtn() // ì¬ì‹œì‘ ë²„íŠ¼ êµ¬í˜„
     {
         SceneLoader.Instance.ReloadScene();
     }

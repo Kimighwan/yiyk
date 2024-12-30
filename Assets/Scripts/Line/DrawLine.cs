@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
@@ -14,18 +14,18 @@ public class DrawLine : MonoBehaviour
 
     [SerializeField]
     [Header("------ Line Info ------")]
-    public GameObject linePrefab; // line ÇÁ¸®Æé
-    public int maxLineCount = 70; // ¶óÀÎ ¬‚´ë ±æÀÌ
-    public int usedLineLength = 0; // ÇöÀç±îÁö »ç¿ëÇÑ ±æÀÌ
-    public int curLineLenght = 0; // Áö±İ ±×¸®°í ÀÖ´Â Ä³Âı ±æÀÌ
-    public float destroyLineTime = 5.0f; // ¼± »ç¶óÁö´Â µô·¹ÀÌ
+    public GameObject linePrefab; // line í”„ë¦¬í©
+    public int maxLineCount = 70; // ë¼ì¸ ìµ€ëŒ€ ê¸¸ì´
+    public int usedLineLength = 0; // í˜„ì¬ê¹Œì§€ ì‚¬ìš©í•œ ê¸¸ì´
+    public int curLineLenght = 0; // ì§€ê¸ˆ ê·¸ë¦¬ê³  ìˆëŠ” ìºì°¹ ê¸¸ì´
+    public float destroyLineTime = 5.0f; // ì„  ì‚¬ë¼ì§€ëŠ” ë”œë ˆì´
 
     public List<Vector2> points = new List<Vector2>();
-    private Queue<GameObject> line = new Queue<GameObject>(); // ¶óÀÎ
-    private Queue<int> usedLinesLength = new Queue<int>(); // »ç¿ëÇß´ø ¶óÀÎµéÀÇ ±æÀÌ
+    private Queue<GameObject> line = new Queue<GameObject>(); // ë¼ì¸
+    private Queue<int> usedLinesLength = new Queue<int>(); // ì‚¬ìš©í–ˆë˜ ë¼ì¸ë“¤ì˜ ê¸¸ì´
 
-    RaycastHit2D hitLever; // ·¹¹öÀÎÁö Ã¼Å©¿ë
-    RaycastHit2D hitEnemy; // ¸ó½ºÅÍÀÎÁö Ã¼Å©¿ë
+    RaycastHit2D hitLever; // ë ˆë²„ì¸ì§€ ì²´í¬ìš©
+    RaycastHit2D hitEnemy; // ëª¬ìŠ¤í„°ì¸ì§€ ì²´í¬ìš©
 
     public GameObject settingUI;
     public Image gauge;
@@ -61,15 +61,15 @@ public class DrawLine : MonoBehaviour
         hitEnemy = Physics2D.Raycast(mousePos, Vector3.forward, 100f, LayerMask.GetMask("Enemy"));
 
 
-        if (Input.GetMouseButtonDown(0)) // line °¹¼ö´Â 1°³ÀÓ
+        if (Input.GetMouseButtonDown(0)) // line ê°¯ìˆ˜ëŠ” 1ê°œì„
         {
-            // Ä³Âı ÀÎ½ºÅÏ½ºÈ­
+            // ìºì°¹ ì¸ìŠ¤í„´ìŠ¤í™”
             GameObject ketChapp = Instantiate(Resources.Load<GameObject>("Ketchapp"), new Vector3(mousePos.x, mousePos.y, 15), Quaternion.identity);
             Destroy(ketChapp, 1.0f);
 
             AudioManager.Instance.PlaySFX(SFX.Mouseclick);
 
-            // ·¹¹ö ¹× ¸ó½ºÅÍ À§¿¡´Â ¶óÀÎÀÌ ±×·ÁÁöÁö ¾ÊÀ½
+            // ë ˆë²„ ë° ëª¬ìŠ¤í„° ìœ„ì—ëŠ” ë¼ì¸ì´ ê·¸ë ¤ì§€ì§€ ì•ŠìŒ
             if (hitLever.collider != null || hitEnemy.collider != null)
                 return;
 
@@ -85,7 +85,7 @@ public class DrawLine : MonoBehaviour
         }
         else if (Input.GetMouseButton(0) && isStart)
         {
-            // ·¹¹ö ¹× ¸ó½ºÅÍ À§¿¡ ¸¶¿ì½º°¡ ¿Ã¶ó°¡¸é...
+            // ë ˆë²„ ë° ëª¬ìŠ¤í„° ìœ„ì— ë§ˆìš°ìŠ¤ê°€ ì˜¬ë¼ê°€ë©´...
             if (hitLever.collider != null || hitEnemy.collider != null)
             {
                 //GameObject obj = null;
@@ -129,7 +129,7 @@ public class DrawLine : MonoBehaviour
             //GameObject obj = null;
             if (points.Count < 5)
             {
-                coll.gameObject.SetActive(false); // Å¬¸¯¸¸ ÇßÀ» ¶§
+                coll.gameObject.SetActive(false); // í´ë¦­ë§Œ í–ˆì„ ë•Œ
             }
             points.Clear();
             //if (line.Count != 0)
@@ -147,38 +147,38 @@ public class DrawLine : MonoBehaviour
 
     private void LineDelete()
     {
-        if (Input.GetMouseButtonDown(1) && !mouseRightBtnDown && !isStart && !mouseRightCoolTime) // ¸ğµç Ä³Âı »èÁ¦
+        if (Input.GetMouseButtonDown(1) && !mouseRightBtnDown && !isStart && !mouseRightCoolTime) // ëª¨ë“  ìºì°¹ ì‚­ì œ
         {
             if (line.Count == 0) return;
 
             StopAllCoroutines();
 
             AudioManager.Instance.PlaySFX(SFX.Eraser);
-            mouseRightBtnDown = true; // ¿ìÅ¬¸¯ Å¬¸¯
-            mouseRightCoolTime = true; // ÄğÅ¸ÀÓ Ã¼Å©
+            mouseRightBtnDown = true; // ìš°í´ë¦­ í´ë¦­
+            mouseRightCoolTime = true; // ì¿¨íƒ€ì„ ì²´í¬
             LineDirectDestroy();
         }
     }
 
-    private IEnumerator LineDestroy() // Á© ¿À·¡µÈ ¶óÀÎ »èÁ¦
+    private IEnumerator LineDestroy() // ì ¤ ì˜¤ë˜ëœ ë¼ì¸ ì‚­ì œ
     {
         float chkTime = 0f;
-        while(chkTime < destroyLineTime)// µô·¹ÀÌ Àû¿ë ÈÄ...
+        while(chkTime < destroyLineTime)// ë”œë ˆì´ ì ìš© í›„...
         {
             yield return null; 
             chkTime += Time.deltaTime;
-            if (mouseRightBtnDown) yield break; // ¸¸¾à ¿ìÅ¬¸¯, Áï ¸ğµç ¶óÀÎ »èÁ¦ÇÑ´Ù¸é ±×³É Á¾·á
+            if (mouseRightBtnDown) yield break; // ë§Œì•½ ìš°í´ë¦­, ì¦‰ ëª¨ë“  ë¼ì¸ ì‚­ì œí•œë‹¤ë©´ ê·¸ëƒ¥ ì¢…ë£Œ
         }
 
         GameObject obj = null;
         if (line.Count != 0)
             obj = line.Dequeue();  // Dequeue
-        Destroy(obj); // ¶óÀÎ »èÁ¦
+        Destroy(obj); // ë¼ì¸ ì‚­ì œ
         if(usedLinesLength.Count != 0)
-        usedLineLength -= usedLinesLength.Dequeue(); // »ç¿ëÇß´ø ¶óÀÎ ±æÀÌ È¸º¹
+        usedLineLength -= usedLinesLength.Dequeue(); // ì‚¬ìš©í–ˆë˜ ë¼ì¸ ê¸¸ì´ íšŒë³µ
     }
 
-    private void LineDirectDestroy() // ¸ğµç ¼± Áö¿ì±â
+    private void LineDirectDestroy() // ëª¨ë“  ì„  ì§€ìš°ê¸°
     {
         if(line.Count == 0) return;
 
@@ -187,9 +187,9 @@ public class DrawLine : MonoBehaviour
             GameObject obj = null;
             if (line.Count != 0)
                 obj = line.Dequeue();  // Dequeue
-            Destroy(obj); // ¶óÀÎ »èÁ¦
+            Destroy(obj); // ë¼ì¸ ì‚­ì œ
             if (usedLinesLength.Count != 0)
-                usedLineLength -= usedLinesLength.Dequeue(); // »ç¿ëÇß´ø ¶óÀÎ ±æÀÌ È¸º¹
+                usedLineLength -= usedLinesLength.Dequeue(); // ì‚¬ìš©í–ˆë˜ ë¼ì¸ ê¸¸ì´ íšŒë³µ
         }
 
         mouseRightBtnDown = false;
@@ -197,7 +197,7 @@ public class DrawLine : MonoBehaviour
         StartCoroutine("mouseRightClickDelayCo");
     }
 
-    private IEnumerator mouseRightClickDelayCo() // ¿ìÅ¬¸¯ ÄğÅ¸ÀÓ
+    private IEnumerator mouseRightClickDelayCo() // ìš°í´ë¦­ ì¿¨íƒ€ì„
     {
         yield return null; //mouseRightClickDelay;
         mouseRightCoolTime = false;

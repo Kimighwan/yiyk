@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using UnityEngine.UI;
 
 public class SettingsUI : BaseUI
@@ -22,11 +22,11 @@ public class SettingsUI : BaseUI
     public GameObject ketChapGaugeBackGround;
     public GameObject settingUI;
 
-    private float preBGMVolume; // ¡˜¿¸ ªÁøÓµÂ ≈©±‚
-    private bool bgmSound = false; // false: º“∏Æ ≤˚ // true: º“∏Æ ≈¥
+    private float preBGMVolume; // ÏßÅÏ†Ñ ÏÇ¨Ïö¥Îìú ÌÅ¨Í∏∞
+    private bool bgmSound = false; // false: ÏÜåÎ¶¨ ÎÅî // true: ÏÜåÎ¶¨ ÌÇ¥
 
-    private float preSFXVolume; // ¡˜¿¸ ªÁøÓµÂ ≈©±‚
-    private bool sfxSound = false; // false: º“∏Æ ≤˚ // true: º“∏Æ ≈¥
+    private float preSFXVolume; // ÏßÅÏ†Ñ ÏÇ¨Ïö¥Îìú ÌÅ¨Í∏∞
+    private bool sfxSound = false; // false: ÏÜåÎ¶¨ ÎÅî // true: ÏÜåÎ¶¨ ÌÇ¥
 
     private void Awake()
     {
@@ -81,23 +81,23 @@ public class SettingsUI : BaseUI
     //    gameVersionTxt.text = $"Version:{Application.version}";
     //}
 
-    private void SetBGMSoundSetting(bool sound) // On/Off πˆ∆∞ »∞º∫»≠, ∫Ò»∞º∫»≠
+    private void SetBGMSoundSetting(bool sound) // On/Off Î≤ÑÌäº ÌôúÏÑ±Ìôî, ÎπÑÌôúÏÑ±Ìôî
     {
         soundBGMOnToggle.SetActive(sound);
         soundBGMOffToggle.SetActive(!sound);
     }
 
-    private void SetSFXSoundSetting(bool sound) // On/Off πˆ∆∞ »∞º∫»≠, ∫Ò»∞º∫»≠
+    private void SetSFXSoundSetting(bool sound) // On/Off Î≤ÑÌäº ÌôúÏÑ±Ìôî, ÎπÑÌôúÏÑ±Ìôî
     {
         soundSFXOnToggle.SetActive(sound);
         soundSFXOffToggle.SetActive(!sound);
     }
 
-    public void OnClickBGMSoundOnToggle() // «ˆ¿Á ƒ—¡Æ ¿÷æÓº≠ ≤¯≤®¿”
+    public void OnClickBGMSoundOnToggle() // ÌòÑÏû¨ ÏºúÏ†∏ ÏûàÏñ¥ÏÑú ÎÅåÍ∫ºÏûÑ
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
 
-        // preVolume = slider.value; // ≥™¡ﬂø° sound ≈∞∏È slider ∞™ ∫π±∏∏¶ ¿ß«ÿ ¿”Ω√ ¿˙¿Â
+        // preVolume = slider.value; // ÎÇòÏ§ëÏóê sound ÌÇ§Î©¥ slider Í∞í Î≥µÍµ¨Î•º ÏúÑÌï¥ ÏûÑÏãú Ï†ÄÏû•
         PlayerPrefs.SetFloat("preBGMVolume", BGMslider.value);
 
         PlayerPrefs.SetInt("BGMSound", 0);
@@ -110,11 +110,11 @@ public class SettingsUI : BaseUI
         BGMslider.value = 0f; 
     }
 
-    public void OnClickSFXSoundOnToggle() // «ˆ¿Á ƒ—¡Æ ¿÷æÓº≠ ≤¯≤®¿”
+    public void OnClickSFXSoundOnToggle() // ÌòÑÏû¨ ÏºúÏ†∏ ÏûàÏñ¥ÏÑú ÎÅåÍ∫ºÏûÑ
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
 
-        // preVolume = slider.value; // ≥™¡ﬂø° sound ≈∞∏È slider ∞™ ∫π±∏∏¶ ¿ß«ÿ ¿”Ω√ ¿˙¿Â
+        // preVolume = slider.value; // ÎÇòÏ§ëÏóê sound ÌÇ§Î©¥ slider Í∞í Î≥µÍµ¨Î•º ÏúÑÌï¥ ÏûÑÏãú Ï†ÄÏû•
         PlayerPrefs.SetFloat("preSFXVolume", SFXslider.value);
 
         PlayerPrefs.SetInt("SFXSound", 0);
@@ -127,7 +127,7 @@ public class SettingsUI : BaseUI
         SFXslider.value = 0f;
     }
 
-    public void OnClickBGMSoundOffToggle() // «ˆ¿Á ≤®¡Æ ¿÷æÓº≠ ≈≥≤®¿”
+    public void OnClickBGMSoundOffToggle() // ÌòÑÏû¨ Í∫ºÏ†∏ ÏûàÏñ¥ÏÑú ÌÇ¨Í∫ºÏûÑ
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
 
@@ -138,10 +138,10 @@ public class SettingsUI : BaseUI
         AudioManager.Instance.ResumeBGM();
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
 
-        BGMslider.value = PlayerPrefs.GetFloat("preBGMVolume"); // ≤Ù±‚¿¸ slider ∞™ ∫π±∏
+        BGMslider.value = PlayerPrefs.GetFloat("preBGMVolume"); // ÎÅÑÍ∏∞Ï†Ñ slider Í∞í Î≥µÍµ¨
     }
 
-    public void OnClickSFXSoundOffToggle() // «ˆ¿Á ≤®¡Æ ¿÷æÓº≠ ≈≥≤®¿”
+    public void OnClickSFXSoundOffToggle() // ÌòÑÏû¨ Í∫ºÏ†∏ ÏûàÏñ¥ÏÑú ÌÇ¨Í∫ºÏûÑ
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
 
@@ -151,7 +151,7 @@ public class SettingsUI : BaseUI
 
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
 
-        SFXslider.value = PlayerPrefs.GetFloat("preSFXVolume"); // ≤Ù±‚¿¸ slider ∞™ ∫π±∏
+        SFXslider.value = PlayerPrefs.GetFloat("preSFXVolume"); // ÎÅÑÍ∏∞Ï†Ñ slider Í∞í Î≥µÍµ¨
     }
 
     public void OnClickSettingQuit()
@@ -171,8 +171,8 @@ public class SettingsUI : BaseUI
 
     private void SliderUpdate() 
     {
-        // ΩΩ∂Û¿Ã¥ı 0¿∏∑Œ ¡∂¿˝«œ∏È ªÁøÓµÂ ≈‰±€¿Ã OFF∑Œ πŸ≤Ò
-        // ΩΩ∂Û¿Ã¥ı 0 √ ∞˙∑Œ ¡∂¿˝«œ∏È ªÁøÓµÂ ≈‰±€¿Ã OnF∑Œ πŸ≤Ò
+        // Ïä¨ÎùºÏù¥Îçî 0ÏúºÎ°ú Ï°∞Ï†àÌïòÎ©¥ ÏÇ¨Ïö¥Îìú ÌÜ†Í∏ÄÏù¥ OFFÎ°ú Î∞îÎÄú
+        // Ïä¨ÎùºÏù¥Îçî 0 Ï¥àÍ≥ºÎ°ú Ï°∞Ï†àÌïòÎ©¥ ÏÇ¨Ïö¥Îìú ÌÜ†Í∏ÄÏù¥ OnFÎ°ú Î∞îÎÄú
         soundBGMOnToggle.SetActive(BGMslider.value > 0.0f);
         soundBGMOffToggle.SetActive(BGMslider.value == 0.0f);
         PlayerPrefs.SetFloat("BGMValue", BGMslider.value);
@@ -182,7 +182,7 @@ public class SettingsUI : BaseUI
         PlayerPrefs.SetFloat("SFXValue", SFXslider.value);
     }
 
-    // URL ∏µ≈© ø≠±‚
+    // URL ÎßÅÌÅ¨ Ïó¥Í∏∞
     public void OnClickOpenURL(string url)
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);

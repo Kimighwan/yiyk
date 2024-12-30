@@ -1,4 +1,4 @@
-using Mono.Cecil.Cil;
+ï»¿using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -25,16 +25,16 @@ public class Lever : MonoBehaviour, IPuzzle
         //leverOn.StopPlayback();
     }
 
-    public void Open() // ¹® ¿©´Â ÇÔ¼ö
+    public void Open() // ë¬¸ ì—¬ëŠ” í•¨ìˆ˜
     {
-        if (alreadyOpen) // ¿­·ÁÀÖÀ¸¸é ±×³É Á¾·á
+        if (alreadyOpen) // ì—´ë ¤ìˆìœ¼ë©´ ê·¸ëƒ¥ ì¢…ë£Œ
             return;
 
         doorAnim.Play();
         
         //Invoke("OnCol", 0.8f);
 
-        alreadyOpen = true; // ¿­·ÁÀÖ´Ù´Â °ÍÀ» Ã¼Å©
+        alreadyOpen = true; // ì—´ë ¤ìˆë‹¤ëŠ” ê²ƒì„ ì²´í¬
     }
 
     private void OnCol()
@@ -42,7 +42,7 @@ public class Lever : MonoBehaviour, IPuzzle
         door.GetComponent<Collider2D>().enabled = true;
     }
 
-    public void On() // ·¹¹ö ÀÛµ¿ ÇÔ¼ö
+    public void On() // ë ˆë²„ ì‘ë™ í•¨ìˆ˜
     {
         leverOn.SetBool("isOn", true);
         AudioManager.Instance.PlaySFX(SFX.LeverSwitch);

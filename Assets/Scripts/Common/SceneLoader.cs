@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,7 +23,7 @@ public enum SceneType
 
 public class SceneLoader : SingletonBehaviour<SceneLoader>
 {
-    public Image fadeImg; // ÆäÀÌµå ÀÌ¹ÌÁö
+    public Image fadeImg; // í˜ì´ë“œ ì´ë¯¸ì§€
 
     protected override void Init()
     {
@@ -41,11 +41,11 @@ public class SceneLoader : SingletonBehaviour<SceneLoader>
 
     public void ReloadScene(int idx = 0)
     {
-        Fade(Color.black, 0f, 1f, 2.0f, 0f, false, () => // ¾îµÎ¿öÁü
+        Fade(Color.black, 0f, 1f, 2.0f, 0f, false, () => // ì–´ë‘ì›Œì§
         {
             LoadScene((SceneType)(SceneManager.GetActiveScene().buildIndex + idx));
 
-            Fade(Color.black, 1f, 0f, 2.0f, 0f, false); // ¹à¾ÆÁü
+            Fade(Color.black, 1f, 0f, 2.0f, 0f, false); // ë°ì•„ì§
         });
 
         Time.timeScale = 1f;
