@@ -16,6 +16,8 @@ public class StartSceneCanvasManager : MonoBehaviour
     public GameObject ketChapGaugeBackGround;
 
     private Canvas fadeCanvas;
+    private bool clickSettingBtn = false;   // 세팅 버튼 클릭 여부
+    public bool escException = false;      // 클릭후 esc로 설장창을 나갔는지 여부
 
     private void Awake()
     {
@@ -38,7 +40,9 @@ public class StartSceneCanvasManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)) // ESC키, 모바일은 뒤로가기 버튼 누르면
         {
-            //AudioManager.Instance.PlaySFX(SFX.ui_button_click);
+            escException = false;
+
+            AudioManager.Instance.PlaySFX(SFX.ButtonClick);
 
             if (setting.activeSelf) // UI가 띄워져 있다면
             {
@@ -52,6 +56,7 @@ public class StartSceneCanvasManager : MonoBehaviour
                 {
                     setting.SetActive(false);
                     BackGroundFadeImg.SetActive(!BackGroundFadeImg.activeSelf);
+                    if (clickSettingBtn) escException = true;
                 }
 
                 Time.timeScale = 1.0f;
@@ -68,7 +73,9 @@ public class StartSceneCanvasManager : MonoBehaviour
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
         setting.SetActive(!setting.activeSelf);
         BackGroundFadeImg.SetActive(!BackGroundFadeImg.activeSelf);
-        Time.timeScale = setting.activeSelf == true ? 0f : 1f;
+        Time.timeScale = setting.activeSelf == true ? 0f : 1f;  // 설정창 켜지면 시간 정지 : 꺼지면 시간 흐름
+        clickSettingBtn = setting.activeSelf == true ? true : false;    // 설정창 켜지면 T, 아니면 F
+        escException = false;
     }
 
     public void OnClickQuit()

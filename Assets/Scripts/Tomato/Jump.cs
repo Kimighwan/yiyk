@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Jump : MonoBehaviour
 {
-    [SerializeField]
-    private int jumpForce = 10;
+    private int jumpForce = 18;
 
     Rigidbody2D rigid;
 

@@ -63,6 +63,11 @@ public class DrawLine : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)) // line 갯수는 1개임
         {
+            if(SettingUIManager.instance.escException)
+            {
+                points.Clear();
+            }
+
             // 캐찹 인스턴스화
             GameObject ketChapp = Instantiate(Resources.Load<GameObject>("Ketchapp"), new Vector3(mousePos.x, mousePos.y, 15), Quaternion.identity);
             Destroy(ketChapp, 1.0f);
