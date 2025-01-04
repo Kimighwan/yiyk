@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SettingUIManager :  StartSceneCanvasManager
 {
+    public static SettingUIManager instance;
+
     [SerializeField] private bool RDown = false; // R 키를 눌렀는가? // true: 누르는 중
     [SerializeField] private float RDownTime = 0.0f; // R 키를 몇초 눌렀는가?
     [SerializeField] private bool reLoadingScene = false; // ReloadScene이 계속 요청되지 않도록 예외 처리용 변수
@@ -12,6 +14,7 @@ public class SettingUIManager :  StartSceneCanvasManager
     private void Awake()
     {
         setting = transform.GetChild(1).gameObject;
+        instance = this;
     }
 
     private void Start()
