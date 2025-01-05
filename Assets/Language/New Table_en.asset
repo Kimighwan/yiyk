@@ -50,6 +50,17 @@ MonoBehaviour:
     m_Localized: Click anywhere to continue
     m_Metadata:
       m_Items: []
+  - m_Id: 37090833948672
+    m_Localized: Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38322487123968
+    m_Localized: 'Toma Toma arrived safely at the ''tomato orchard''.
+
+      And
+      had a great time with my friends Tomatoes.'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

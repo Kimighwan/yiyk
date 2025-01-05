@@ -47,6 +47,14 @@ MonoBehaviour:
     m_Key: Desc
     m_Metadata:
       m_Items: []
+  - m_Id: 37090833948672
+    m_Key: Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38322487123968
+    m_Key: Ending
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
