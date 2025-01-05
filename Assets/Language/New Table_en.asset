@@ -55,10 +55,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 38322487123968
-    m_Localized: 'Toma Toma arrived safely at the ''tomato orchard''.
-
-      And
-      had a great time with my friends Tomatoes.'
+    m_Localized: TomaToma arrived safely at the Tomato Land and had a good time with
+      his friends.
     m_Metadata:
       m_Items: []
   references:
