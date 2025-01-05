@@ -257,6 +257,7 @@ MonoBehaviour:
   BackGroundFadeImg: {fileID: 3986365011426510318}
   maker: {fileID: 6364867201980014997}
   ketChapGaugeBackGround: {fileID: 7663001613822221548}
+  escException: 0
   RDown: 0
   RDownTime: 0
   reLoadingScene: 0

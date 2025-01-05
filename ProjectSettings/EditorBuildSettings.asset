@@ -44,4 +44,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Clear.unity
     guid: 6021111489d191a47bc4f170ae1b3b50
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 3c100df7e6ace8141a57e69141b1fd66, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: d850e39941be4064da84b0f67192546b, type: 2}

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: New Table Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: New Table
+  m_TableCollectionNameGuidString: 9c13fde65572fdc43804c753fe25e49e
+  m_Entries:
+  - m_Id: 18043592704
+    m_Key: Game Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4905431162880
+    m_Key: Game Quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8867773374464
+    m_Key: ReStart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8948429840384
+    m_Key: Maker
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9033456771072
+    m_Key: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9101463216128
+    m_Key: Main
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9731170852864
+    m_Key: Skip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9966618107904
+    m_Key: Desc
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4220851530898079768
+  references:
+    version: 2
+    RefIds:
+    - rid: 4220851530898079768
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1736040961721
