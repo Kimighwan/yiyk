@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 public enum SceneType
 {
-    StartScene,
+    StartScene, // 0
     CutScene,
-    Stage1,
+    Lobby,
+    Stage1, // 3
     Stage2,
     Stage3,
     Stage4,

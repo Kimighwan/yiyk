@@ -23,6 +23,14 @@ MonoBehaviour:
     m_Key: logo
     m_Metadata:
       m_Items: []
+  - m_Id: 553289942523904
+    m_Key: Maker
+    m_Metadata:
+      m_Items: []
+  - m_Id: 553501666795520
+    m_Key: maker
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items:
     - rid: 4220851530898079810
@@ -44,6 +52,10 @@ MonoBehaviour:
           m_TableCodes:
           - en
           - ko
+        - m_KeyId: 553289942523904
+          m_TableCodes:
+          - en
+          - ko
         m_TypeString: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
     - rid: 4220851530898079815
@@ -51,6 +63,10 @@ MonoBehaviour:
       data:
         m_Entries:
         - m_KeyId: 1682133704704
+          m_TableCodes:
+          - en
+          - ko
+        - m_KeyId: 553501666795520
           m_TableCodes:
           - en
           - ko
