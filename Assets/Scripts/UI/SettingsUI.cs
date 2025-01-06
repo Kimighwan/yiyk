@@ -208,6 +208,6 @@ public class SettingsUI : BaseUI
     {
         mainBtn.interactable = false;
         OnClickSettingQuit();
-        SceneLoader.Instance.LoadScene(SceneType.StartScene);
+        SceneLoader.Instance.LoadScene(SceneType.Lobby);
     }
 }
