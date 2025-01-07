@@ -1,10 +1,10 @@
 using System.Collections;
-using System.ComponentModel;
 using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
     public Transform player;            // 플레이어 위치
+    public Transform respawnPoint;      // 리스폰 위치 (Prefab에서 설정)
     public float moveDistance = 3f;     // 적의 이동 거리
     public float moveSpeed = 1f;        // 적의 기본 이동 속도
     public float approachSpeed = 2f;    // 플레이어 접근 시 속도
@@ -26,6 +26,8 @@ public class Monster : MonoBehaviour
     private bool isDie = false;         // 죽었는지 체크
     private string currentAnimState;     // 현재 애니메이션 상태 확인을 위한 변수
 
+    private bool isKilledByTrap = false; // Trap에 의한 죽음 여부
+
     void Start()
     {
         startPosition = transform.position;
@@ -33,7 +35,6 @@ public class Monster : MonoBehaviour
         originalSprite = spriteRenderer.sprite;  // 원래 스프라이트 저장
         fadeManager = FindObjectOfType<FadeManager>(); // 페이드 매니저 찾기
         animator = GetComponent<Animator>();
-        //fixedY = transform.position.y;
         currentAnimationCoroutine = StartCoroutine(MovePattern()); // 이동 패턴 시작
         currentAnimState = ""; // 초기 애니메이션 상태 초기화
     }
@@ -100,9 +101,6 @@ public class Monster : MonoBehaviour
         StartCoroutine(HandleHit());
     }
 
-
-
-
     IEnumerator HandleHit()
     {
         yield return new WaitForSeconds(2f); // 피격 후 대기 시간
@@ -127,17 +125,14 @@ public class Monster : MonoBehaviour
         }
     }
 
-
     // 이동 패턴
     IEnumerator MovePattern()
     {
-       
         while (!isApproaching)
         {
             UpdateFacingDirection(false);
             // 현재 방향을 기준으로 이동
             float targetX = movingLeft ? startPosition.x - 5f : startPosition.x + 5f;
-           
             Vector3 targetPosition = new Vector3(targetX, transform.position.y, transform.position.z);
 
             // 이동을 시작하며 목적지로 이동
@@ -192,15 +187,17 @@ public class Monster : MonoBehaviour
             isApproaching = false;
             currentAnimationCoroutine = StartCoroutine(MovePattern());
         }
-       
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Trap"))
         {
+            isKilledByTrap = true; // Trap에 의한 죽음을 기록
             Die();
         }
     }
+
     private void UpdateFacingDirection(bool usePlayerDirection = true)
     {
         if (usePlayerDirection)
@@ -222,8 +219,6 @@ public class Monster : MonoBehaviour
         }
     }
 
-
-
     private void Die()
     {
         if (isDie) return;
@@ -242,7 +237,24 @@ public class Monster : MonoBehaviour
         }
         AudioManager.Instance.PlaySFX(SFX.EnemyDie1);
 
-        Destroy(gameObject, 0.8f);
+        // Trap에 의한 죽음인 경우에는 바로 Destroy하고 리스폰 시도
+        if (isKilledByTrap)
+        {
+            Destroy(gameObject, 0.8f); // 0.8초 후에 Destroy
+            StartCoroutine(Respawn());  // 리스폰 처리
+        }
+        else
+        {
+            Destroy(gameObject); // Trap이 아니면 바로 Destroy
+        }
+    }
+
+    private IEnumerator Respawn()
+    {
+        // 1초 뒤 리스폰 처리
+        yield return new WaitForSeconds(1f); // 리스폰 대기
+        GameObject newMonster = Instantiate(gameObject, respawnPoint.position, Quaternion.identity); // 리스폰 위치로 새 객체 생성
+        newMonster.GetComponent<Monster>().enabled = true; // 몬스터 스크립트 활성화
     }
 
     private void OnMouseDown()
