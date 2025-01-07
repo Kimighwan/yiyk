@@ -27,11 +27,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8867773374464
-    m_Localized: ReStart
+    m_Localized: Restart
     m_Metadata:
       m_Items: []
   - m_Id: 8948429840384
-    m_Localized: Maker
+    m_Localized: Credits
     m_Metadata:
       m_Items: []
   - m_Id: 9033456771072
