@@ -4,7 +4,7 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     public Transform player;            // 플레이어 위치
-    public Transform respawnPoint;      // 리스폰 위치 (Prefab에서 설정)
+    //public Transform respawnPoint;      // 리스폰 위치 (Prefab에서 설정)
     public float moveDistance = 3f;     // 적의 이동 거리
     public float moveSpeed = 1f;        // 적의 기본 이동 속도
     public float approachSpeed = 2f;    // 플레이어 접근 시 속도
@@ -26,11 +26,11 @@ public class Monster : MonoBehaviour
     private bool isDie = false;         // 죽었는지 체크
     private string currentAnimState;     // 현재 애니메이션 상태 확인을 위한 변수
 
-    private bool isKilledByTrap = false; // Trap에 의한 죽음 여부
+    //private bool isKilledByTrap = false; // Trap에 의한 죽음 여부
 
     void Start()
     {
-        startPosition = transform.position;
+        //startPosition = transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalSprite = spriteRenderer.sprite;  // 원래 스프라이트 저장
         fadeManager = FindObjectOfType<FadeManager>(); // 페이드 매니저 찾기
@@ -193,7 +193,7 @@ public class Monster : MonoBehaviour
     {
         if (collision.CompareTag("Trap"))
         {
-            isKilledByTrap = true; // Trap에 의한 죽음을 기록
+           // isKilledByTrap = true; // Trap에 의한 죽음을 기록
             Die();
         }
     }
@@ -236,26 +236,21 @@ public class Monster : MonoBehaviour
             collider.enabled = false;
         }
         AudioManager.Instance.PlaySFX(SFX.EnemyDie1);
-
+        Destroy(gameObject,0.8f);
         // Trap에 의한 죽음인 경우에는 바로 Destroy하고 리스폰 시도
-        if (isKilledByTrap)
-        {
-            Destroy(gameObject, 0.8f); // 0.8초 후에 Destroy
-            StartCoroutine(Respawn());  // 리스폰 처리
-        }
-        else
-        {
-            Destroy(gameObject); // Trap이 아니면 바로 Destroy
-        }
+        /* if (isKilledByTrap)
+         {
+             StartCoroutine(Respawn());  // 리스폰 처리
+         }*/
     }
 
-    private IEnumerator Respawn()
+    /*private IEnumerator Respawn()
     {
         // 1초 뒤 리스폰 처리
         yield return new WaitForSeconds(1f); // 리스폰 대기
         GameObject newMonster = Instantiate(gameObject, respawnPoint.position, Quaternion.identity); // 리스폰 위치로 새 객체 생성
         newMonster.GetComponent<Monster>().enabled = true; // 몬스터 스크립트 활성화
-    }
+    }*/
 
     private void OnMouseDown()
     {
