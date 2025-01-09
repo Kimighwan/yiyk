@@ -216,7 +216,7 @@ public class SettingsUI : BaseUI
         {            
             SceneLoader.Instance.LoadScene(SceneType.Lobby);
             SceneLoader.Instance.Fade(Color.black, 1f, 0f, 0.5f, 0f, false);
-            // AudioManager.Instance.PlayBGM(BGM.Lobby)
+            AudioManager.Instance.PlayBGM(BGM.Lobby);
         });
         
         
