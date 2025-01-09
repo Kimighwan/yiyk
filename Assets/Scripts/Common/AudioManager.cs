@@ -8,6 +8,7 @@ public enum BGM
     CutsceneBGM2,
     IngameBGM,
     ClearScene,
+    Lobby,
     COUNT
 }
 
