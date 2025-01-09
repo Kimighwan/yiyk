@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SettingsUI : BaseUI
@@ -208,6 +209,16 @@ public class SettingsUI : BaseUI
     {
         mainBtn.interactable = false;
         OnClickSettingQuit();
-        SceneLoader.Instance.LoadScene(SceneType.Lobby);
+
+        AudioManager.Instance.StopBGM();
+
+        SceneLoader.Instance.Fade(Color.black, 0f, 1f, 2.0f, 0f, true, () =>
+        {            
+            SceneLoader.Instance.LoadScene(SceneType.Lobby);
+            SceneLoader.Instance.Fade(Color.black, 1f, 0f, 0.5f, 0f, false);
+            AudioManager.Instance.PlayBGM(BGM.Lobby);
+        });
+        
+        
     }
 }

@@ -38,8 +38,8 @@ public class CutScene : MonoBehaviour
             skipBtn.interactable = false;
             SceneLoader.Instance.Fade(Color.black, 0f, 1f, 2.0f, 0f, false, () =>
             {
-                AudioManager.Instance.PlayBGM(BGM.IngameBGM);
-                SceneLoader.Instance.LoadScene(SceneType.Stage1);
+                AudioManager.Instance.PlayBGM(BGM.Lobby);
+                SceneLoader.Instance.LoadScene(SceneType.Lobby);
                 SceneLoader.Instance.Fade(Color.black, 1f, 0f, 2.0f, 0f, false);
             });
         }
@@ -65,7 +65,7 @@ public class CutScene : MonoBehaviour
         skipBtn.interactable = false;
         SceneLoader.Instance.Fade(Color.black, 0f, 1f, 2.0f, 0f, false, () =>
         {
-            AudioManager.Instance.PlayBGM(BGM.IngameBGM);
+            AudioManager.Instance.PlayBGM(BGM.Lobby);
             SceneLoader.Instance.LoadScene(SceneType.Lobby);
             SceneLoader.Instance.Fade(Color.black, 1f, 0f, 2.0f, 0f, false);
         });
