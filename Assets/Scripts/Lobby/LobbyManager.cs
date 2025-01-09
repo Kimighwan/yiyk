@@ -7,5 +7,6 @@ public class LobbyManager : MonoBehaviour
     public void OnClickStageBtn(int stage) // 1 ~ 10
     {
         SceneLoader.Instance.LoadScene((SceneType)(stage + 3));
+        AudioManager.Instance.PlayBGM(BGM.IngameBGM);
     }
 }
