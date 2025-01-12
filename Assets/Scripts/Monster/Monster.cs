@@ -4,7 +4,7 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     public Transform player;            // 플레이어 위치
-    //public Transform respawnPoint;      // 리스폰 위치 (Prefab에서 설정)
+    public Transform respawnPoint;      // 리스폰 위치 (Prefab에서 설정)
     public float moveDistance = 3f;     // 적의 이동 거리
     public float moveSpeed = 1f;        // 적의 기본 이동 속도
     public float approachSpeed = 2f;    // 플레이어 접근 시 속도
@@ -21,16 +21,17 @@ public class Monster : MonoBehaviour
     private Sprite originalSprite;      // 원래 스프라이트 저장
     private Coroutine currentAnimationCoroutine;
 
-    private int health = 10;             // 적의 체력
+    private int health = 5;             // 적의 체력
     private bool isHit = false;         // 피격 상태 체크
     private bool isDie = false;         // 죽었는지 체크
     private string currentAnimState;     // 현재 애니메이션 상태 확인을 위한 변수
+    private bool isKilledByTrap = false; // Trap에 의한 죽음 여부
+    public GameObject monsterPrefab;
 
-    //private bool isKilledByTrap = false; // Trap에 의한 죽음 여부
-
+    public string monsterType;
     void Start()
     {
-        //startPosition = transform.position;
+        startPosition = transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalSprite = spriteRenderer.sprite;  // 원래 스프라이트 저장
         fadeManager = FindObjectOfType<FadeManager>(); // 페이드 매니저 찾기
@@ -193,7 +194,7 @@ public class Monster : MonoBehaviour
     {
         if (collision.CompareTag("Trap"))
         {
-           // isKilledByTrap = true; // Trap에 의한 죽음을 기록
+            isKilledByTrap = true;
             Die();
         }
     }
@@ -235,23 +236,55 @@ public class Monster : MonoBehaviour
         {
             collider.enabled = false;
         }
-        AudioManager.Instance.PlaySFX(SFX.EnemyDie1);
-        Destroy(gameObject,0.8f);
-        // Trap에 의한 죽음인 경우에는 바로 Destroy하고 리스폰 시도
-        /* if (isKilledByTrap)
-         {
-             StartCoroutine(Respawn());  // 리스폰 처리
-         }*/
+        //AudioManager.Instance.PlaySFX(SFX.EnemyDie1);
+        
+        if (isKilledByTrap)
+        {
+            StartCoroutine(Respawn(respawnPoint.position)); // 리스폰 코루틴 호출
+            Destroy(gameObject, 1.2f);
+        }
+        else if(monsterType == "RespawnMonster")
+        {
+            StartCoroutine(Respawn(respawnPoint.position)); // 리스폰 코루틴 호출
+            Destroy(gameObject, 1.2f);
+        }
+        else
+        {
+            Destroy(gameObject, 0.8f);
+        }
+       
     }
-
-    /*private IEnumerator Respawn()
+    private IEnumerator Respawn(Vector3 respawnPosition)
     {
-        // 1초 뒤 리스폰 처리
-        yield return new WaitForSeconds(1f); // 리스폰 대기
-        GameObject newMonster = Instantiate(gameObject, respawnPoint.position, Quaternion.identity); // 리스폰 위치로 새 객체 생성
-        newMonster.GetComponent<Monster>().enabled = true; // 몬스터 스크립트 활성화
-    }*/
+        yield return new WaitForSeconds(1f); // 리스폰 대기 시간
 
+        // 몬스터를 새로 생성
+        if (monsterPrefab != null)
+        {
+            GameObject newMonster = Instantiate(monsterPrefab, respawnPosition, Quaternion.identity);
+            newMonster.GetComponent<Monster>().InitializeForRespawn(); // 리스폰 초기화
+        }
+
+        // 기존 오브젝트 삭제
+        Destroy(gameObject);
+        Debug.Log("기존 오브젝트 삭제 완료");
+    }
+    public void InitializeForRespawn()
+    {
+        isDie = false;
+        isHit = false;
+        isApproaching = false;
+
+        // 초기 상태 복구
+        animator.SetBool("IsDie", false);
+        animator.Rebind();
+
+        CircleCollider2D collider = GetComponent<CircleCollider2D>();
+        if (collider != null)
+        {
+            collider.enabled = true;
+        }
+    }
     private void OnMouseDown()
     {
         if (Input.GetMouseButtonDown(0))
