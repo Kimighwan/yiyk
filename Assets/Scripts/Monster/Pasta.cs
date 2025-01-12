@@ -16,7 +16,7 @@ public class Pasta : MonoBehaviour
     public Sprite hitSprite;
     private Sprite originalSprite;
     private Coroutine currentAnimationCoroutine;
-    private int health = 6;
+    private int health = 5;
     private bool isHit = false;
     private bool isDie = false;
 
