@@ -17,6 +17,7 @@ public class SettingsUI : BaseUI
 
     public Button reStartButton;
     public Button mainBtn;
+    public Button lobbyBtn;
 
     public GameObject BackGroundFadeImg;
     public GameObject makerImg;
@@ -205,9 +206,9 @@ public class SettingsUI : BaseUI
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
     }
 
-    public void OnClickMain()
+    public void OnClickLobby()
     {
-        mainBtn.interactable = false;
+        lobbyBtn.interactable = false;
         OnClickSettingQuit();
 
         AudioManager.Instance.StopBGM();
@@ -218,7 +219,20 @@ public class SettingsUI : BaseUI
             SceneLoader.Instance.Fade(Color.black, 1f, 0f, 0.5f, 0f, false);
             AudioManager.Instance.PlayBGM(BGM.Lobby);
         });
-        
-        
+    }
+
+    public void OnClickMain()
+    {
+        mainBtn.interactable = false;
+        OnClickSettingQuit();
+
+        AudioManager.Instance.StopBGM();
+
+        SceneLoader.Instance.Fade(Color.black, 0f, 1f, 2.0f, 0f, true, () =>
+        {
+            SceneLoader.Instance.LoadScene(SceneType.StartScene);
+            SceneLoader.Instance.Fade(Color.black, 1f, 0f, 0.5f, 0f, false);
+            AudioManager.Instance.PlayBGM(BGM.MainBGM);
+        });
     }
 }
