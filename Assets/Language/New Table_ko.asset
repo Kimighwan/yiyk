@@ -61,6 +61,10 @@ MonoBehaviour:
       \uC990\uAC70\uC6B4 \uC2DC\uAC04\uC744 \uBCF4\uB0C8\uB2F5\uB2C8\uB2E4."
     m_Metadata:
       m_Items: []
+  - m_Id: 3324390275768320
+    m_Localized: "\uB85C\uBE44"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

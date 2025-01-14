@@ -59,6 +59,10 @@ MonoBehaviour:
       his friends.
     m_Metadata:
       m_Items: []
+  - m_Id: 3324390275768320
+    m_Localized: Lobby
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
