@@ -32,7 +32,7 @@ public class SettingUIManager :  StartSceneCanvasManager
             if(!setting.activeSelf)
             Debug.Log("R 키 누르는 중");
             RDownTime += Time.deltaTime;
-            if (RDownTime > 2.0f)  // R버튼 2초 누르면 재시작
+            if (RDownTime > 1.0f)  // R버튼 2초 누르면 재시작
             {
                 reLoadingScene = true; // ReloadScene이 계속 요청되지 않도록 예외 처리
                 SceneLoader.Instance.ReloadScene();
