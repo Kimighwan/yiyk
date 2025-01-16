@@ -13,7 +13,7 @@ public class SettingUIManager :  StartSceneCanvasManager
 
     private void Awake()
     {
-        setting = transform.GetChild(1).gameObject;
+        settingUIPrefab = transform.GetChild(1).gameObject;
         instance = this;
     }
 
@@ -29,7 +29,7 @@ public class SettingUIManager :  StartSceneCanvasManager
         RDown = Input.GetKey(KeyCode.R); 
         if (RDown && collTime && !reLoadingScene)
         {
-            if(!setting.activeSelf)
+            if(!settingUIPrefab.activeSelf)
             Debug.Log("R 키 누르는 중");
             RDownTime += Time.deltaTime;
             if (RDownTime > 1.0f)  // R버튼 2초 누르면 재시작
