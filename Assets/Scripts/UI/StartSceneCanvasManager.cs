@@ -10,12 +10,14 @@ using UnityEngine.UI;
 
 public class StartSceneCanvasManager : MonoBehaviour
 {
-    public GameObject setting;   // UI 설정찰 프리팹
-    public GameObject settingUI; // setting UI : 톱니바퀴
+    public GameObject settingUIPrefab;   // UI 설정찰 프리팹
+    public GameObject settingBtnUI; // setting UI : 톱니바퀴
+    public GameObject audioUIPrefab;
+    public GameObject creditUI;
+
     public Button gameStartButton;
 
     public GameObject BackGroundFadeImg;
-    public GameObject maker;
     public GameObject ketChapGaugeBackGround;
 
     private Canvas fadeCanvas;
@@ -47,20 +49,20 @@ public class StartSceneCanvasManager : MonoBehaviour
 
             AudioManager.Instance.PlaySFX(SFX.ButtonClick);
 
-            if (setting.activeSelf) // UI가 띄워져 있다면
+            if (creditUI.activeSelf) // 만든이들 띄워져 있음
             {
-                if (maker.activeSelf) // 만든이들 띄워져 있음
-                {
-                    settingUI.SetActive(true);
-                    maker.SetActive(false);
-                    ketChapGaugeBackGround.SetActive(true);
-                }
-                else
-                {
-                    setting.SetActive(false);
-                    BackGroundFadeImg.SetActive(!BackGroundFadeImg.activeSelf);
-                    if (clickSettingBtn) escException = true;
-                }
+                creditUI.SetActive(false);
+            }
+            else if (audioUIPrefab.activeSelf)
+            {
+                audioUIPrefab.SetActive(false);
+                settingUIPrefab.SetActive(true);
+            }
+            else if (settingUIPrefab.activeSelf) // UI가 띄워져 있다면
+            {
+                settingUIPrefab.SetActive(false);
+                BackGroundFadeImg.SetActive(!BackGroundFadeImg.activeSelf);
+                if (clickSettingBtn) escException = true;
 
                 Time.timeScale = 1.0f;
             }
@@ -74,10 +76,10 @@ public class StartSceneCanvasManager : MonoBehaviour
     public void OnClickSettingsBtn()
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
-        setting.SetActive(!setting.activeSelf);
+        settingUIPrefab.SetActive(!settingUIPrefab.activeSelf);
         BackGroundFadeImg.SetActive(!BackGroundFadeImg.activeSelf);
-        Time.timeScale = setting.activeSelf == true ? 0f : 1f;  // 설정창 켜지면 시간 정지 : 꺼지면 시간 흐름
-        clickSettingBtn = setting.activeSelf == true ? true : false;    // 설정창 켜지면 T, 아니면 F
+        Time.timeScale = settingUIPrefab.activeSelf == true ? 0f : 1f;  // 설정창 켜지면 시간 정지 : 꺼지면 시간 흐름
+        clickSettingBtn = settingUIPrefab.activeSelf == true ? true : false;    // 설정창 켜지면 T, 아니면 F
         escException = false;
     }
 
@@ -104,6 +106,13 @@ public class StartSceneCanvasManager : MonoBehaviour
 
     public void ClosedSetting()
     {
-        setting.SetActive(false);
+        settingUIPrefab.SetActive(false);
+    }
+
+    public void OnClickAudioBtn()   // 오디오 닫기 버튼에도 적용
+    {
+        audioUIPrefab.SetActive(!audioUIPrefab.activeSelf);
+        settingUIPrefab.SetActive(!settingUIPrefab.activeSelf);
+        AudioManager.Instance.PlaySFX(SFX.ButtonClick);
     }
 }
