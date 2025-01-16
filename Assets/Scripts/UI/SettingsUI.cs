@@ -18,7 +18,6 @@ public class SettingsUI : BaseUI
     public Button reStartButton;
 
     public GameObject BackGroundFadeImg;
-    public GameObject makerImg;
     public GameObject ketChapGaugeBackGround;
     public GameObject settingButnUI;
     public GameObject audioUI;
@@ -190,28 +189,12 @@ public class SettingsUI : BaseUI
         Application.OpenURL(url);
     }
 
-    public void OnClickMaker()
-    {
-        makerImg.SetActive(true);
-        settingButnUI.SetActive(false);
-        ketChapGaugeBackGround.SetActive(false);
-        AudioManager.Instance.PlaySFX(SFX.ButtonClick);
-    }
-
     public void OnClickAudioBtn()   // 오디오 닫기 버튼에도 적용
     {
         audioUI.SetActive(audioUI.activeSelf);
         transform.gameObject.SetActive(!transform.gameObject.activeSelf);
         settingButnUI.SetActive(false);             // 오디오 설정창을 닫던 열던 설정 버튼은 그대로 안 보이게
         ketChapGaugeBackGround.SetActive(false);    // 위와 동일
-        AudioManager.Instance.PlaySFX(SFX.ButtonClick);
-    }
-
-    public void OnClickMakerQuit()
-    {
-        makerImg.SetActive(false);
-        settingButnUI.SetActive(true);
-        ketChapGaugeBackGround.SetActive(true);
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
     }
 
