@@ -60,6 +60,7 @@ public class StartSceneCanvasManager : MonoBehaviour
             }
             else if (settingUIPrefab.activeSelf) // UI가 띄워져 있다면
             {
+                settingBtnUI.SetActive(true);
                 settingUIPrefab.SetActive(false);
                 BackGroundFadeImg.SetActive(!BackGroundFadeImg.activeSelf);
                 if (clickSettingBtn) escException = true;
@@ -77,6 +78,7 @@ public class StartSceneCanvasManager : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
         settingUIPrefab.SetActive(!settingUIPrefab.activeSelf);
+        settingBtnUI.SetActive(!settingBtnUI.activeSelf);
         BackGroundFadeImg.SetActive(!BackGroundFadeImg.activeSelf);
         Time.timeScale = settingUIPrefab.activeSelf == true ? 0f : 1f;  // 설정창 켜지면 시간 정지 : 꺼지면 시간 흐름
         clickSettingBtn = settingUIPrefab.activeSelf == true ? true : false;    // 설정창 켜지면 T, 아니면 F
