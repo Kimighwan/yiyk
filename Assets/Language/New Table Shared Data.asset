@@ -59,6 +59,14 @@ MonoBehaviour:
     m_Key: Lobby
     m_Metadata:
       m_Items: []
+  - m_Id: 4072102944268288
+    m_Key: Quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4074330425876480
+    m_Key: Audio
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
