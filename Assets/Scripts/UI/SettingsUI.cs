@@ -16,13 +16,12 @@ public class SettingsUI : BaseUI
     public Slider SFXslider;
 
     public Button reStartButton;
-    public Button mainBtn;
-    public Button lobbyBtn;
 
     public GameObject BackGroundFadeImg;
     public GameObject makerImg;
     public GameObject ketChapGaugeBackGround;
-    public GameObject settingUI;
+    public GameObject settingButnUI;
+    public GameObject audioUI;
 
     private float preBGMVolume; // 직전 사운드 크기
     private bool bgmSound = false; // false: 소리 끔 // true: 소리 킴
@@ -194,21 +193,30 @@ public class SettingsUI : BaseUI
     public void OnClickMaker()
     {
         makerImg.SetActive(true);
-        settingUI.SetActive(false);
+        settingButnUI.SetActive(false);
         ketChapGaugeBackGround.SetActive(false);
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
     }
+
+    public void OnClickAudioBtn()   // 오디오 닫기 버튼에도 적용
+    {
+        audioUI.SetActive(audioUI.activeSelf);
+        transform.gameObject.SetActive(!transform.gameObject.activeSelf);
+        settingButnUI.SetActive(false);             // 오디오 설정창을 닫던 열던 설정 버튼은 그대로 안 보이게
+        ketChapGaugeBackGround.SetActive(false);    // 위와 동일
+        AudioManager.Instance.PlaySFX(SFX.ButtonClick);
+    }
+
     public void OnClickMakerQuit()
     {
         makerImg.SetActive(false);
-        settingUI.SetActive(true);
+        settingButnUI.SetActive(true);
         ketChapGaugeBackGround.SetActive(true);
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
     }
 
     public void OnClickLobby()
     {
-        lobbyBtn.interactable = false;
         OnClickSettingQuit();
 
         AudioManager.Instance.StopBGM();
@@ -223,7 +231,6 @@ public class SettingsUI : BaseUI
 
     public void OnClickMain()
     {
-        mainBtn.interactable = false;
         OnClickSettingQuit();
 
         AudioManager.Instance.StopBGM();
