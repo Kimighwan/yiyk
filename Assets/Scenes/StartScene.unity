@@ -299,6 +299,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!1 &180810564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6670122876980000467, guid: d6fb27f201227694c9974d3718ef27a5, type: 3}
+  m_PrefabInstance: {fileID: 1352473773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &204967015
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,6 +468,11 @@ Transform:
   m_Father: {fileID: 1350668677}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &314655777 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6079721514506673934, guid: d6fb27f201227694c9974d3718ef27a5, type: 3}
+  m_PrefabInstance: {fileID: 1352473773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &351507645
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,6 +549,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 351507645}
   m_CullTransparentMesh: 1
+--- !u!1 &381282668 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4230453276661428621, guid: d6fb27f201227694c9974d3718ef27a5, type: 3}
+  m_PrefabInstance: {fileID: 1352473773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &474989713
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,6 +833,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StartSceneCanvasManager, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 1175417818734461194, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1930451892190802024, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.1
@@ -967,6 +986,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1930451893679076040, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+      propertyPath: BGMslider
+      value: 
+      objectReference: {fileID: 635029089}
+    - target: {fileID: 1930451893679076040, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+      propertyPath: SFXslider
+      value: 
+      objectReference: {fileID: 1063695966}
+    - target: {fileID: 1930451893679076040, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: settingUI
       value: 
       objectReference: {fileID: 1720179929}
@@ -975,9 +1002,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1720179929}
     - target: {fileID: 1930451893679076040, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+      propertyPath: soundBGMOnToggle
+      value: 
+      objectReference: {fileID: 314655777}
+    - target: {fileID: 1930451893679076040, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+      propertyPath: soundSFXOnToggle
+      value: 
+      objectReference: {fileID: 180810564}
+    - target: {fileID: 1930451893679076040, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: BackGroundFadeImg
       value: 
       objectReference: {fileID: 351507645}
+    - target: {fileID: 1930451893679076040, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+      propertyPath: soundBGMOffToggle
+      value: 
+      objectReference: {fileID: 381282668}
+    - target: {fileID: 1930451893679076040, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+      propertyPath: soundSFXOffToggle
+      value: 
+      objectReference: {fileID: 1885200216}
     - target: {fileID: 1930451893679076040, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: ketChapGaugeBackGround
       value: 
@@ -988,6 +1031,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930451893679076087, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978216892509175418, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3627681136655754169, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
@@ -1022,6 +1069,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -240.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6462453403420920267, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6614821440235420207, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1033,6 +1084,14 @@ PrefabInstance:
     - target: {fileID: 6614821440235420207, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StartSceneCanvasManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435469658169975240, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7745036355280193557, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8358673440661612959, guid: 994c2ac3b26ac2f47961bab227070c21, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1291,6 +1350,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &635029089 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4437996306187193743, guid: d6fb27f201227694c9974d3718ef27a5, type: 3}
+  m_PrefabInstance: {fileID: 1352473773}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &640088341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,6 +1890,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 502b880dd9187964b8811946e5131edc, type: 3}
+--- !u!114 &1063695966 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7632872906744146195, guid: d6fb27f201227694c9974d3718ef27a5, type: 3}
+  m_PrefabInstance: {fileID: 1352473773}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1198735403
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,6 +3164,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720179929}
   m_CullTransparentMesh: 1
+--- !u!1 &1885200216 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 807842686036008964, guid: d6fb27f201227694c9974d3718ef27a5, type: 3}
+  m_PrefabInstance: {fileID: 1352473773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1908267405
 GameObject:
   m_ObjectHideFlags: 0

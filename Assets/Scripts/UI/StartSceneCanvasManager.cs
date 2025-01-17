@@ -81,7 +81,7 @@ public class StartSceneCanvasManager : MonoBehaviour
         settingBtnUI.SetActive(!settingBtnUI.activeSelf);
         BackGroundFadeImg.SetActive(!BackGroundFadeImg.activeSelf);
         Time.timeScale = settingUIPrefab.activeSelf == true ? 0f : 1f;  // 설정창 켜지면 시간 정지 : 꺼지면 시간 흐름
-        clickSettingBtn = settingUIPrefab.activeSelf == true ? true : false;    // 설정창 켜지면 T, 아니면 F
+        //clickSettingBtn = settingUIPrefab.activeSelf == true ? true : false;    // 설정창 켜지면 T, 아니면 F
         escException = false;
     }
 
@@ -116,5 +116,6 @@ public class StartSceneCanvasManager : MonoBehaviour
         audioUIPrefab.SetActive(!audioUIPrefab.activeSelf);
         settingUIPrefab.SetActive(!settingUIPrefab.activeSelf);
         AudioManager.Instance.PlaySFX(SFX.ButtonClick);
+        Time.timeScale = 0f;
     }
 }

@@ -28,6 +28,7 @@ public class DrawLine : MonoBehaviour
     RaycastHit2D hitEnemy; // 몬스터인지 체크용
 
     public GameObject settingUI;
+    public GameObject audioUI;
     public Image gauge;
 
     LineRenderer lineRenderer;
@@ -52,7 +53,7 @@ public class DrawLine : MonoBehaviour
 
     private void Draw()
     {
-        if (settingUI.activeSelf) return;
+        if (settingUI.activeSelf || audioUI.activeSelf) return;
 
         mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z));
 
