@@ -195,8 +195,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingsUI, Assembly-CSharp
+      - m_Target: {fileID: 6123130136648831767}
+        m_TargetAssemblyTypeName: AudioUIControl, Assembly-CSharp
         m_MethodName: OnClickSFXSoundOffToggle
         m_Mode: 1
         m_Arguments:
@@ -786,8 +786,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingsUI, Assembly-CSharp
+      - m_Target: {fileID: 6123130136648831767}
+        m_TargetAssemblyTypeName: AudioUIControl, Assembly-CSharp
         m_MethodName: OnClickBGMSoundOffToggle
         m_Mode: 1
         m_Arguments:
@@ -809,6 +809,7 @@ GameObject:
   - component: {fileID: 4023865279908259944}
   - component: {fileID: 898564460810521971}
   - component: {fileID: 5519934319236872215}
+  - component: {fileID: 6123130136648831767}
   m_Layer: 5
   m_Name: AudioUI
   m_TagString: Untagged
@@ -877,6 +878,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6123130136648831767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4338397518408531758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577b58bb9d6783a49902382fd8ffae0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundBGMOnToggle: {fileID: 6079721514506673934}
+  soundBGMOffToggle: {fileID: 4230453276661428621}
+  soundSFXOnToggle: {fileID: 6670122876980000467}
+  soundSFXOffToggle: {fileID: 807842686036008964}
+  BGMslider: {fileID: 4437996306187193743}
+  SFXslider: {fileID: 7632872906744146195}
 --- !u!1 &4382760305472259850
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,8 +1340,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingsUI, Assembly-CSharp
+      - m_Target: {fileID: 6123130136648831767}
+        m_TargetAssemblyTypeName: AudioUIControl, Assembly-CSharp
         m_MethodName: OnClickBGMSoundOnToggle
         m_Mode: 1
         m_Arguments:
@@ -1454,8 +1473,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingsUI, Assembly-CSharp
+      - m_Target: {fileID: 6123130136648831767}
+        m_TargetAssemblyTypeName: AudioUIControl, Assembly-CSharp
         m_MethodName: OnClickSFXSoundOnToggle
         m_Mode: 1
         m_Arguments:
