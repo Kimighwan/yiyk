@@ -31,8 +31,6 @@ public class StartSceneCanvasManager : MonoBehaviour
 
     private void Start()
     {
-        PlayerPrefs.SetFloat("BGMValue", 0.2f);
-        PlayerPrefs.SetFloat("SFXValue", 0.5f);
         AudioManager.Instance.PlayBGM(BGM.MainBGM);
     }
 

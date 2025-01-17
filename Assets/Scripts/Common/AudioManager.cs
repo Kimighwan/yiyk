@@ -45,6 +45,12 @@ public class AudioManager : SingletonBehaviour<AudioManager>
     {
         base.Init();
 
+        PlayerPrefs.SetFloat("BGMValue", 0.2f);
+        PlayerPrefs.SetFloat("SFXValue", 0.5f);
+
+        PlayerPrefs.SetFloat("preBGMVolume", 0.2f);
+        PlayerPrefs.SetFloat("preSFXVolume", 0.5f);
+
         LoadBGMPlayer();
         LoadSFXPlayer();
     }
