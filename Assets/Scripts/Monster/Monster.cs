@@ -236,7 +236,7 @@ public class Monster : MonoBehaviour
         {
             collider.enabled = false;
         }
-        //AudioManager.Instance.PlaySFX(SFX.EnemyDie1);
+        AudioManager.Instance.PlaySFX(SFX.EnemyDie1);
         
         if (isKilledByTrap)
         {
@@ -262,6 +262,7 @@ public class Monster : MonoBehaviour
         if (monsterPrefab != null)
         {
             GameObject newMonster = Instantiate(monsterPrefab, respawnPosition, Quaternion.identity);
+            newMonster.transform.parent = transform.parent; // 원래 부모 아래로 이동
             newMonster.GetComponent<Monster>().InitializeForRespawn(); // 리스폰 초기화
         }
 
