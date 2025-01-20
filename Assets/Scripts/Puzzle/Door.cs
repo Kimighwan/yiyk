@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour
 {
@@ -20,8 +21,10 @@ public class Door : MonoBehaviour
         {
             gameManager.playerInvincibility = true;
             AudioManager.Instance.PlaySFX(SFX.StageClear);
-            SceneLoader.Instance.NextStage();
+            // SceneLoader.Instance.NextStage();
+            SceneLoader.Instance.LoadScene(SceneType.Lobby);
             Collider.enabled = false;
+            PlayerPrefs.SetInt("Stage", SceneManager.GetActiveScene().buildIndex - 2);
         }
     }
 }
